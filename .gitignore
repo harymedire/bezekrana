@@ -12,3 +12,5 @@ dist
 .idea
 coverage
 next-env.d.ts
+*.tsbuildinfo
+tsconfig.tsbuildinfo
