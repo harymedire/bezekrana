@@ -3,6 +3,7 @@ import { stripe } from "@/lib/stripe/server";
 import { createSupabaseServerClient, createSupabaseServiceClient } from "@/lib/supabase/server";
 import { currencyByLocale, type Locale } from "@/lib/i18n/config";
 import { DEFAULT_ONETIME_PRICE_CENTS } from "@/lib/utils/money";
+import type { Currency } from "@/types/db";
 
 // Creates a one-time PaymentIntent for a single content pack purchase.
 // The pack metadata travels on the PaymentIntent so the webhook can grant
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
     await service.from("profiles").update({ stripe_customer_id: customerId }).eq("id", profile.id);
   }
 
-  const currency = pack.one_time_currency ?? fallbackCurrency;
+  const currency = (pack.one_time_currency ?? fallbackCurrency) as Currency;
   const amount = pack.one_time_price_cents ?? DEFAULT_ONETIME_PRICE_CENTS[currency];
 
   const intent = await stripe.paymentIntents.create({

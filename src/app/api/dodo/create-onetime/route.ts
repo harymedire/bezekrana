@@ -1,4 +1,17 @@
 import { NextResponse } from "next/server";
+
+// Dodo Payments — privremeno isključen. Stripe je trenutno primarni
+// payment provider. Cijela implementacija je sačuvana u komentaru ispod
+// i može se vratiti kad bude potrebno (uz update Dodo SDK-a — `force_language`
+// više ne postoji u CheckoutSessionCreateParams tipu).
+export async function POST() {
+  return NextResponse.json(
+    { error: "dodo-disabled", message: "Dodo Payments is currently disabled. Use /api/stripe/create-onetime instead." },
+    { status: 503 },
+  );
+}
+
+/* ORIGINAL IMPLEMENTATION — re-enable when Dodo is needed again
 import { createSupabaseServerClient, createSupabaseServiceClient } from "@/lib/supabase/server";
 import { dodoClient, dodoForceLanguage, dodoOneTimeProductId } from "@/lib/dodo/server";
 
@@ -49,3 +62,4 @@ export async function POST(request: Request) {
     packTitle: pack.title,
   });
 }
+*/

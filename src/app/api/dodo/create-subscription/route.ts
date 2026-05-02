@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
+
+// Dodo Payments — privremeno isključen. Stripe je trenutno primarni
+// payment provider. Original implementacija sačuvana u komentaru ispod.
+export async function POST() {
+  return NextResponse.json(
+    { error: "dodo-disabled", message: "Dodo Payments is currently disabled. Use /api/stripe/create-subscription instead." },
+    { status: 503 },
+  );
+}
+
+/* ORIGINAL IMPLEMENTATION — re-enable when Dodo is needed again
 import { createSupabaseServerClient, createSupabaseServiceClient } from "@/lib/supabase/server";
 import { dodoClient, dodoForceLanguage, dodoSubscriptionProductId } from "@/lib/dodo/server";
 
-// Creates a Dodo checkout session for the weekly subscription. Returns the
-// checkout_url which the client mounts inside an inline iframe.
 export async function POST(request: Request) {
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -24,8 +33,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ alreadyActive: true });
   }
 
-  // return_url is mostly a fallback — with manualRedirect: true the iframe
-  // never actually navigates here, but Dodo requires the field.
   const returnUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`;
 
   const session = (await dodoClient.checkoutSessions.create({
@@ -44,3 +51,4 @@ export async function POST(request: Request) {
     sessionId: session.id ?? session.session_id ?? null,
   });
 }
+*/

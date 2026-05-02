@@ -2,7 +2,8 @@ import Stripe from "stripe";
 import type { Currency } from "@/types/db";
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-09-30.acacia",
+  // Stripe SDK v17 ships its own pinned API version; we accept it rather
+  // than override so type defs and runtime always match.
   typescript: true,
 });
 
