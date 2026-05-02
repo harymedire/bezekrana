@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BEZ EKRANA — Sedmični sistem #7</title>
+
+<!--
+  HOW TO USE THIS FILE
+  ====================
+  1. Open in a browser (Chrome / Edge / Firefox).
+  2. Click the floating "Download" button in the top-right corner.
+  3. In the print dialog: Destination → "Save as PDF" → A4, portrait,
+     margins: None (or Default), Background graphics: ON. Save.
+  4. Upload the resulting PDF in /admin → Paketi → Novi paket.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Brand tokens ---------- */
+  :root {
+    --coral-100:#FFE2E0; --coral-300:#FFA39E; --coral-500:#FF6B6B; --coral-700:#C73838;
+    --sun-100:#FFF6BF;   --sun-300:#FFE556;   --sun-500:#FFD93D;   --sun-700:#B89510;
+    --teal-100:#CFF3EE;  --teal-300:#7FDED0;  --teal-500:#4ECDC4;  --teal-700:#268B83;
+    --plum-100:#E6D9F0;  --plum-300:#B591D2;  --plum-500:#7F58A8;  --plum-700:#553C7A;
+    --plum-800:#3F2C5A;  --plum-900:#291D3B;
+    --cream:#FFF9F2;
+    --ink:#291D3B;
+    --muted:#7c6e92;
+  }
+
+  /* ---------- Reset + base ---------- */
+  *,*::before,*::after { box-sizing:border-box; }
+  html,body { margin:0; padding:0; background:#eee; color:var(--ink);
+    font-family:"Plus Jakarta Sans",system-ui,sans-serif; font-size:11pt; line-height:1.55;
+    -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4 { font-family:"Baloo 2",system-ui,sans-serif; font-weight:800;
+    letter-spacing:-0.01em; color:var(--plum-900); margin:0; }
+  p { margin:0 0 .55em; }
+  ul { margin:0; padding-left:1.1em; }
+  li { margin:.15em 0; }
+  strong { font-weight:700; color:var(--plum-800); }
+  em { font-style:italic; }
+
+  /* ---------- Page (A4 portrait) ---------- */
+  @page { size:A4 portrait; margin:0; }
+  .page {
+    width:210mm; height:297mm;
+    margin:8mm auto; background:var(--cream);
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+    padding:18mm 16mm; position:relative; overflow:hidden;
+    page-break-after:always;
+  }
+  .page.bleed { padding:0; }
+  .page:last-of-type { page-break-after:auto; }
+
+  /* ---------- Print ---------- */
+  @media print {
+    html,body { background:var(--cream); }
+    .page { margin:0; box-shadow:none; height:297mm; overflow:hidden; }
+    .no-print { display:none !important; }
+    body.ink-save html, body.ink-save { background:#fff !important; }
+    .page, .page * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+
+  /* ---------- Floating control panel (screen only) ---------- */
+  .controls {
+    position:fixed; top:18px; right:18px; z-index:50;
+    display:flex; flex-direction:column; gap:10px;
+    background:rgba(255,255,255,.97);
+    border:1px solid var(--plum-100); border-radius:18px;
+    padding:14px; box-shadow:0 10px 30px rgba(63,44,90,.18);
+    font-family:"Plus Jakarta Sans",sans-serif;
+  }
+  .controls .toggle {
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; color:var(--plum-800); user-select:none; cursor:pointer;
+    font-weight:600;
+  }
+  .controls .toggle input { position:absolute; opacity:0; width:0; height:0; }
+  .controls .toggle .box {
+    width:18px; height:18px; border-radius:6px;
+    border:2px solid var(--plum-300); background:#fff;
+    display:inline-grid; place-items:center;
+    transition:all .15s ease; flex-shrink:0;
+  }
+  .controls .toggle .box svg { width:12px; height:12px; opacity:0; transition:opacity .15s ease; }
+  .controls .toggle input:checked + .box {
+    background:var(--coral-500); border-color:var(--coral-500);
+  }
+  .controls .toggle input:checked + .box svg { opacity:1; }
+  .controls .toggle input:focus-visible + .box {
+    box-shadow:0 0 0 3px rgba(255,107,107,.3);
+  }
+  .print-btn {
+    background:var(--coral-500); color:#fff; font-weight:700;
+    font-family:"Plus Jakarta Sans",sans-serif; font-size:14px;
+    border:0; border-radius:999px; padding:11px 18px;
+    box-shadow:0 6px 16px rgba(199,56,56,.35);
+    cursor:pointer; transition:transform .15s ease; white-space:nowrap;
+  }
+  .print-btn:hover { transform:translateY(-2px); }
+  .print-btn:active { transform:translateY(0); }
+
+  /* ---------- INK-SAVE MODE ---------- */
+  body.ink-save .page { background:#fff !important; }
+  body.ink-save .blob { display:none !important; }
+  body.ink-save .confetti { display:none !important; }
+  body.ink-save .glow { display:none !important; }
+  body.ink-save .cover::before { display:none !important; }
+  body.ink-save .cover {
+    background:#fff !important; color:var(--ink) !important;
+    border:1px solid var(--plum-100);
+  }
+  body.ink-save .cover .meta,
+  body.ink-save .cover .week-number,
+  body.ink-save .cover .theme-name,
+  body.ink-save .cover .subtitle,
+  body.ink-save .cover .pitch,
+  body.ink-save .cover .wordmark,
+  body.ink-save .cover .url-tag,
+  body.ink-save .cover .logo-pill { color:var(--plum-900) !important; }
+  body.ink-save .cover .meta .dot { background:var(--plum-700) !important; }
+  body.ink-save .cover .pitch { border-top-color:var(--plum-100) !important; }
+  body.ink-save .cover .pitch strong { color:var(--coral-700) !important; }
+  body.ink-save .cover .week-number { color:var(--coral-700) !important; }
+  body.ink-save .cover .logo-pill { background:transparent !important; border:1px solid var(--plum-200) !important; }
+  body.ink-save .callout,
+  body.ink-save .callout-plum,
+  body.ink-save .callout-teal,
+  body.ink-save .callout-heart {
+    background:#fff !important; color:var(--ink) !important;
+    border:1px solid var(--plum-100);
+  }
+  body.ink-save .callout strong,
+  body.ink-save .callout-plum strong,
+  body.ink-save .callout-teal strong,
+  body.ink-save .callout-heart strong { color:var(--coral-700) !important; }
+  body.ink-save .day-stamp { background:#fff !important; color:var(--plum-900) !important; border:2px solid var(--plum-300); }
+  body.ink-save .week-list .day-num { background:#fff !important; color:var(--plum-900) !important; border:2px solid var(--plum-300); }
+  body.ink-save .chip { background:transparent !important; border:1px solid currentColor; }
+  body.ink-save .meta-cell { background:#fff !important; }
+  body.ink-save .version.lighter,
+  body.ink-save .version.harder { background:transparent !important; border:1px dashed var(--plum-200); color:var(--ink); }
+  body.ink-save .version .label { color:var(--plum-700) !important; }
+  body.ink-save .note-parent { background:transparent !important; }
+  body.ink-save .sos-bullet { background:transparent !important; border:1px solid var(--coral-500); }
+  body.ink-save .closing { background:#fff !important; }
+  body.ink-save .closing .badge { background:transparent !important; border:1px solid var(--plum-300); color:var(--plum-900) !important; }
+  body.ink-save .closing .stamp { background:#fff !important; color:var(--plum-900) !important; border:2px solid var(--plum-300); box-shadow:none !important; }
+  body.ink-save .story {
+    background:#fff !important;
+    border:1px solid var(--plum-200) !important;
+    border-left:4px solid var(--plum-600) !important;
+  }
+  body.ink-save .story::before { color:var(--plum-300) !important; }
+  body.ink-save .level.wow {
+    background:#fff !important;
+    color:var(--plum-900) !important;
+    border:1px solid var(--coral-300) !important;
+    box-shadow:none !important;
+  }
+  body.ink-save .level.wow .level-tag {
+    background:#fff !important; color:var(--coral-700) !important;
+    border:1px solid var(--coral-500);
+  }
+  body.ink-save .level.wow h3 { color:var(--coral-700) !important; }
+  body.ink-save .level.wow h4 { color:var(--coral-700) !important; }
+  body.ink-save .level.wow .needs,
+  body.ink-save .level.wow .needs strong,
+  body.ink-save .level.wow p { color:var(--plum-900) !important; opacity:1 !important; }
+
+  /* ---------- Decorative blobs ---------- */
+  .blob { position:absolute; border-radius:50%; filter:blur(70px);
+    opacity:.55; pointer-events:none; z-index:0; }
+
+  /* ---------- COVER ----------
+     Week 7 mood: emotions held in deep night. Soft pink → crimson →
+     mulberry → midnight navy. "Heart at night" feel — warm but with depth
+     and weight, fitting the gravitas of emotional literacy. Distinct from
+     week 1 (coral-purple sunset) and week 4 (pink-magenta-plum) by the
+     crimson middle and navy ending. */
+  .page.cover {
+    color:#fff; position:relative;
+    background:linear-gradient(155deg, #FFC0CB 0%, #DC143C 32%, #6B2D5C 65%, #0D1B3D 100%);
+    display:flex; flex-direction:column;
+    padding:24mm 20mm 20mm;
+    overflow:hidden;
+  }
+  .glow {
+    position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none;
+  }
+  .glow.g-1 { top:-30mm; left:-20mm; width:120mm; height:120mm; background:rgba(255,192,203,.65); }
+  .glow.g-2 { top:0; right:-20mm; width:100mm; height:100mm; background:rgba(220,20,60,.55); }
+  .glow.g-3 { bottom:-30mm; left:20mm; width:120mm; height:120mm; background:rgba(107,45,92,.6); }
+  .glow.g-4 { bottom:-10mm; right:-20mm; width:120mm; height:120mm; background:rgba(85,60,122,.55); }
+
+  .confetti { position:absolute; pointer-events:none; }
+  .confetti.c-1 { top:18mm; right:30mm; width:14mm; height:14mm; transform:rotate(20deg); }
+  .confetti.c-2 { top:70mm; right:14mm; width:8mm;  height:8mm;  transform:rotate(-15deg); }
+  .confetti.c-3 { bottom:88mm; left:14mm; width:12mm; height:12mm; transform:rotate(35deg); }
+  .confetti.c-4 { top:40mm; right:55mm; width:6mm; height:6mm; }
+  .confetti.c-5 { bottom:120mm; right:26mm; width:10mm; height:10mm; transform:rotate(-22deg); }
+
+  .cover-top {
+    display:flex; justify-content:space-between; align-items:center;
+    position:relative; z-index:2;
+  }
+  .logo-pill {
+    display:inline-flex; align-items:center; gap:9px;
+    background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.4);
+    padding:8px 16px 8px 10px; border-radius:999px;
+    font-weight:800; font-size:13pt; color:#fff;
+    font-family:"Baloo 2",sans-serif; letter-spacing:.01em;
+  }
+  .logo-pill svg { width:26px; height:26px; }
+
+  .cover .meta {
+    display:flex; align-items:center; gap:10px;
+    font-size:9pt; letter-spacing:.22em; text-transform:uppercase;
+    font-weight:700; color:#fff; opacity:.95;
+  }
+  .cover .meta .dot { width:8px; height:8px; border-radius:50%; background:var(--sun-500); }
+
+  .cover-hero { margin-top:18mm; position:relative; z-index:2; }
+  .cover .wordmark {
+    font-family:"Baloo 2",sans-serif; font-weight:800;
+    font-size:96pt; line-height:.9; letter-spacing:-0.025em; margin:0;
+    color:#fff;
+    text-shadow:0 2px 12px rgba(13,27,61,.55);
+  }
+  .cover .week-number {
+    margin-top:8mm;
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"Baloo 2",sans-serif; font-weight:700;
+    font-size:14pt; color:var(--plum-900);
+    background:var(--sun-300); padding:6px 14px; border-radius:999px;
+    box-shadow:0 6px 14px rgba(255,217,61,.35);
+  }
+  .cover .theme-name {
+    margin-top:14mm; font-family:"Baloo 2",sans-serif; font-weight:700;
+    font-size:36pt; line-height:1.02; color:#fff; max-width:160mm;
+    letter-spacing:-0.01em;
+  }
+  .cover .subtitle {
+    margin-top:6mm; font-size:13pt; max-width:160mm; opacity:.92;
+    font-weight:500;
+  }
+
+  .cover-bottom {
+    margin-top:auto; position:relative; z-index:2;
+    padding-top:10mm;
+  }
+  .cover .pitch {
+    max-width:160mm; font-size:11.5pt; line-height:1.6; color:#fff; opacity:.96;
+    padding-top:8mm; border-top:1px solid rgba(255,255,255,.28);
+  }
+  .url-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:6mm; font-weight:700; font-size:10pt;
+    color:#fff; opacity:.92; letter-spacing:.04em;
+  }
+  .url-tag svg { width:14px; height:14px; }
+
+  .cover-copy {
+    margin-top:4mm; font-size:7.5pt; letter-spacing:.06em;
+    color:rgba(255,255,255,.55); font-weight:500;
+  }
+
+  .watermark, .page-num {
+    position:absolute; bottom:4mm;
+    font-family:"Plus Jakarta Sans",sans-serif;
+    font-size:6pt; font-weight:600; letter-spacing:.22em;
+    color:rgba(63,44,90,.18);
+    pointer-events:none; z-index:5;
+  }
+  .watermark { right:6mm; }
+  .page-num { left:6mm; letter-spacing:.1em; color:rgba(63,44,90,.32); }
+  .page.cover .watermark,
+  .page.cover .page-num,
+  .page.closing .watermark,
+  .page.closing .page-num { color:rgba(255,255,255,.4); }
+  body.ink-save .watermark,
+  body.ink-save .page-num { color:rgba(63,44,90,.4) !important; }
+
+  .legal-notice {
+    margin-top:auto; padding-top:5mm;
+    width:100%; max-width:178mm;
+    position:relative; z-index:2;
+    text-align:left;
+  }
+  .legal-cols {
+    display:grid; grid-template-columns:1fr 1fr; gap:6mm;
+  }
+  .legal-cols h4 {
+    font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+    font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--plum-700); margin:0 0 1.2mm;
+  }
+  .legal-cols p {
+    font-size:5.5pt; line-height:1.4; color:var(--muted); margin:0;
+  }
+  .legal-cols p strong { color:var(--plum-800); }
+  .legal-safety {
+    font-size:6pt; line-height:1.45; color:var(--muted);
+    margin:0 auto 3mm; max-width:140mm; text-align:center;
+    padding:2mm 4mm;
+    border-top:1px solid var(--plum-200);
+    border-bottom:1px solid var(--plum-200);
+  }
+  .legal-safety strong { color:var(--plum-700); display:block; margin-bottom:1mm;
+    font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; }
+  .legal-copyright {
+    display:block; width:100%;
+    margin-top:3mm; padding-top:3mm;
+    border-top:1px solid var(--plum-200);
+    font-size:6pt; letter-spacing:0;
+    color:var(--plum-600); text-align:center; font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* ---------- Page header ---------- */
+  .page-header {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:10mm; font-size:9pt; letter-spacing:.18em;
+    text-transform:uppercase; font-weight:700; color:var(--muted);
+  }
+  .page-header .brand { color:var(--plum-700); }
+
+  .h-eyebrow { font-size:9pt; font-weight:700; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--coral-700); margin-bottom:4mm; }
+  .h-display { font-size:30pt; line-height:1.05; margin-bottom:6mm; }
+  .h-display.small { font-size:24pt; }
+
+  /* ---------- Reusable callout boxes ---------- */
+  .callout {
+    border-radius:18px; padding:8mm 9mm;
+    background:linear-gradient(135deg,var(--sun-100),var(--coral-100));
+    color:var(--plum-900); position:relative; overflow:hidden;
+  }
+  .callout strong { color:var(--coral-700); }
+  .callout-plum {
+    background:linear-gradient(135deg,var(--plum-700),var(--plum-900));
+    color:#fff;
+  }
+  .callout-plum strong { color:var(--sun-300); }
+  .callout-teal {
+    background:linear-gradient(135deg,var(--teal-100),var(--teal-300));
+    color:var(--plum-900);
+  }
+  /* Heart variant — for the parent "kako mjeriti" note. Soft warm gradient
+     that mirrors the cover but lighter. */
+  .callout-heart {
+    background:linear-gradient(135deg, #FFE2E0, #FFC0CB 50%, #E0CCEB);
+    color:var(--plum-900);
+    border-left:4px solid #DC143C;
+  }
+  .callout-heart strong { color:#7A1A2E; }
+
+  /* ---------- "How to use" steps ---------- */
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin-top:6mm; }
+  .step {
+    background:#fff; border:1px solid var(--plum-100);
+    border-radius:18px; padding:7mm 7mm 6mm;
+    box-shadow:0 2px 8px rgba(63,44,90,.04);
+  }
+  .step .num {
+    font-family:"Baloo 2",sans-serif; font-weight:800;
+    font-size:42pt; line-height:1; color:var(--coral-300); margin-bottom:2mm;
+  }
+  .step h3 { font-size:13pt; margin-bottom:1.5mm; }
+  .step p { font-size:10.5pt; color:var(--muted); margin:0; }
+
+  /* ---------- Legend grid ---------- */
+  .legend { display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin-top:8mm; }
+  .legend-item {
+    background:#fff; border-radius:16px; padding:7mm 8mm;
+    border:1px solid var(--plum-100); display:flex; align-items:center; gap:5mm;
+  }
+  .legend-icon {
+    width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
+    flex-shrink:0;
+  }
+  .legend-icon svg { width:24px; height:24px; }
+  .legend-item h4 { font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+    font-size:14pt; color:var(--plum-900); margin-bottom:1mm; }
+  .legend-item p { font-size:11pt; color:var(--muted); margin:0; line-height:1.4; }
+
+  .f-pokret      { background:var(--coral-100); color:var(--coral-700); }
+  .f-fine        { background:var(--sun-100);   color:var(--sun-700); }
+  .f-paznja      { background:var(--plum-100);  color:var(--plum-700); }
+  .f-govor       { background:var(--teal-100);  color:var(--teal-700); }
+  .f-senzor      { background:#FFE0F0;          color:#C12B71; }
+  .f-povezivanje { background:#E8DFFB;          color:#5B3FB3; }
+  .f-rjesavanje  { background:#FFE5C0;          color:#A8650B; }
+  .f-masta       { background:#D8F0FF;          color:#2167A8; }
+
+  /* ---------- Week overview ---------- */
+  .week-list { margin-top:6mm; }
+  .week-list .day {
+    display:grid; grid-template-columns:14mm 1fr; gap:4mm; align-items:center;
+    padding:4mm 0; border-bottom:1px dashed var(--plum-100);
+  }
+  .week-list .day:last-child { border-bottom:0; }
+  .week-list .day-num {
+    width:14mm; height:14mm; border-radius:14px; display:grid; place-items:center;
+    background:var(--plum-700); color:#fff; font-family:"Baloo 2",sans-serif;
+    font-weight:800; font-size:13pt;
+  }
+  .week-list .day:nth-child(7n+1) .day-num { background:var(--coral-500); }
+  .week-list .day:nth-child(7n+2) .day-num { background:var(--plum-700); }
+  .week-list .day:nth-child(7n+3) .day-num { background:#2C5F7A; }
+  .week-list .day:nth-child(7n+4) .day-num { background:#7A1D1D; }
+  .week-list .day:nth-child(7n+5) .day-num { background:var(--sun-700); }
+  .week-list .day:nth-child(7n+6) .day-num { background:#114641; }
+  .week-list .day:nth-child(7n+7) .day-num { background:var(--plum-800); }
+  .week-list .day-title { font-family:"Baloo 2",sans-serif; font-weight:700;
+    font-size:14pt; color:var(--plum-900); }
+
+  /* ---------- DAY page ---------- */
+  .day-header {
+    display:flex; align-items:flex-end; gap:5mm; margin-bottom:7mm;
+    padding-bottom:5mm; border-bottom:2px solid var(--plum-100);
+  }
+  .day-stamp {
+    width:22mm; height:22mm; border-radius:16px; display:grid; place-items:center;
+    color:#fff; font-family:"Baloo 2",sans-serif; font-weight:800; font-size:20pt;
+    line-height:1; flex-shrink:0;
+  }
+
+  /* ---------- STORY HOOK + 3-LEVEL ACTIVITY ---------- */
+  .story {
+    position:relative;
+    background:#FFE2E0;
+    background:linear-gradient(135deg, #FFE2E0 0%, #E0CCEB 100%);
+    border-radius:18px; padding:7mm 9mm 7mm 14mm;
+    margin:0 0 6mm;
+    border-left:4px solid #DC143C;
+  }
+  .story::before {
+    content:"\201C";
+    position:absolute; top:-2mm; left:5mm;
+    font-family:"Baloo 2",sans-serif; font-weight:800;
+    font-size:60pt; line-height:1; color:#DC143C;
+  }
+  .story p {
+    font-family:"Baloo 2",sans-serif; font-style:italic;
+    font-size:14pt; line-height:1.4; color:#291D3B;
+    margin:0; font-weight:600;
+  }
+
+  .level {
+    border-radius:16px; padding:5mm 6mm; margin-bottom:0;
+    page-break-inside:avoid; break-inside:avoid;
+    border:1px solid var(--plum-100); background:#fff;
+  }
+  .level + .level { margin-top:4mm; }
+
+  .level-tag {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:8.5pt; font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase;
+    padding:3px 10px; border-radius:999px; margin-bottom:2.5mm;
+  }
+  .level-tag .ico { font-size:11pt; line-height:1; }
+
+  .level h3 { font-size:14pt; line-height:1.15; margin:0 0 2mm; }
+  .level .needs {
+    font-size:9.5pt; line-height:1.45; margin-bottom:2mm;
+    color:var(--muted);
+  }
+  .level .needs strong { color:var(--plum-900); }
+  .level h4 {
+    font-family:"Plus Jakarta Sans",sans-serif; font-weight:700;
+    font-size:8.5pt; color:var(--coral-700); margin:2mm 0 1mm;
+    text-transform:uppercase; letter-spacing:.08em;
+  }
+  .level p { font-size:10pt; line-height:1.5; margin:0; }
+
+  .level.wow {
+    background:#FF6B6B !important;
+    background:linear-gradient(135deg, #FF6B6B 0%, #E84F4F 100%) !important;
+    border:0 !important; color:#fff !important;
+    padding:6mm 7mm;
+    box-shadow:0 6px 16px rgba(0,0,0,.18);
+  }
+  .level.wow .level-tag {
+    background:#FFD93D !important; color:#291D3B !important;
+  }
+  .level.wow h3 { color:#fff !important; font-size:16pt; }
+  .level.wow h4 { color:#FFE556 !important; }
+  .level.wow .needs { color:rgba(255,255,255,.92) !important; }
+  .level.wow .needs strong { color:#fff !important; }
+  .level.wow p { color:#fff !important; font-size:10.5pt; opacity:.95; }
+
+  /* ---------- Per-day theme — bound to the emotional tool of the day ---------- */
+  /* Day 1 — Coral (faces, immediate warmth) */
+  .day-1 .day-stamp { background:#C73838; color:#fff; }
+  .day-1 .level.wow {
+    background:linear-gradient(135deg, #FF837C 0%, #C73838 100%) !important;
+    box-shadow:0 6px 16px rgba(199,56,56,.3);
+  }
+
+  /* Day 2 — Plum (book, contemplation, theory of mind) */
+  .day-2 .day-stamp { background:#553C7A; color:#fff; }
+  .day-2 .level.wow {
+    background:linear-gradient(135deg, #B591D2 0%, #553C7A 100%) !important;
+    box-shadow:0 6px 16px rgba(85,60,122,.32);
+  }
+
+  /* Day 3 — Sky (breath, calm, parasympathetic) */
+  .day-3 .day-stamp { background:#2C5F7A; color:#fff; }
+  .day-3 .level.wow {
+    background:linear-gradient(135deg, #5BB3D6 0%, #2C5F7A 100%) !important;
+    box-shadow:0 6px 16px rgba(44,95,122,.32);
+  }
+
+  /* Day 4 — Crimson (thermometer, intensity, the "red" zone) */
+  .day-4 .day-stamp { background:#7A1D1D; color:#fff; }
+  .day-4 .level.wow {
+    background:linear-gradient(135deg, #C73838 0%, #7A1D1D 100%) !important;
+    box-shadow:0 6px 16px rgba(122,29,29,.32);
+  }
+
+  /* Day 5 — Sun gold (silly dance, joy, energy) */
+  .day-5 .day-stamp { background:#8C6F08; color:#fff; }
+  .day-5 .level.wow {
+    background:linear-gradient(135deg, #E5BD1F 0%, #8C6F08 100%) !important;
+    box-shadow:0 6px 16px rgba(140,111,8,.3);
+  }
+  .day-5 .level.wow .level-tag { background:#CFF3EE !important; color:#268B83 !important; }
+  .day-5 .level.wow h4 { color:#FFF6BF !important; }
+
+  /* Day 6 — Forest teal (calm jar, settling, focus) */
+  .day-6 .day-stamp { background:#114641; color:#fff; }
+  .day-6 .level.wow {
+    background:linear-gradient(135deg, #268B83 0%, #114641 100%) !important;
+    box-shadow:0 6px 16px rgba(17,70,65,.35);
+  }
+
+  /* Day 7 — Royal Plum (heart, deep close) */
+  .day-7 .day-stamp { background:#3F2C5A; color:#fff; }
+  .day-7 .level.wow {
+    background:linear-gradient(135deg, #6B4E9B 0%, #291D3B 100%) !important;
+    box-shadow:0 6px 16px rgba(41,29,59,.35);
+  }
+
+  .levels-row {
+    display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:4mm;
+  }
+  .level.medium .level-tag {
+    background:var(--sun-100); color:var(--sun-700);
+  }
+  .level.medium { border-color:var(--sun-300); }
+  .level.light .level-tag {
+    background:var(--teal-100); color:var(--teal-700);
+  }
+  .level.light { border-color:var(--teal-300); }
+
+  .day-title-block h2 { font-size:20pt; line-height:1.05; margin-bottom:1.5mm; }
+  .day-title-block p { color:var(--muted); font-size:10pt; margin:0; }
+
+  /* ---------- SOS page ---------- */
+  .sos-list { display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:4mm; }
+  .sos-item {
+    background:#fff; border:1px solid var(--plum-100); border-radius:14px;
+    padding:5mm; display:flex; gap:3mm; align-items:flex-start;
+  }
+  .sos-bullet {
+    flex-shrink:0; width:28px; height:28px; border-radius:8px; background:var(--coral-100);
+    color:var(--coral-700); display:grid; place-items:center; font-weight:800;
+  }
+  .sos-bullet svg { width:14px; height:14px; }
+  .sos-item p { margin:0; font-size:10.5pt; }
+
+  /* ---------- Closing page ---------- */
+  .page.closing {
+    padding:0 !important;
+    background:var(--cream);
+  }
+  .closing-inner {
+    height:100%;
+    padding:14mm 16mm 10mm;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .closing-inner .body {
+    flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    position:relative; z-index:2;
+    padding-bottom:4mm;
+  }
+  .closing .glow { z-index:0; }
+  .closing .glow.cg-1 { top:-50mm; left:50%; transform:translateX(-50%);
+    width:200mm; height:120mm; background:#FFE2E0; filter:blur(50px); }
+  .closing .glow.cg-2 { bottom:-50mm; left:50%; transform:translateX(-50%);
+    width:200mm; height:120mm; background:#E0CCEB; filter:blur(50px); }
+  .closing .badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--sun-300); color:var(--plum-900);
+    font-weight:800; padding:6px 14px; border-radius:999px;
+    font-size:10pt; margin-bottom:4mm;
+  }
+  .closing h2 { font-size:26pt; line-height:1.1; max-width:160mm; margin-bottom:4mm; }
+  .closing p { font-size:11pt; max-width:140mm; color:var(--muted); }
+  .closing .stamp {
+    margin-top:6mm; padding:5mm 8mm; border-radius:18px;
+    background:linear-gradient(135deg,#DC143C,#3F2C5A);
+    color:#fff; font-family:"Baloo 2",sans-serif; font-weight:700; font-size:13pt;
+    box-shadow:0 10px 24px rgba(220,20,60,.3);
+  }
+
+  /* ---------- Activity title color rotation per day ---------- */
+  .day-1 .activity h3 { color:var(--coral-700); }
+  .day-2 .activity h3 { color:var(--plum-700); }
+  .day-3 .activity h3 { color:#2C5F7A; }
+  .day-4 .activity h3 { color:#7A1D1D; }
+  .day-5 .activity h3 { color:#A87000; }
+  .day-6 .activity h3 { color:var(--teal-700); }
+  .day-7 .activity h3 { color:var(--plum-700); }
+</style>
+</head>
+<body>
+
+<div class="controls no-print" id="controls">
+  <label class="toggle">
+    <input type="checkbox" id="ink-save-toggle"
+      onchange="document.body.classList.toggle('ink-save', this.checked)" />
+    <span class="box" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>
+    </span>
+    Bez pozadinskih boja
+  </label>
+  <button class="print-btn" id="download-btn" type="button" onclick="downloadPDF()">
+    ⬇ Download
+  </button>
+</div>
+
+<script>
+  (function injectMeta() {
+    const run = () => {
+      const pages = document.querySelectorAll('section.page');
+      const total = pages.length;
+      pages.forEach((page, i) => {
+        if (page.querySelector('.page-num')) return;
+        const num = document.createElement('span');
+        num.className = 'page-num';
+        num.textContent = `str. ${i + 1} / ${total}`;
+        page.appendChild(num);
+
+        const wm = document.createElement('span');
+        wm.className = 'watermark';
+        wm.textContent = page.classList.contains('closing')
+          ? 'PROTECTED CONTENT'
+          : 'ZAŠTIĆENI SADRŽAJ';
+        page.appendChild(wm);
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+  })();
+</script>
+
+<script>
+  function downloadPDF() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => window.print());
+    } else {
+      window.print();
+    }
+  }
+</script>
+
+<!-- ============================================================== COVER -->
+<section class="page bleed cover">
+
+  <div class="glow g-1"></div>
+  <div class="glow g-2"></div>
+  <div class="glow g-3"></div>
+  <div class="glow g-4"></div>
+
+  <svg class="confetti c-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#FFD93D" opacity=".85"/>
+  </svg>
+  <svg class="confetti c-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="#FFC0CB" opacity=".85"/>
+  </svg>
+  <svg class="confetti c-3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#FFFFFF" opacity=".55"/>
+  </svg>
+  <svg class="confetti c-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="#FF6B6B" opacity=".75"/>
+  </svg>
+  <svg class="confetti c-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#B591D2" opacity=".75"/>
+  </svg>
+
+  <div class="cover-top">
+    <span class="logo-pill" aria-label="BezEkrana">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#FF6B6B"/>
+        <circle cx="18" cy="5" r="2" fill="#FFD93D"/>
+        <circle cx="6" cy="18" r="1.5" fill="#4ECDC4"/>
+      </svg>
+      BezEkrana
+    </span>
+    <div class="meta"><span class="dot"></span> 2–4 godine</div>
+  </div>
+
+  <div class="cover-hero">
+    <h1 class="wordmark">BEZ<br/>EKRANA</h1>
+    <div class="week-number">★ Sedmični sistem #7</div>
+    <h2 class="theme-name">Velika osjećanja<br/>u malom tijelu</h2>
+    <p class="subtitle">7 dana jednostavnih aktivnosti za djecu od 2 do 4 godine.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="pitch">
+      <strong style="color:var(--sun-300);">Sedam alata za emocije</strong>
+      — od prepoznavanja na licu i disanja sa medom, preko termometra osjećaja
+      i tegle mirnoće, do tri stvari iz srca prije spavanja. Igre koje pomažu
+      djetetu da prepozna, imenuje i regulira ono što već osjeća.
+    </div>
+    <div class="url-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      bezekrana.com
+    </div>
+    <div class="cover-copy">© 2026 Prime Vector Solutions LLC</div>
+  </div>
+</section>
+
+<!-- ================================================================ INTRO -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Uvod</span>
+  </div>
+
+  <p class="h-eyebrow">Dobro došli</p>
+  <h1 class="h-display">Sedmični sistem #7</h1>
+
+  <p style="font-size:12pt; max-width:155mm;">Ova sedmica je posvećena <strong>emocionalnoj pismenosti i samoregulaciji</strong>. Razdoblje 2–4 godine je upravo kada amigdala radi punom snagom, prefrontalni korteks tek počinje raditi, i dijete ima ogromne emocije koje ne razumije. <strong>Bez alata</strong> to su tantrumi, ujedanje, povlačenje. <strong>Sa alatima</strong> — to je rast.</p>
+
+  <p style="font-size:11.5pt; max-width:155mm; color:var(--muted); margin-top:4mm;">Sedam dana sintetiše ono što je u akademskoj literaturi rasuto u stotinama studija — od „<em>Name it to tame it</em>" (Dan Siegel), preko emotion coachinga (Gottman) i polivagalne teorije (Porges), do gratitude practice iz pozitivne psihologije. Roditelj ne mora znati nijedno od ovih imena — sedmica radi i bez njih.</p>
+
+  <ul style="font-size:11.5pt; margin:5mm 0 5mm; columns:2; column-gap:8mm;">
+    <li>prepoznavanje osjećaja na licu</li>
+    <li>imenovanje emocija (rječnik)</li>
+    <li>regulacija kroz tijelo (dah, pokret)</li>
+    <li>svjesnost intenziteta (termometar)</li>
+    <li>fokus i smirivanje (tegla)</li>
+    <li>pozitivna sjećanja i privrženost</li>
+    <li>teorija uma (drugi imaju osjećaje)</li>
+    <li>oslobađanje energije + zaledi</li>
+  </ul>
+
+  <div class="callout-heart" style="border-radius:18px; padding:6mm 8mm; margin-top:3mm;">
+    <p style="font-size:11.5pt; line-height:1.55; margin:0;">
+      <strong>Napomena za roditelja:</strong> ova sedmica nije o tome da dijete postane „smireno" ili „dobro raspoloženo". <strong>Sva su osjećanja dobrodošla</strong> — i ljutnja, i tuga, i strah. Cilj je da dijete dobije riječi i alate za ono što već osjeća. Ne tjeraj rezultate — sjeme se sije sada, žetva dolazi godinama kasnije. Ono što mjeriš ovih sedam dana <strong>nije promjena ponašanja, nego trenuci povezanosti</strong>.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ HOW TO USE -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Kako koristiti</span>
+  </div>
+
+  <p class="h-eyebrow">Vodič</p>
+  <h1 class="h-display">Kako koristiti<br/>ovaj sistem</h1>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <h3>Alati se grade</h3>
+      <p>Sedmica ide redom: prvo rječnik (1, 2), pa smirivanje (3), pa svjesnost intenziteta (4), pa oslobađanje (5), pa fokus (6), i konačno povezivanje (7).</p>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h3>Imenuj, ne gasi</h3>
+      <p>Kad dijete plače: „Vidim da si tužan." Pa onda alat. <strong>Imenuj prije nego što riješiš.</strong></p>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h3>Tijelo prvo</h3>
+      <p>Kod 2–4 godine regulacija ide kroz <strong>tijelo</strong> (dah, pokret, dodir), ne kroz logiku. Pričanje smiruje tek kasnije.</p>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h3>Tantrum je vježba</h3>
+      <p>Ne uspijeva ti svaki dan? To je signal da je sedmica <em>potrebna</em>, ne da nije uspjela. Vrati se sutra.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:9mm;">
+    <p style="font-size:13pt; font-weight:700; line-height:1.4; margin:0;">
+      Najvažnije nije savršena izvedba.<br/>
+      <span style="color:var(--coral-700);">Najvažnije je da dijete osjeti — kad mi je teško, neko sa mnom diše, prima moje suze, čuje moje srce.</span>
+    </p>
+  </div>
+</section>
+
+<!-- =============================================================== LEGEND -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Legenda</span>
+  </div>
+
+  <p class="h-eyebrow">Šta razvijamo</p>
+  <h1 class="h-display">Šta razvijamo<br/>kroz igru</h1>
+
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-icon f-pokret">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M11 22l1-5-3-3 1-5 4 1 4 4"/></svg>
+      </span>
+      <div><h4>Pokret</h4><p>Cijelo tijelo, koordinacija</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-fine">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a2 2 0 1 1 4 0v6"/><path d="M13 11V4a2 2 0 1 1 4 0v9"/><path d="M17 13V7a2 2 0 1 1 4 0v8a7 7 0 0 1-7 7H9a5 5 0 0 1-5-5l-1-3a2 2 0 0 1 4-1l1 2v-6a2 2 0 1 1 4 0v5"/></svg>
+      </span>
+      <div><h4>Fine ruke</h4><p>Šaka, prsti, preciznost</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-paznja">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+      </span>
+      <div><h4>Pažnja</h4><p>Fokus, posmatranje</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-govor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6A8.4 8.4 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+      </span>
+      <div><h4>Govor</h4><p>Riječi, slušanje, imitacija</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-senzor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10l-4.5 3.1L16 19l-4-3-4 3 1.5-5.9L5 10l5.1-1.4z"/></svg>
+      </span>
+      <div><h4>Senzorna igra</h4><p>Dodir, tekstura, miris</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-povezivanje">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-.9a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>
+      </span>
+      <div><h4>Povezivanje</h4><p>Bliskost s roditeljem</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-rjesavanje">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 13c.5.5 1 1 1 2v1h6v-1c0-1 .5-1.5 1-2a7 7 0 0 0-4-13z"/></svg>
+      </span>
+      <div><h4>Rješavanje</h4><p>Uzrok-posljedica, mali problemi</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-masta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M19 13l.8 2.2 2.2.8-2.2.8L19 19l-.8-2.2L16 16l2.2-.8z"/><path d="M5 5l.7 2 2 .7-2 .7L5 10l-.7-1.6L2.3 7.7l2-.7z"/></svg>
+      </span>
+      <div><h4>Mašta</h4><p>Kreativnost, role-play, ekspresija</p></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:10mm; font-size:14pt;">Dodatne oznake na svakoj aktivnosti</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1.5mm; margin-top:4mm;">
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Priprema</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">jednostavna</div>
+    </div>
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Potrebno</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">stvari iz kuće</div>
+    </div>
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Tempo</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">prema djetetu</div>
+    </div>
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Nadzor</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">obavezan</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== WEEK OVERVIEW -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Pregled sedmice</span>
+  </div>
+
+  <p class="h-eyebrow">Plan u jednom pogledu</p>
+  <h1 class="h-display">Pregled sedmice</h1>
+
+  <p style="font-size:11.5pt; color:var(--muted); max-width:155mm;">Sedam alata za velika osjećanja u malom tijelu — od prepoznavanja na licu (Dan 1) do tri stvari iz srca pred spavanje (Dan 7). Sedmica gradi alate <strong>kumulativno</strong>: prvo rječnik, pa smirivanje kroz tijelo, pa svjesnost intenziteta, pa oslobađanje energije, pa fokus, i konačno povezivanje kroz pozitivno — redoslijed koji prati klinički protokol emocionalne edukacije male djece.</p>
+
+  <div class="week-list">
+    <div class="day"><div class="day-num">1</div><div class="day-title">Tri lica u ogledalu</div></div>
+    <div class="day"><div class="day-num">2</div><div class="day-title">Knjiga osjećaja</div></div>
+    <div class="day"><div class="day-num">3</div><div class="day-title">Disanje sa medom</div></div>
+    <div class="day"><div class="day-num">4</div><div class="day-title">Termometar osjećaja</div></div>
+    <div class="day"><div class="day-num">5</div><div class="day-title">Glupav ples</div></div>
+    <div class="day"><div class="day-num">6</div><div class="day-title">Tegla mirnoća</div></div>
+    <div class="day"><div class="day-num">7</div><div class="day-title">Tri stvari iz srca</div></div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 1 -->
+<section class="page day day-1">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 1 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">1</div>
+    <div class="day-title-block">
+      <h2>Tri lica u ogledalu</h2>
+      <p>Sretno, tužno, ljuto — 3 minute, 50 godina.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Lice prvo pokaže šta osjećamo. Riječ stiže poslije.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Tri lica u ogledalu</h3>
+    <div class="needs"><strong>Potrebno:</strong> ogledalo (ili samo lice u lice), 5 minuta.</div>
+    <h4>Kako se igra</h4>
+    <p>Stanete pred ogledalo (ili sjedite licem u lice). Kažeš: „Hajde da napravimo sretno lice." Praviš ga preuveličano — široki osmijeh, sjajne oči. Dijete oponaša. Pa: „Sad tužno lice." Spušteni uglovi, opuštena ramena. Pa: „Sad ljuto lice." Namršteno, stisnuti zubi. Bez objašnjenja, bez priče — <strong>samo lice + riječ</strong>. Možeš dodati iznenađeno, umorno, uplašeno. Kratko, 5 minuta — ponovi više puta tokom dana. Oponašanje izraza aktivira ogledalo neurone — dijete na trenutak zaista osjeti tu emociju, kao sigurnu, kontrolisanu izloženost. Tri minute danas → riječi koje će koristiti narednih 50 godina.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Pogodi koje je lice</h3>
+      <p>Praviš lice bez riječi. Dijete pogađa: „Sretno? Tužno? Ljuto?" Onda zamjena — dijete pravi, ti pogađaš. Vježba prepoznavanja tuđih osjećaja kroz lice — temelj empatije.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Lice kao mama</h3>
+      <p>Samo dva lica: sretno i tužno. Ti praviš, dijete kopira. Bez pogađanja, bez razgovora — samo imitacija. Mlađoj djeci dovoljno je da kopiraju jedan tvoj izraz da osjete šta to znači.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 2 -->
+<section class="page day day-2">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 2 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">2</div>
+    <div class="day-title-block">
+      <h2>Knjiga osjećaja</h2>
+      <p>Slika ima i lice — ne samo radnju.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Kako se osjeća na ovoj slici?</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Šta lik osjeća?</h3>
+    <div class="needs"><strong>Potrebno:</strong> bilo koja slikovnica iz kuće.</div>
+    <h4>Kako se igra</h4>
+    <p>Umjesto da pratite radnju, na svakoj stranici pitaš jedno: „Kako se ona osjeća na ovoj slici?" Dijete odgovori (ili pokaže na svoje lice ako nema riječ). Imenuješ i proširiš: „Da, izgleda tužno. Vidiš, suze su joj. Šta misliš zašto?" Ako dijete ne zna — ti ponudi: „Možda zato što je izgubila igračku." Ovo je dijaloško čitanje usmjereno na <strong>emocionalnu kategoriju</strong>. Studije pokazuju da djeca čiji roditelji često razgovaraju o osjećanjima likova razvijaju značajno bolju <strong>teoriju uma</strong> do 4. godine — sposobnost da razumiju da drugi ljudi imaju misli i osjećaje različite od njihovih. Ista knjiga koju ste čitali 50 puta otkriva potpuno novi sloj.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Šta sad? Šta poslije?</h3>
+      <p>Pratite jednog lika kroz par stranica. Pitaš: „Kako se osjećala na početku? Šta je promijenilo? Kako se osjeća sad?" Vježba praćenja emocije kroz vrijeme.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Sretno ili tužno?</h3>
+      <p>Dvije kategorije, ništa više. Pokazuješ stranicu: „Sretno ili tužno?" Dijete pokazuje. Mlađem djetetu ovo je dovoljno — temelj na kojem se kasnije nadograđuje.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 3 -->
+<section class="page day day-3">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 3 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">3</div>
+    <div class="day-title-block">
+      <h2>Disanje sa medom</h2>
+      <p>Medo se vozi gore-dole.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Stomak diže medu. Pa ga spušta. Polako.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Medo na stomaku</h3>
+    <div class="needs"><strong>Potrebno:</strong> mali plišani medo (ili bilo koja mekana igračka), mjesto za leđa (krevet, pod, ćebe).</div>
+    <h4>Kako se igra</h4>
+    <p>Dijete legne na leđa. Staviš mu malog medu na stomak. „Vidiš medu? On voli da se vozi gore-dolje na tvom stomaku. Diši duboko — gore. Sad polako pusti — dole." Pravite zajedno 5–6 dahova. Možeš pjevuckati polako: „Gooore... dooole..." Pa zamjena — medo ide na tvom stomaku, dijete posmatra. <strong>Spori izdah aktivira parasimpatički nervni sistem</strong> — fiziološki smiruje. Najmoćniji dio: riječ <strong>„medo"</strong> postaje alat za buduće trenutke krize. Kad dijete bude u tantrumu mjesecima poslije, to ime priziva naučenu reakciju smirivanja.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Brojanje dahova</h3>
+      <p>Dijete drži medu na stomaku. Ti brojiš: „Jedan... dva... tri..." Pa dijete broji svoje dahove — koliko ih može mirno do mete? Vježba kontrole pažnje i disanja istovremeno.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Medo spava</h3>
+      <p>Bez tehnike. Dijete legne, medo na stomaku, vi zajedno gledate kako se diže i spušta. Ne trudite se ništa — samo posmatrate. Dovoljno za vrlo malu djecu da osjete povezanost sa svojim disanjem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 4 -->
+<section class="page day day-4">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 4 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">4</div>
+    <div class="day-title-block">
+      <h2>Termometar osjećaja</h2>
+      <p>Mali ljut. Veliki ljut. Sve je ljut.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Osjećaj može biti mali. Osjećaj može biti veliki.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Crtaj termometar</h3>
+    <div class="needs"><strong>Potrebno:</strong> papir; flomasteri (plavi, žuti, narandžasti, crveni).</div>
+    <h4>Kako se igra</h4>
+    <p>Na papiru nacrtaš jednostavan vertikalni termometar — od dna prema vrhu, sa tri ili četiri nivoa. Dno: <strong>smiren</strong> (plavo, ravna linija). Sredina: <strong>malo uznemiren</strong> (žuto, talasić). Više: <strong>jako uznemiren</strong> (narandžasto, zigzag). Vrh: <strong>eksplozija</strong> (crveno, zvijezda). Prvo pokažeš na sebi: „Sad sam ovdje (na dnu). Smirena sam." Pa improviziraš situacije: „Šta misliš, gdje sam ja kad neko ruši moju kulu od kocaka?" Dijete pokaže. „A ti? Gdje si ti sad?" Daje djetetu vizuelni jezik za <strong>intenzitet</strong> osjećaja — što je teže od imenovanja same emocije. 2-godišnjak doživljava sve kao 100%; termometar uvodi nijansu. Roditelj dobije alat za buduće trenutke: „Gdje si sad na termometru?"</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Kad je mama na crvenom?</h3>
+      <p>Pričaš situacije iz dana: „Jutros kad je telefon zazvonio mnogo puta — mislim da sam bila narandžasta." „A ti, kad ti je tata uzeo lopatu?" Dijete spaja sjećanje sa nivoom. Vježba refleksije.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Pokaži boju</h3>
+      <p>Bez crtanja. Tri papira: plavi, žuti, crveni. Pitaš: „Kako se osjećaš sad?" Dijete pokaže boju. Mlađem djetetu jednostavnije kad nema kompleksne skale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 5 -->
+<section class="page day day-5">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 5 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">5</div>
+    <div class="day-title-block">
+      <h2>Glupav ples</h2>
+      <p>Pa zaledi se! Ne mrdaj!</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Tijelo izađe — pa stane. Pa opet.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Pleši i zaledi se</h3>
+    <div class="needs"><strong>Potrebno:</strong> bilo koja brza, vesela muzika.</div>
+    <h4>Kako se igra</h4>
+    <p>Pustiš muziku. „Hajde da pravimo glupav ples!" Pomjeraš ruke, noge, glavu, jezik, sve odjednom. Bez pravila, bez stila. Dijete oponaša ili pravi svoj. Pa <strong>stop muzike</strong> — „ZALEDI SE!" Stojite kao kipovi 3–5 sekundi. Pa opet pokret. Pa opet zaledi. Završetak: legnete na pod i „rastapate se". Kombinacija fizičke aktivacije i namjerne deaktivacije („zaledi se") je vježba <strong>interocepcije</strong> — sposobnosti da osjećaš svoje tijelo. Interocepcija je temelj samoregulacije. „Zaledi se" trenuci uče dijete da primijeti razliku između pokreta i mirovanja, što je preteča sposobnosti da primijeti razliku između „ljut sam" i „smiren sam". Izgleda kao čisti smijeh, a zapravo je vježba koju koriste i dječiji terapeuti.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Pravila zaledi-igre</h3>
+      <p>Dodaješ pravila: „Zaledi se kao žaba!" „Zaledi se sa rukama gore!" „Zaledi se na jednoj nozi!" Dijete planira pokret prije nego što stane — vježba samokontrole.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Brzo–sporo</h3>
+      <p>Bez muzike i bez zaledi. Samo „brzo!" pa „sporo!" Trčite, pa hodate kao puž. Dijete uči da pokret može biti brz ili spor — preteča kontrole tempa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 6 -->
+<section class="page day day-6">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 6 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">6</div>
+    <div class="day-title-block">
+      <h2>Tegla mirnoća</h2>
+      <p>Šljokice se smiruju. I ja se smirujem.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Vrtloži se. Pa polako sleže.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Calm-down jar</h3>
+    <div class="needs"><strong>Potrebno:</strong> prozirna tegla ili plastična boca s navojem; topla voda; 1 kašika tečnog ljepila ili glicerina; par kapi prehrambene boje (plave ili ljubičaste); pregršt sitnih šljokica ili konfeta od papira.</div>
+    <h4>Kako se igra</h4>
+    <p>Napuni teglu do 2/3 toplom vodom. Dodaj kašiku tečnog ljepila (ili glicerina), par kapi boje (plava/ljubičasta — smirujuće), pregršt šljokica. Zatvori i <strong>zalijepi poklopac</strong> (sigurnost iznad svega). Promućkaj — šljokice se vrtložno taloze 1–2 minute. Dijete posmatra, drži teglu, fokusira se na taloženje. Vizuelni fokus na sporo taloženje aktivira pažnju usmjerenu prema vani — što prekida unutarnji emocionalni vrtlog. Plus, taloženje je metafora koju dijete <strong>fizički razumije</strong>: „Kad sam uznemiren, osjećaji se vrtlože. Ako sačekam, slegnu se." Apstraktna ideja koju 3-godišnjak može doslovno vidjeti. <strong>Tegla ostaje u kući mjesecima kao alat</strong> — dijete sam poseže za njom kad osjeti da je previše.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Gledaj dok ne legne</h3>
+      <p>Promućkaš teglu. Dijete čeka i kaže „Stop!" kad sve šljokice slegnu na dno. Strpljenje + vizuelno vraćanje pažnje. Možeš dodati: „Kako se osjećaš sad?" — dijete često odgovori „mirno".</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Drži teglu</h3>
+      <p>Bez mućkanja. Dijete drži teglu u krilu i samo je gleda. Tihi, smirujući trenutak — savršeno prije spavanja ili nakon naporne situacije.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 7 -->
+<section class="page day day-7">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>Dan 7 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">7</div>
+    <div class="day-title-block">
+      <h2>Tri stvari iz srca</h2>
+      <p>Bilo mi je lijepo kad...</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Tri male sreće. Cijeli dan.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Tri stvari u krilu</h3>
+    <div class="needs"><strong>Potrebno:</strong> krilo, mir, 5 minuta pred spavanje.</div>
+    <h4>Kako se igra</h4>
+    <p>Pred kraj dana, sjedneš sa djetetom u krilo ili pored njega: „Hajde da kažemo jedno drugom tri stvari iz srca." Ti počneš: „Bilo mi je lijepo kad si me jutros zagrlila." „Smijala sam se kad si rekla da pas ima brkove." „Ponosna sam što si sama obula cipele." Pa dijete: „A ti? Šta tebi danas u srcu?" Dijete kaže koliko zna, koliko hoće. Ako ne zna, pomažeš: „Možda kad smo jeli sladoled?" <strong>Bez pritiska, bez „tačnih odgovora."</strong> Adaptacija „highs and lows" rituala iz porodične psihologije — dokazano povezano sa sigurnom privrženošću. Fokus na pozitivno: 2–4 godine lakše procesuiraju pozitivna sjećanja prije sna. Postaje porodični ritual koji preživi davno nakon ove sedmice.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Šta ti je u srcu?</h3>
+      <p>Bez tvoje liste. Pitaš dijete prvo: „Šta ti je danas najljepše bilo?" Onda ti odgovaraš na isto pitanje. Vježba reciprociteta — ja čujem tebe, ti čuješ mene.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Jedna stvar</h3>
+      <p>Samo jedna stvar. „Šta ti je bilo najljepše danas?" Dijete kaže riječ ili dvije. Ti proširiš: „Da, sjećam se kako si se smijala u parku." Najjednostavnije, savršeno za vrlo umorne ili mlađe djece.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== SOS -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #7 · bezekrana.com</span>
+    <span>SOS ideje</span>
+  </div>
+
+  <p class="h-eyebrow">Spremne za hitne trenutke</p>
+  <h1 class="h-display small">SOS ideje<br/>kada dijete traži ekran</h1>
+
+  <p style="font-size:11.5pt; max-width:155mm; color:var(--muted);">Kad je dijete na <strong>narandžastom ili crvenom</strong> termometru — ekran ne smiruje, samo prebacuje. Ovi alati vraćaju dijete u tijelo i u kontakt s tobom. Imenuj prije nego što riješiš:</p>
+
+  <div class="sos-list">
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Vidim da si ljut. Pokaži mi koliko."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Daj medu na stomak — diši."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Promućkaj teglu — gledaj zajedno."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Pokaži mi sretno lice."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Hajde da pravimo glupav ples!"</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Zaledi se! Tri sekunde."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Šta je sad u tvom srcu?"</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Diši sa mnom — gore, dole."</p></div>
+  </div>
+
+  <div class="callout-heart" style="margin-top:8mm; border-radius:18px; padding:7mm 9mm;">
+    <p style="font-size:13pt; font-weight:700; line-height:1.4; margin:0;">
+      Tantrumovi nisu neuspjeh sedmice — oni su razlog zbog kojeg je sedmica nastala.<br/>
+      <strong>Imenuj prije nego što riješiš.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- =============================================================== CLOSING -->
+<section class="page bleed closing">
+  <div class="closing-inner">
+    <div class="glow cg-1"></div>
+    <div class="glow cg-2"></div>
+
+    <div class="body">
+      <div class="badge">⭐ Završili ste sedmicu</div>
+      <h2>Bravo za još jednu sedmicu bez ekrana</h2>
+      <p>Ako niste stigli uraditi sve aktivnosti — to je potpuno u redu. Ova sedmica vam je u kuću ostavila <strong>alate</strong>: medu za disanje, termometar na zidu, teglu mirnoće na polici, ritual tri stvari iz srca pred spavanje.</p>
+      <p style="margin-top:3mm;">Ne idu nigdje. Vraćate se po njih kad zatreba — danas, sutra, za godinu dana. Ili pređite na <strong>naredni sedmični sistem</strong>.</p>
+
+      <div class="stamp">
+        Imenuj prije nego što riješiš. Diši prije nego što govoriš.
+      </div>
+    </div>
+
+    <div class="legal-notice">
+      <p class="legal-safety">
+        <strong>Sigurnost prije svega.</strong> Sav sadržaj je informativnog i edukativnog karaktera; roditelj/staratelj je u potpunosti odgovoran za sigurnost djeteta. Tegla mirnoća (calm-down jar) mora imati <strong>čvrsto zalijepljen poklopac</strong> — šljokice i ljepilo nisu sigurni za usta. Kod stalne emocionalne disregulacije izvan tipičnih razvojnih okvira savjetuje se konsultacija sa dječijim psihologom.
+      </p>
+
+      <div class="legal-cols">
+        <div>
+          <h4>Pravna napomena</h4>
+          <p>Ovaj materijal je zaštićen autorskim pravima i predstavlja vlasništvo kompanije <strong>Prime Vector Solutions LLC, USA</strong>. Svako neovlašteno kopiranje, dijeljenje, distribuiranje ili prodaja ovog sadržaja — djelimično ili u cijelosti — strogo je zabranjeno bez prethodnog pismenog odobrenja. Kršenje ovih prava može rezultirati pravnim postupkom, uključujući novčane kazne i zahtjeve za naknadu štete, u skladu sa zakonima Sjedinjenih Američkih Država i međunarodnim propisima. Ovaj materijal se aktivno prati u cilju sprječavanja neovlaštene distribucije.</p>
+        </div>
+        <div>
+          <h4>Legal Notice</h4>
+          <p>This material is protected by copyright and is the intellectual property of <strong>Prime Vector Solutions LLC, USA</strong>. Any unauthorized copying, sharing, distribution, or resale of this content — in whole or in part — is strictly prohibited without prior written consent. Violation of these terms may result in legal action, including financial penalties and claims for damages, in accordance with United States and international intellectual property laws. This material is actively monitored for unauthorized distribution.</p>
+        </div>
+      </div>
+
+      <p class="legal-copyright">© 2026 Prime Vector Solutions LLC. Sva prava zadržana. · All rights reserved.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

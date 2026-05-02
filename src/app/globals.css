@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  @apply bg-cream text-plum-900;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  @apply text-plum-800;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-bold transition-all
+           active:translate-y-1 disabled:opacity-50 disabled:pointer-events-none
+           focus:outline-none focus-visible:ring-4 focus-visible:ring-plum-300/50;
+  }
+  .btn-primary {
+    @apply btn bg-coral-500 text-white px-7 py-3.5
+           shadow-[0_6px_0_0_#7A1D1D]
+           hover:bg-coral-400 hover:-translate-y-0.5
+           active:shadow-[0_2px_0_0_#7A1D1D];
+  }
+  .btn-secondary {
+    @apply btn bg-teal-500 text-white px-7 py-3.5
+           shadow-[0_6px_0_0_#1B6660]
+           hover:bg-teal-400 hover:-translate-y-0.5
+           active:shadow-[0_2px_0_0_#1B6660];
+  }
+  .btn-ghost {
+    @apply btn px-5 py-2.5 text-plum-800 hover:bg-plum-100;
+  }
+  .btn-yellow {
+    @apply btn bg-sun-400 text-plum-900 px-7 py-3.5
+           shadow-[0_6px_0_0_#B89510]
+           hover:bg-sun-300 hover:-translate-y-0.5
+           active:shadow-[0_2px_0_0_#B89510];
+  }
+  .btn-plum {
+    @apply btn bg-plum-600 text-white px-7 py-3.5
+           shadow-[0_6px_0_0_#3F2C5A]
+           hover:bg-plum-500 hover:-translate-y-0.5
+           active:shadow-[0_2px_0_0_#3F2C5A];
+  }
+
+  .card {
+    @apply bg-white rounded-bubble shadow-soft p-6;
+  }
+  .input {
+    @apply w-full rounded-2xl border-2 border-plum-100 bg-white px-4 py-3
+           text-plum-900 placeholder:text-plum-300
+           focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/20
+           transition;
+  }
+  .label {
+    @apply block text-sm font-bold text-plum-800 mb-1.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold;
+  }
+}
+
+/* Decorative blobs used on the landing page */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}

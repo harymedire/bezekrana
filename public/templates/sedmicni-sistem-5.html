@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BEZ EKRANA — Sedmični sistem #5</title>
+
+<!--
+  HOW TO USE THIS FILE
+  ====================
+  1. Open in a browser (Chrome / Edge / Firefox).
+  2. Click the floating "Download" button in the top-right corner.
+  3. In the print dialog: Destination → "Save as PDF" → A4, portrait,
+     margins: None (or Default), Background graphics: ON. Save.
+  4. Upload the resulting PDF in /admin → Paketi → Novi paket.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Brand tokens ---------- */
+  :root {
+    --coral-100:#FFE2E0; --coral-300:#FFA39E; --coral-500:#FF6B6B; --coral-700:#C73838;
+    --sun-100:#FFF6BF;   --sun-300:#FFE556;   --sun-500:#FFD93D;   --sun-700:#B89510;
+    --teal-100:#CFF3EE;  --teal-300:#7FDED0;  --teal-500:#4ECDC4;  --teal-700:#268B83;
+    --plum-100:#E6D9F0;  --plum-300:#B591D2;  --plum-500:#7F58A8;  --plum-700:#553C7A;
+    --plum-800:#3F2C5A;  --plum-900:#291D3B;
+    --cream:#FFF9F2;
+    --ink:#291D3B;
+    --muted:#7c6e92;
+  }
+
+  /* ---------- Reset + base ---------- */
+  *,*::before,*::after { box-sizing:border-box; }
+  html,body { margin:0; padding:0; background:#eee; color:var(--ink);
+    font-family:"Plus Jakarta Sans",system-ui,sans-serif; font-size:11pt; line-height:1.55;
+    -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4 { font-family:"Baloo 2",system-ui,sans-serif; font-weight:800;
+    letter-spacing:-0.01em; color:var(--plum-900); margin:0; }
+  p { margin:0 0 .55em; }
+  ul { margin:0; padding-left:1.1em; }
+  li { margin:.15em 0; }
+  strong { font-weight:700; color:var(--plum-800); }
+  em { font-style:italic; }
+
+  /* ---------- Page (A4 portrait) ---------- */
+  @page { size:A4 portrait; margin:0; }
+  .page {
+    width:210mm; height:297mm;
+    margin:8mm auto; background:var(--cream);
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+    padding:18mm 16mm; position:relative; overflow:hidden;
+    page-break-after:always;
+  }
+  .page.bleed { padding:0; }
+  .page:last-of-type { page-break-after:auto; }
+
+  /* ---------- Print ---------- */
+  @media print {
+    html,body { background:var(--cream); }
+    .page { margin:0; box-shadow:none; height:297mm; overflow:hidden; }
+    .no-print { display:none !important; }
+    body.ink-save html, body.ink-save { background:#fff !important; }
+    .page, .page * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+
+  /* ---------- Floating control panel (screen only) ---------- */
+  .controls {
+    position:fixed; top:18px; right:18px; z-index:50;
+    display:flex; flex-direction:column; gap:10px;
+    background:rgba(255,255,255,.97);
+    border:1px solid var(--plum-100); border-radius:18px;
+    padding:14px; box-shadow:0 10px 30px rgba(63,44,90,.18);
+    font-family:"Plus Jakarta Sans",sans-serif;
+  }
+  .controls .toggle {
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; color:var(--plum-800); user-select:none; cursor:pointer;
+    font-weight:600;
+  }
+  .controls .toggle input { position:absolute; opacity:0; width:0; height:0; }
+  .controls .toggle .box {
+    width:18px; height:18px; border-radius:6px;
+    border:2px solid var(--plum-300); background:#fff;
+    display:inline-grid; place-items:center;
+    transition:all .15s ease; flex-shrink:0;
+  }
+  .controls .toggle .box svg { width:12px; height:12px; opacity:0; transition:opacity .15s ease; }
+  .controls .toggle input:checked + .box {
+    background:var(--coral-500); border-color:var(--coral-500);
+  }
+  .controls .toggle input:checked + .box svg { opacity:1; }
+  .controls .toggle input:focus-visible + .box {
+    box-shadow:0 0 0 3px rgba(255,107,107,.3);
+  }
+  .print-btn {
+    background:var(--coral-500); color:#fff; font-weight:700;
+    font-family:"Plus Jakarta Sans",sans-serif; font-size:14px;
+    border:0; border-radius:999px; padding:11px 18px;
+    box-shadow:0 6px 16px rgba(199,56,56,.35);
+    cursor:pointer; transition:transform .15s ease; white-space:nowrap;
+  }
+  .print-btn:hover { transform:translateY(-2px); }
+  .print-btn:active { transform:translateY(0); }
+
+  /* ---------- INK-SAVE MODE ---------- */
+  body.ink-save .page { background:#fff !important; }
+  body.ink-save .blob { display:none !important; }
+  body.ink-save .confetti { display:none !important; }
+  body.ink-save .glow { display:none !important; }
+  body.ink-save .cover::before { display:none !important; }
+  body.ink-save .cover {
+    background:#fff !important; color:var(--ink) !important;
+    border:1px solid var(--plum-100);
+  }
+  body.ink-save .cover .meta,
+  body.ink-save .cover .week-number,
+  body.ink-save .cover .theme-name,
+  body.ink-save .cover .subtitle,
+  body.ink-save .cover .pitch,
+  body.ink-save .cover .wordmark,
+  body.ink-save .cover .url-tag,
+  body.ink-save .cover .logo-pill { color:var(--plum-900) !important; }
+  body.ink-save .cover .meta .dot { background:var(--plum-700) !important; }
+  body.ink-save .cover .pitch { border-top-color:var(--plum-100) !important; }
+  body.ink-save .cover .pitch strong { color:var(--coral-700) !important; }
+  body.ink-save .cover .week-number { color:var(--coral-700) !important; }
+  body.ink-save .cover .logo-pill { background:transparent !important; border:1px solid var(--plum-200) !important; }
+  body.ink-save .callout,
+  body.ink-save .callout-plum,
+  body.ink-save .callout-teal {
+    background:#fff !important; color:var(--ink) !important;
+    border:1px solid var(--plum-100);
+  }
+  body.ink-save .callout strong,
+  body.ink-save .callout-plum strong,
+  body.ink-save .callout-teal strong { color:var(--coral-700) !important; }
+  body.ink-save .day-stamp { background:#fff !important; color:var(--plum-900) !important; border:2px solid var(--plum-300); }
+  body.ink-save .week-list .day-num { background:#fff !important; color:var(--plum-900) !important; border:2px solid var(--plum-300); }
+  body.ink-save .chip { background:transparent !important; border:1px solid currentColor; }
+  body.ink-save .meta-cell { background:#fff !important; }
+  body.ink-save .version.lighter,
+  body.ink-save .version.harder { background:transparent !important; border:1px dashed var(--plum-200); color:var(--ink); }
+  body.ink-save .version .label { color:var(--plum-700) !important; }
+  body.ink-save .note-parent { background:transparent !important; }
+  body.ink-save .sos-bullet { background:transparent !important; border:1px solid var(--coral-500); }
+  body.ink-save .closing { background:#fff !important; }
+  body.ink-save .closing .badge { background:transparent !important; border:1px solid var(--plum-300); color:var(--plum-900) !important; }
+  body.ink-save .closing .stamp { background:#fff !important; color:var(--plum-900) !important; border:2px solid var(--plum-300); box-shadow:none !important; }
+  body.ink-save .story {
+    background:#fff !important;
+    border:1px solid var(--plum-200) !important;
+    border-left:4px solid var(--plum-600) !important;
+  }
+  body.ink-save .story::before { color:var(--plum-300) !important; }
+  body.ink-save .level.wow {
+    background:#fff !important;
+    color:var(--plum-900) !important;
+    border:1px solid var(--coral-300) !important;
+    box-shadow:none !important;
+  }
+  body.ink-save .level.wow .level-tag {
+    background:#fff !important; color:var(--coral-700) !important;
+    border:1px solid var(--coral-500);
+  }
+  body.ink-save .level.wow h3 { color:var(--coral-700) !important; }
+  body.ink-save .level.wow h4 { color:var(--coral-700) !important; }
+  body.ink-save .level.wow .needs,
+  body.ink-save .level.wow .needs strong,
+  body.ink-save .level.wow p { color:var(--plum-900) !important; opacity:1 !important; }
+
+  /* ---------- Decorative blobs ---------- */
+  .blob { position:absolute; border-radius:50%; filter:blur(70px);
+    opacity:.55; pointer-events:none; z-index:0; }
+
+  /* ---------- COVER ----------
+     Week 5 mood: nature indoors. Leaf green → sun → forest → deep moss.
+     Distinct from week 2 (teal/ocean) by leaning into earthy yellow-green
+     rather than blue-teal. */
+  .page.cover {
+    color:#fff; position:relative;
+    background:linear-gradient(155deg, #8BC34A 0%, #FFE556 30%, #5D8A3F 65%, #1F3520 100%);
+    display:flex; flex-direction:column;
+    padding:24mm 20mm 20mm;
+    overflow:hidden;
+  }
+  .glow {
+    position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none;
+  }
+  .glow.g-1 { top:-30mm; left:-20mm; width:120mm; height:120mm; background:rgba(139,195,74,.55); }
+  .glow.g-2 { top:0; right:-20mm; width:100mm; height:100mm; background:rgba(255,217,61,.55); }
+  .glow.g-3 { bottom:-30mm; left:20mm; width:120mm; height:120mm; background:rgba(93,138,63,.55); }
+  .glow.g-4 { bottom:-10mm; right:-20mm; width:120mm; height:120mm; background:rgba(31,53,32,.6); }
+
+  .confetti { position:absolute; pointer-events:none; }
+  .confetti.c-1 { top:18mm; right:30mm; width:14mm; height:14mm; transform:rotate(20deg); }
+  .confetti.c-2 { top:70mm; right:14mm; width:8mm;  height:8mm;  transform:rotate(-15deg); }
+  .confetti.c-3 { bottom:88mm; left:14mm; width:12mm; height:12mm; transform:rotate(35deg); }
+  .confetti.c-4 { top:40mm; right:55mm; width:6mm; height:6mm; }
+  .confetti.c-5 { bottom:120mm; right:26mm; width:10mm; height:10mm; transform:rotate(-22deg); }
+
+  .cover-top {
+    display:flex; justify-content:space-between; align-items:center;
+    position:relative; z-index:2;
+  }
+  .logo-pill {
+    display:inline-flex; align-items:center; gap:9px;
+    background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.4);
+    padding:8px 16px 8px 10px; border-radius:999px;
+    font-weight:800; font-size:13pt; color:#fff;
+    font-family:"Baloo 2",sans-serif; letter-spacing:.01em;
+  }
+  .logo-pill svg { width:26px; height:26px; }
+
+  .cover .meta {
+    display:flex; align-items:center; gap:10px;
+    font-size:9pt; letter-spacing:.22em; text-transform:uppercase;
+    font-weight:700; color:#fff; opacity:.95;
+  }
+  .cover .meta .dot { width:8px; height:8px; border-radius:50%; background:var(--sun-500); }
+
+  .cover-hero { margin-top:18mm; position:relative; z-index:2; }
+  .cover .wordmark {
+    font-family:"Baloo 2",sans-serif; font-weight:800;
+    font-size:96pt; line-height:.9; letter-spacing:-0.025em; margin:0;
+    color:#fff;
+    text-shadow:0 2px 12px rgba(31,53,32,.45);
+  }
+  .cover .week-number {
+    margin-top:8mm;
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"Baloo 2",sans-serif; font-weight:700;
+    font-size:14pt; color:var(--plum-900);
+    background:var(--sun-300); padding:6px 14px; border-radius:999px;
+    box-shadow:0 6px 14px rgba(255,217,61,.35);
+  }
+  .cover .theme-name {
+    margin-top:14mm; font-family:"Baloo 2",sans-serif; font-weight:700;
+    font-size:38pt; line-height:1.02; color:#fff; max-width:160mm;
+    letter-spacing:-0.01em;
+  }
+  .cover .subtitle {
+    margin-top:6mm; font-size:13pt; max-width:160mm; opacity:.92;
+    font-weight:500;
+  }
+
+  .cover-bottom {
+    margin-top:auto; position:relative; z-index:2;
+    padding-top:10mm;
+  }
+  .cover .pitch {
+    max-width:160mm; font-size:11.5pt; line-height:1.6; color:#fff; opacity:.96;
+    padding-top:8mm; border-top:1px solid rgba(255,255,255,.28);
+  }
+  .url-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:6mm; font-weight:700; font-size:10pt;
+    color:#fff; opacity:.92; letter-spacing:.04em;
+  }
+  .url-tag svg { width:14px; height:14px; }
+
+  .cover-copy {
+    margin-top:4mm; font-size:7.5pt; letter-spacing:.06em;
+    color:rgba(255,255,255,.55); font-weight:500;
+  }
+
+  .watermark, .page-num {
+    position:absolute; bottom:4mm;
+    font-family:"Plus Jakarta Sans",sans-serif;
+    font-size:6pt; font-weight:600; letter-spacing:.22em;
+    color:rgba(63,44,90,.18);
+    pointer-events:none; z-index:5;
+  }
+  .watermark { right:6mm; }
+  .page-num { left:6mm; letter-spacing:.1em; color:rgba(63,44,90,.32); }
+  .page.cover .watermark,
+  .page.cover .page-num,
+  .page.closing .watermark,
+  .page.closing .page-num { color:rgba(255,255,255,.4); }
+  body.ink-save .watermark,
+  body.ink-save .page-num { color:rgba(63,44,90,.4) !important; }
+
+  .legal-notice {
+    margin-top:auto; padding-top:5mm;
+    width:100%; max-width:178mm;
+    position:relative; z-index:2;
+    text-align:left;
+  }
+  .legal-cols {
+    display:grid; grid-template-columns:1fr 1fr; gap:6mm;
+  }
+  .legal-cols h4 {
+    font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+    font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--plum-700); margin:0 0 1.2mm;
+  }
+  .legal-cols p {
+    font-size:5.5pt; line-height:1.4; color:var(--muted); margin:0;
+  }
+  .legal-cols p strong { color:var(--plum-800); }
+  .legal-safety {
+    font-size:6pt; line-height:1.45; color:var(--muted);
+    margin:0 auto 3mm; max-width:140mm; text-align:center;
+    padding:2mm 4mm;
+    border-top:1px solid var(--plum-200);
+    border-bottom:1px solid var(--plum-200);
+  }
+  .legal-safety strong { color:var(--plum-700); display:block; margin-bottom:1mm;
+    font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; }
+  .legal-copyright {
+    display:block; width:100%;
+    margin-top:3mm; padding-top:3mm;
+    border-top:1px solid var(--plum-200);
+    font-size:6pt; letter-spacing:0;
+    color:var(--plum-600); text-align:center; font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* ---------- Page header ---------- */
+  .page-header {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:10mm; font-size:9pt; letter-spacing:.18em;
+    text-transform:uppercase; font-weight:700; color:var(--muted);
+  }
+  .page-header .brand { color:var(--plum-700); }
+
+  .h-eyebrow { font-size:9pt; font-weight:700; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--coral-700); margin-bottom:4mm; }
+  .h-display { font-size:30pt; line-height:1.05; margin-bottom:6mm; }
+  .h-display.small { font-size:24pt; }
+
+  /* ---------- Reusable callout boxes ---------- */
+  .callout {
+    border-radius:18px; padding:8mm 9mm;
+    background:linear-gradient(135deg,var(--sun-100),var(--coral-100));
+    color:var(--plum-900); position:relative; overflow:hidden;
+  }
+  .callout strong { color:var(--coral-700); }
+  .callout-plum {
+    background:linear-gradient(135deg,var(--plum-700),var(--plum-900));
+    color:#fff;
+  }
+  .callout-plum strong { color:var(--sun-300); }
+  .callout-teal {
+    background:linear-gradient(135deg,var(--teal-100),var(--teal-300));
+    color:var(--plum-900);
+  }
+  /* Forest variant for week 5 — used on the parent walk-prep note */
+  .callout-forest {
+    background:linear-gradient(135deg, #DCF1B8, #8BC34A);
+    color:#1F3520;
+  }
+  .callout-forest strong { color:#1F3520; }
+
+  /* ---------- "How to use" steps ---------- */
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin-top:6mm; }
+  .step {
+    background:#fff; border:1px solid var(--plum-100);
+    border-radius:18px; padding:7mm 7mm 6mm;
+    box-shadow:0 2px 8px rgba(63,44,90,.04);
+  }
+  .step .num {
+    font-family:"Baloo 2",sans-serif; font-weight:800;
+    font-size:42pt; line-height:1; color:var(--coral-300); margin-bottom:2mm;
+  }
+  .step h3 { font-size:13pt; margin-bottom:1.5mm; }
+  .step p { font-size:10.5pt; color:var(--muted); margin:0; }
+
+  /* ---------- Legend grid ---------- */
+  .legend { display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin-top:8mm; }
+  .legend-item {
+    background:#fff; border-radius:16px; padding:7mm 8mm;
+    border:1px solid var(--plum-100); display:flex; align-items:center; gap:5mm;
+  }
+  .legend-icon {
+    width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
+    flex-shrink:0;
+  }
+  .legend-icon svg { width:24px; height:24px; }
+  .legend-item h4 { font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+    font-size:14pt; color:var(--plum-900); margin-bottom:1mm; }
+  .legend-item p { font-size:11pt; color:var(--muted); margin:0; line-height:1.4; }
+
+  .f-pokret      { background:var(--coral-100); color:var(--coral-700); }
+  .f-fine        { background:var(--sun-100);   color:var(--sun-700); }
+  .f-paznja      { background:var(--plum-100);  color:var(--plum-700); }
+  .f-govor       { background:var(--teal-100);  color:var(--teal-700); }
+  .f-senzor      { background:#FFE0F0;          color:#C12B71; }
+  .f-povezivanje { background:#E8DFFB;          color:#5B3FB3; }
+  .f-rjesavanje  { background:#FFE5C0;          color:#A8650B; }
+  .f-masta       { background:#D8F0FF;          color:#2167A8; }
+
+  /* ---------- Week overview ---------- */
+  .week-list { margin-top:6mm; }
+  .week-list .day {
+    display:grid; grid-template-columns:14mm 1fr; gap:4mm; align-items:center;
+    padding:4mm 0; border-bottom:1px dashed var(--plum-100);
+  }
+  .week-list .day:last-child { border-bottom:0; }
+  .week-list .day-num {
+    width:14mm; height:14mm; border-radius:14px; display:grid; place-items:center;
+    background:var(--plum-700); color:#fff; font-family:"Baloo 2",sans-serif;
+    font-weight:800; font-size:13pt;
+  }
+  .week-list .day:nth-child(7n+1) .day-num { background:#2D5C1F; }
+  .week-list .day:nth-child(7n+2) .day-num { background:#268B83; }
+  .week-list .day:nth-child(7n+3) .day-num { background:#5D5048; }
+  .week-list .day:nth-child(7n+4) .day-num { background:var(--sun-700); }
+  .week-list .day:nth-child(7n+5) .day-num { background:#8B6F47; }
+  .week-list .day:nth-child(7n+6) .day-num { background:var(--coral-700); }
+  .week-list .day:nth-child(7n+7) .day-num { background:#2C5F7A; }
+  .week-list .day-title { font-family:"Baloo 2",sans-serif; font-weight:700;
+    font-size:14pt; color:var(--plum-900); }
+
+  /* ---------- DAY page ---------- */
+  .day-header {
+    display:flex; align-items:flex-end; gap:5mm; margin-bottom:7mm;
+    padding-bottom:5mm; border-bottom:2px solid var(--plum-100);
+  }
+  .day-stamp {
+    width:22mm; height:22mm; border-radius:16px; display:grid; place-items:center;
+    color:#fff; font-family:"Baloo 2",sans-serif; font-weight:800; font-size:20pt;
+    line-height:1; flex-shrink:0;
+  }
+
+  /* ---------- STORY HOOK + 3-LEVEL ACTIVITY ---------- */
+  .story {
+    position:relative;
+    background:#E6D9F0;
+    background:linear-gradient(135deg, #DCF1B8 0%, #FFE556 100%);
+    border-radius:18px; padding:7mm 9mm 7mm 14mm;
+    margin:0 0 6mm;
+    border-left:4px solid #5D8A3F;
+  }
+  .story::before {
+    content:"\201C";
+    position:absolute; top:-2mm; left:5mm;
+    font-family:"Baloo 2",sans-serif; font-weight:800;
+    font-size:60pt; line-height:1; color:#8BC34A;
+  }
+  .story p {
+    font-family:"Baloo 2",sans-serif; font-style:italic;
+    font-size:14pt; line-height:1.4; color:#1F3520;
+    margin:0; font-weight:600;
+  }
+
+  .level {
+    border-radius:16px; padding:5mm 6mm; margin-bottom:0;
+    page-break-inside:avoid; break-inside:avoid;
+    border:1px solid var(--plum-100); background:#fff;
+  }
+  .level + .level { margin-top:4mm; }
+
+  .level-tag {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:8.5pt; font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase;
+    padding:3px 10px; border-radius:999px; margin-bottom:2.5mm;
+  }
+  .level-tag .ico { font-size:11pt; line-height:1; }
+
+  .level h3 { font-size:14pt; line-height:1.15; margin:0 0 2mm; }
+  .level .needs {
+    font-size:9.5pt; line-height:1.45; margin-bottom:2mm;
+    color:var(--muted);
+  }
+  .level .needs strong { color:var(--plum-900); }
+  .level h4 {
+    font-family:"Plus Jakarta Sans",sans-serif; font-weight:700;
+    font-size:8.5pt; color:var(--coral-700); margin:2mm 0 1mm;
+    text-transform:uppercase; letter-spacing:.08em;
+  }
+  .level p { font-size:10pt; line-height:1.5; margin:0; }
+
+  .level.wow {
+    background:#FF6B6B !important;
+    background:linear-gradient(135deg, #FF6B6B 0%, #E84F4F 100%) !important;
+    border:0 !important; color:#fff !important;
+    padding:6mm 7mm;
+    box-shadow:0 6px 16px rgba(0,0,0,.18);
+  }
+  .level.wow .level-tag {
+    background:#FFD93D !important; color:#291D3B !important;
+  }
+  .level.wow h3 { color:#fff !important; font-size:16pt; }
+  .level.wow h4 { color:#FFE556 !important; }
+  .level.wow .needs { color:rgba(255,255,255,.92) !important; }
+  .level.wow .needs strong { color:#fff !important; }
+  .level.wow p { color:#fff !important; font-size:10.5pt; opacity:.95; }
+
+  /* ---------- Per-day theme — bound to the natural element of the day ---------- */
+  /* Day 1 — Forest (leaves, branches, twigs) */
+  .day-1 .day-stamp { background:#2D5C1F; color:#fff; }
+  .day-1 .level.wow {
+    background:linear-gradient(135deg, #6BBF59 0%, #2D5C1F 100%) !important;
+    box-shadow:0 6px 16px rgba(45,92,31,.32);
+  }
+
+  /* Day 2 — Water (aqua-teal) */
+  .day-2 .day-stamp { background:#268B83; color:#fff; }
+  .day-2 .level.wow {
+    background:linear-gradient(135deg, #4ECDC4 0%, #1B6660 100%) !important;
+    box-shadow:0 6px 16px rgba(38,139,131,.32);
+  }
+
+  /* Day 3 — Stone (warm gray-brown) */
+  .day-3 .day-stamp { background:#5D5048; color:#fff; }
+  .day-3 .level.wow {
+    background:linear-gradient(135deg, #B8A99A 0%, #5D5048 100%) !important;
+    box-shadow:0 6px 16px rgba(93,80,72,.32);
+  }
+  .day-3 .level.wow .level-tag { background:#FFF6BF !important; color:#5D5048 !important; }
+
+  /* Day 4 — Seed / sun (germination) */
+  .day-4 .day-stamp { background:#8C6F08; color:#fff; }
+  .day-4 .level.wow {
+    background:linear-gradient(135deg, #E5BD1F 0%, #8C6F08 100%) !important;
+    box-shadow:0 6px 16px rgba(140,111,8,.3);
+  }
+  .day-4 .level.wow .level-tag { background:#DCF1B8 !important; color:#2D5C1F !important; }
+  .day-4 .level.wow h4 { color:#FFF6BF !important; }
+
+  /* Day 5 — Earth (warm brown) */
+  .day-5 .day-stamp { background:#8B6F47; color:#fff; }
+  .day-5 .level.wow {
+    background:linear-gradient(135deg, #B88A5C 0%, #5C4530 100%) !important;
+    box-shadow:0 6px 16px rgba(92,69,48,.32);
+  }
+
+  /* Day 6 — Autumn leaves (crimson) */
+  .day-6 .day-stamp { background:#7A1D1D; color:#fff; }
+  .day-6 .level.wow {
+    background:linear-gradient(135deg, #C73838 0%, #7A1D1D 100%) !important;
+    box-shadow:0 6px 16px rgba(122,29,29,.32);
+  }
+
+  /* Day 7 — Sky (clear day walk) */
+  .day-7 .day-stamp { background:#2C5F7A; color:#fff; }
+  .day-7 .level.wow {
+    background:linear-gradient(135deg, #5BB3D6 0%, #2C5F7A 100%) !important;
+    box-shadow:0 6px 16px rgba(44,95,122,.32);
+  }
+
+  .levels-row {
+    display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:4mm;
+  }
+  .level.medium .level-tag {
+    background:var(--sun-100); color:var(--sun-700);
+  }
+  .level.medium { border-color:var(--sun-300); }
+  .level.light .level-tag {
+    background:var(--teal-100); color:var(--teal-700);
+  }
+  .level.light { border-color:var(--teal-300); }
+
+  .day-title-block h2 { font-size:20pt; line-height:1.05; margin-bottom:1.5mm; }
+  .day-title-block p { color:var(--muted); font-size:10pt; margin:0; }
+
+  /* ---------- SOS page ---------- */
+  .sos-list { display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:4mm; }
+  .sos-item {
+    background:#fff; border:1px solid var(--plum-100); border-radius:14px;
+    padding:5mm; display:flex; gap:3mm; align-items:flex-start;
+  }
+  .sos-bullet {
+    flex-shrink:0; width:28px; height:28px; border-radius:8px; background:var(--coral-100);
+    color:var(--coral-700); display:grid; place-items:center; font-weight:800;
+  }
+  .sos-bullet svg { width:14px; height:14px; }
+  .sos-item p { margin:0; font-size:10.5pt; }
+
+  /* ---------- Closing page ---------- */
+  .page.closing {
+    padding:0 !important;
+    background:var(--cream);
+  }
+  .closing-inner {
+    height:100%;
+    padding:18mm 18mm 14mm;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .closing-inner .body {
+    flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    position:relative; z-index:2;
+  }
+  .closing .glow { z-index:0; }
+  .closing .glow.cg-1 { top:-50mm; left:50%; transform:translateX(-50%);
+    width:200mm; height:120mm; background:#DCF1B8; filter:blur(50px); }
+  .closing .glow.cg-2 { bottom:-50mm; left:50%; transform:translateX(-50%);
+    width:200mm; height:120mm; background:var(--sun-100); filter:blur(50px); }
+  .closing .badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--sun-300); color:var(--plum-900);
+    font-weight:800; padding:6px 14px; border-radius:999px;
+    font-size:10pt; margin-bottom:4mm;
+  }
+  .closing h2 { font-size:26pt; line-height:1.1; max-width:160mm; margin-bottom:4mm; }
+  .closing p { font-size:11pt; max-width:140mm; color:var(--muted); }
+  .closing .stamp {
+    margin-top:6mm; padding:5mm 8mm; border-radius:18px;
+    background:linear-gradient(135deg,#5D8A3F,#1F3520);
+    color:#fff; font-family:"Baloo 2",sans-serif; font-weight:700; font-size:13pt;
+    box-shadow:0 10px 24px rgba(45,92,31,.3);
+  }
+
+  /* ---------- Activity title color rotation per day ---------- */
+  .day-1 .activity h3 { color:#2D5C1F; }
+  .day-2 .activity h3 { color:var(--teal-700); }
+  .day-3 .activity h3 { color:#5D5048; }
+  .day-4 .activity h3 { color:#A87000; }
+  .day-5 .activity h3 { color:#8B6F47; }
+  .day-6 .activity h3 { color:var(--coral-700); }
+  .day-7 .activity h3 { color:#2C5F7A; }
+</style>
+</head>
+<body>
+
+<div class="controls no-print" id="controls">
+  <label class="toggle">
+    <input type="checkbox" id="ink-save-toggle"
+      onchange="document.body.classList.toggle('ink-save', this.checked)" />
+    <span class="box" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>
+    </span>
+    Bez pozadinskih boja
+  </label>
+  <button class="print-btn" id="download-btn" type="button" onclick="downloadPDF()">
+    ⬇ Download
+  </button>
+</div>
+
+<script>
+  (function injectMeta() {
+    const run = () => {
+      const pages = document.querySelectorAll('section.page');
+      const total = pages.length;
+      pages.forEach((page, i) => {
+        if (page.querySelector('.page-num')) return;
+        const num = document.createElement('span');
+        num.className = 'page-num';
+        num.textContent = `str. ${i + 1} / ${total}`;
+        page.appendChild(num);
+
+        const wm = document.createElement('span');
+        wm.className = 'watermark';
+        wm.textContent = page.classList.contains('closing')
+          ? 'PROTECTED CONTENT'
+          : 'ZAŠTIĆENI SADRŽAJ';
+        page.appendChild(wm);
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+  })();
+</script>
+
+<script>
+  function downloadPDF() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => window.print());
+    } else {
+      window.print();
+    }
+  }
+</script>
+
+<!-- ============================================================== COVER -->
+<section class="page bleed cover">
+
+  <div class="glow g-1"></div>
+  <div class="glow g-2"></div>
+  <div class="glow g-3"></div>
+  <div class="glow g-4"></div>
+
+  <svg class="confetti c-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#FFD93D" opacity=".85"/>
+  </svg>
+  <svg class="confetti c-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="#8BC34A" opacity=".8"/>
+  </svg>
+  <svg class="confetti c-3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#FFFFFF" opacity=".55"/>
+  </svg>
+  <svg class="confetti c-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="#FFD93D" opacity=".9"/>
+  </svg>
+  <svg class="confetti c-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#5D8A3F" opacity=".7"/>
+  </svg>
+
+  <div class="cover-top">
+    <span class="logo-pill" aria-label="BezEkrana">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L13.8 8.2H19L14.8 11.4L16.6 16.6L12 13.4L7.4 16.6L9.2 11.4L5 8.2H10.2L12 3Z" fill="#FF6B6B"/>
+        <circle cx="18" cy="5" r="2" fill="#FFD93D"/>
+        <circle cx="6" cy="18" r="1.5" fill="#4ECDC4"/>
+      </svg>
+      BezEkrana
+    </span>
+    <div class="meta"><span class="dot"></span> 2–4 godine</div>
+  </div>
+
+  <div class="cover-hero">
+    <h1 class="wordmark">BEZ<br/>EKRANA</h1>
+    <div class="week-number">★ Sedmični sistem #5</div>
+    <h2 class="theme-name">Priroda<br/>unutra</h2>
+    <p class="subtitle">7 dana jednostavnih aktivnosti za djecu od 2 do 4 godine.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="pitch">
+      <strong style="color:var(--sun-300);">Sedam dana s prirodom u stanu</strong>
+      — listovi, voda, kamenčići, sjeme, trava i mali svjetovi koje sakupljate i pravite zajedno.
+      Igre koje grade pažnju, govor i strpljenje, s materijalima koje sakupiš u jednoj kratkoj šetnji.
+    </div>
+    <div class="url-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      bezekrana.com
+    </div>
+    <div class="cover-copy">© 2026 Prime Vector Solutions LLC</div>
+  </div>
+</section>
+
+<!-- ================================================================ INTRO -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Uvod</span>
+  </div>
+
+  <p class="h-eyebrow">Dobro došli</p>
+  <h1 class="h-display">Sedmični sistem #5</h1>
+
+  <p style="font-size:12pt; max-width:155mm;">Ova sedmica donosi <strong>prirodu unutra</strong>. Listovi, kamenčići, voda, sjeme, grančice i zemlja — materijali koji su djeci od 2 do 4 godine prirodno bliži od plastike, ali koje stan u gradu često uskraćuje. Sedmica gradi:</p>
+
+  <ul style="font-size:12pt; margin:5mm 0 7mm; columns:2; column-gap:8mm;">
+    <li>senzorna istraživanja kroz prirodne materijale</li>
+    <li>govor i priču kroz sakupljeno blago</li>
+    <li>posmatranje i predviđanje</li>
+    <li>strpljenje (sjeme koje raste danima)</li>
+    <li>bosa stopala i kontakt sa zemljom</li>
+    <li>kreativnost bez „krivih poteza"</li>
+  </ul>
+
+  <div class="callout-forest" style="border-radius:18px; padding:6mm 8mm; margin-bottom:6mm;">
+    <p style="font-size:11pt; line-height:1.5; margin:0;">
+      <strong>Praktična napomena za roditelja:</strong> ova sedmica zahtijeva <strong>jednu kratku šetnju (10–15 min)</strong> prije ili tokom sedmice za sakupljanje materijala — listovi, kamenčići, grančice, žirovi. To je jedina priprema različita od prethodnih sedmica. I sama ta šetnja postaje aktivnost (Dan 7).
+    </p>
+  </div>
+
+  <div class="callout callout-plum">
+    <p style="font-size:13pt; font-weight:700; line-height:1.4; margin:0;">
+      Prva sedmica sa <strong>dugoročnim elementom</strong>:<br/>
+      sjeme klija danima poslije, slika ostaje na zidu, vrećica blaga se vraća. Igra ne mora biti potrošna — može graditi nešto što ostaje.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ HOW TO USE -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Kako koristiti</span>
+  </div>
+
+  <p class="h-eyebrow">Vodič</p>
+  <h1 class="h-display">Kako koristiti<br/>ovaj sistem</h1>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <h3>Sakupite materijal</h3>
+      <p>Jedna kratka šetnja (10–15 min) — <strong>listovi, kamenčići, grančice, žirovi</strong>. Sve ostalo je već u kući.</p>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h3>Otvorite dan</h3>
+      <p>Svaki dan donosi <strong>3 jednostavne aktivnosti</strong> oko jednog prirodnog elementa.</p>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h3>Pratite dijete</h3>
+      <p>Igra traje koliko dijete pokazuje interes. Skratite, ponovite kasnije ili proširite ako uživa.</p>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h3>Bez pritiska</h3>
+      <p>Ako dijete taj dan nije raspoloženo — preskočite. Sjeme strpljivo čeka, šetnja se uvijek može odgoditi.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:9mm;">
+    <p style="font-size:13pt; font-weight:700; line-height:1.4; margin:0;">
+      Najvažnije nije da sve bude savršeno.<br/>
+      <span style="color:var(--coral-700);">Najvažnije je da dijete dobije prostor za igru, kretanje, bliskost i istraživanje — bez ekrana.</span>
+    </p>
+  </div>
+</section>
+
+<!-- =============================================================== LEGEND -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Legenda</span>
+  </div>
+
+  <p class="h-eyebrow">Šta razvijamo</p>
+  <h1 class="h-display">Šta razvijamo<br/>kroz igru</h1>
+
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-icon f-pokret">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M11 22l1-5-3-3 1-5 4 1 4 4"/></svg>
+      </span>
+      <div><h4>Pokret</h4><p>Cijelo tijelo, koordinacija</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-fine">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a2 2 0 1 1 4 0v6"/><path d="M13 11V4a2 2 0 1 1 4 0v9"/><path d="M17 13V7a2 2 0 1 1 4 0v8a7 7 0 0 1-7 7H9a5 5 0 0 1-5-5l-1-3a2 2 0 0 1 4-1l1 2v-6a2 2 0 1 1 4 0v5"/></svg>
+      </span>
+      <div><h4>Fine ruke</h4><p>Šaka, prsti, preciznost</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-paznja">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+      </span>
+      <div><h4>Pažnja</h4><p>Fokus, posmatranje</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-govor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6A8.4 8.4 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+      </span>
+      <div><h4>Govor</h4><p>Riječi, slušanje, imitacija</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-senzor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10l-4.5 3.1L16 19l-4-3-4 3 1.5-5.9L5 10l5.1-1.4z"/></svg>
+      </span>
+      <div><h4>Senzorna igra</h4><p>Dodir, tekstura, miris</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-povezivanje">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-.9a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>
+      </span>
+      <div><h4>Povezivanje</h4><p>Bliskost s roditeljem</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-rjesavanje">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 13c.5.5 1 1 1 2v1h6v-1c0-1 .5-1.5 1-2a7 7 0 0 0-4-13z"/></svg>
+      </span>
+      <div><h4>Rješavanje</h4><p>Uzrok-posljedica, mali problemi</p></div>
+    </div>
+
+    <div class="legend-item">
+      <span class="legend-icon f-masta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M19 13l.8 2.2 2.2.8-2.2.8L19 19l-.8-2.2L16 16l2.2-.8z"/><path d="M5 5l.7 2 2 .7-2 .7L5 10l-.7-1.6L2.3 7.7l2-.7z"/></svg>
+      </span>
+      <div><h4>Mašta</h4><p>Kreativnost, role-play, ekspresija</p></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:10mm; font-size:14pt;">Dodatne oznake na svakoj aktivnosti</h3>
+  <div class="meta-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1.5mm; margin-top:4mm;">
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Priprema</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">jedna šetnja</div>
+    </div>
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Potrebno</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">priroda + kuća</div>
+    </div>
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Tempo</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">prema djetetu</div>
+    </div>
+    <div style="background:var(--cream); border:1px dashed var(--plum-100); border-radius:8px; padding:1.5mm 2.5mm;">
+      <div style="font-size:6.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700;">Nadzor</div>
+      <div style="font-size:9pt; font-weight:600; color:var(--plum-900);">obavezan</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== WEEK OVERVIEW -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Pregled sedmice</span>
+  </div>
+
+  <p class="h-eyebrow">Plan u jednom pogledu</p>
+  <h1 class="h-display">Pregled sedmice</h1>
+
+  <p style="font-size:11.5pt; color:var(--muted); max-width:155mm;">Sedam dana s prirodom u stanu — listovi, voda, kamenčići, sjeme, trava, slika i šetnja. Sedmica počinje „donošenjem prirode unutra" (Dan 1) i završava „vraćanjem u prirodu sa novim očima" (Dan 7) — luk koji povezuje sedmicu.</p>
+
+  <div class="week-list">
+    <div class="day"><div class="day-num">1</div><div class="day-title">Šuma na stolu</div></div>
+    <div class="day"><div class="day-num">2</div><div class="day-title">Voda i list</div></div>
+    <div class="day"><div class="day-num">3</div><div class="day-title">Kamenčići priča</div></div>
+    <div class="day"><div class="day-num">4</div><div class="day-title">Sjeme u staklu</div></div>
+    <div class="day"><div class="day-num">5</div><div class="day-title">Bosi po travi</div></div>
+    <div class="day"><div class="day-num">6</div><div class="day-title">Slika od prirode</div></div>
+    <div class="day"><div class="day-num">7</div><div class="day-title">Mala šetnja sa zadatkom</div></div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 1 -->
+<section class="page day day-1">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 1 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">1</div>
+    <div class="day-title-block">
+      <h2>Šuma na stolu</h2>
+      <p>Donosimo prirodu unutra.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Donijeli smo šumu u sobu.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Šuma na stolu</h3>
+    <div class="needs"><strong>Potrebno:</strong> 5–6 listova različitih oblika, 2–3 grančice, par kamenčića, žirovi ili kestenovi (ako je sezona); pleh ili veliki tanjir, plastične životinje.</div>
+    <h4>Kako se igra</h4>
+    <p>U kratkoj šetnji sakupiš sa djetetom listove, grančice, kamenčiće, žirove. Kod kuće na pleh ili veliki tanjir slažete „šumu". Dodaj plastične životinje. Dijete priča šta se dešava: „Ovdje živi medo. Ovdje zec spava. Tu je rijeka." Pomaži pitanjima: „Ko stiže u šumu? Gdje će spavati? Koja životinja se sakrila?" 15 minuta šetnje + sat igre — dijete vidi prirodu drugačije, kao građevinski materijal koji odlučuje sam.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Sortiranje šumskog blaga</h3>
+      <p>Stavi sve sakupljeno na pod. „Stavi sve listove ovdje. Sve kamenčiće ovdje. Sve grančice ovdje." Dijete sortira po vrsti, pa po veličini: „Veliki list ovdje, mali tu." Vježba pažnje, fine motorike i pojmova.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Šta to imamo?</h3>
+      <p>Bez sortiranja ili igre — samo dodirivanje i imenovanje. „Ovo je list — šuška. Ovo je kamen — težak je. Ovo je grančica." Dovoljno za mlađu djecu — uvodi prirodu kroz dodir i govor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 2 -->
+<section class="page day day-2">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 2 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">2</div>
+    <div class="day-title-block">
+      <h2>Voda i list</h2>
+      <p>Šta pluta? Šta tone?</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Pluta ili tone?</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Pluta ili tone?</h3>
+    <div class="needs"><strong>Potrebno:</strong> velika prozirna posuda s vodom; list, mali kamen, kockica leda, kora od narandže, plastična igračka, papir, kašika.</div>
+    <h4>Kako se igra</h4>
+    <p>Posudu s vodom postaviš na sto. Dijete jedno po jedno spušta predmete unutra. <strong>Prije</strong> nego baci, pitaš: „Šta misliš za ovaj? Pluta ili tone?" Dijete pogađa, pa testira. Reakcija: „Pluta!" ili „Otišao je dole!" Govori jezik nauke: „Lebdi", „potone", „pliva", „tone polako, tone brzo". Ovo je prava nauka pakovana u 5 minuta — dijete uči predviđanje, posmatranje i nove riječi. Roditelji ostanu u čudu koliko dijete pamti.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Pravi grupe</h3>
+      <p>Poslije testiranja, sortiraj predmete: ovi su plivali, ovi su potonuli. „Šta je drugačije kod ovih? Šta su lakše, šta teže?" Dijete povezuje rezultat s osobinom predmeta — početak naučnog razmišljanja.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Voda i ruka</h3>
+      <p>Bez igre predviđanja — dijete samo stavlja ruku, pere, pljuska. „Hladno? Toplo? Šuška li voda?" Senzorno istraživanje vode, idealno za mlađu djecu ili kraj dana.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 3 -->
+<section class="page day day-3">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 3 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">3</div>
+    <div class="day-title-block">
+      <h2>Kamenčići priča</h2>
+      <p>Svaki kamenčić zna jednu riječ.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Svaki kamenčić zna jednu riječ.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Priča iz kamenčića</h3>
+    <div class="needs"><strong>Potrebno:</strong> 6–8 glatkih kamenčića (iz parka ili iz kupljenog cvjetnog šljunka), trajni flomaster.</div>
+    <h4>Kako se igra</h4>
+    <p>Na svakom kamenčiću nacrtaš nešto jednostavno: sunce, kuća, srce, drvo, zvjezdica, životinja, val, oblak. Dijete vuče po jedan i zajedno pravite priču: „Bilo jednom sunce... onda kuća... onda zec..." Slijedi šta dijete pokaže — ne ispravlja se. Pričanje priča iz nule, bez knjige. Razvija govor i maštu na način kojem nijedna aplikacija ne može prići. Kamenčiće čuvaš u kesici i koristiš sedmicama.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Pogodi koji nedostaje</h3>
+      <p>Postavi 4 kamenčića. Dijete ih vidi. Onda zatvori oči, ti skloniš jedan: „Koji je nestao?" Pamćenje, vizuelna pažnja. Mlađem 3 kamenčića, starijem 5–6.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Imenuj sliku</h3>
+      <p>Bez priče. Dijete vuče kamenčić i kaže šta vidi: „Sunce. Kuća. Zvijezda." Najlakša verzija — vježba prepoznavanja simbola i rječnika.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 4 -->
+<section class="page day day-4">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 4 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">4</div>
+    <div class="day-title-block">
+      <h2>Sjeme u staklu</h2>
+      <p>Život koji raste polako.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Nešto raste polako, dan po dan.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Život koji raste</h3>
+    <div class="needs"><strong>Potrebno:</strong> prozirna teglica ili čaša, vata ili papirni ubrus, voda, par zrna graha / leblebije / sočiva.</div>
+    <h4>Kako se igra</h4>
+    <p>Na dno teglice staviš vatu (ili papirni ubrus), zaliješ vodom da bude vlažno. Dijete uz staklo postavi 2–3 zrna — tako da se vide. Stavi teglicu na prozor. Svaki dan dijete posmatra i opisuje: „Mokro je. Nešto se dešava. Pukla je ljuska!" U narednim danima nastaje korijen, pa stabljika. <strong>Aktivnost koja „živi" 2–3 sedmice nakon ove.</strong> Prvi put dijete vidi šta znači „raste polako".</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Dnevnik klijanja</h3>
+      <p>Roditelj ima papir. Svaki dan crtaju ono što vide: dan 1 zrno, dan 3 prva linija, dan 5 stabljika, dan 7 list. Dijete vodi: „Šta vidiš danas?" Razvija strpljenje, posmatranje i osjećaj za vrijeme.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Pij vodu</h3>
+      <p>Bez crtanja, samo dnevni ritual: „Hajde da provjerimo sjeme. Treba li mu vode?" Dijete sipa pažljivo malo vode. Mali, ali bitan ritual koji se ponavlja danima.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 5 -->
+<section class="page day day-5">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 5 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">5</div>
+    <div class="day-title-block">
+      <h2>Bosi po travi</h2>
+      <p>Stopala otkrivaju zemlju.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Stopala znaju razliku.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Stopala otkrivaju</h3>
+    <div class="needs"><strong>Potrebno:</strong> ako vrijeme dozvoljava — vani; ako ne — 4 tanjira: jedan s travom (ili peršunom), jedan s vodom, jedan s grizom ili pijeskom, jedan s kamenčićima.</div>
+    <h4>Kako se igra</h4>
+    <p>Vani: par minuta bosih nogu po travi, zemlji, kamenu, asfaltu. Imenuj senzaciju: „Trava škaklja. Asfalt je tvrd. Pijesak ulazi između prstiju." Ako ne može vani, donesi unutra — dijete prelazi po četiri tanjira i opisuje. <strong>Dijete koje cijeli dan nosi cipele odjednom otkrije svijet stopalima.</strong> Prizemljujuće u doslovnom smislu — smiruje senzorno preopterećenu djecu.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Pogodi gdje stojiš</h3>
+      <p>Dijete zatvori oči (ili gleda gore). Ti pomjeri stopalo na drugi tanjir. „Gdje su sad noge?" Dijete pogađa po dodiru. Vježba taktilne pažnje i prostorne svijesti.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Samo trava</h3>
+      <p>Bez staze. Jedan tanjir, jedna senzacija (trava ili pijesak). Dijete dodiruje rukom ili stopalom. Mlađim djecima dovoljno je jedno čulo dodira po sesiji.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 6 -->
+<section class="page day day-6">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 6 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">6</div>
+    <div class="day-title-block">
+      <h2>Slika od prirode</h2>
+      <p>Sve što sakupiš ostaje.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Sve što sakupiš ostaje.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Slika koja ostaje</h3>
+    <div class="needs"><strong>Potrebno:</strong> komad kartona ili papira, malo ljepila u tanjiriću (ili dvostrana ljepljiva traka), sakupljeno: listovi, latice, sjeme, malo pijeska, grančica, perce.</div>
+    <h4>Kako se igra</h4>
+    <p>Dijete lijepi šta želi: listove, latice, sjeme, grančicu, perce. Pravi „sliku" bez ikakvih pravila — <strong>nema „krivog poteza"</strong> jer se sve može zalijepiti. Možeš dodati flomaster za „okvir" ili potpis. Slika se okači u sobu i dijete je nedjeljama pokazuje gostima — kreativnost bez frustracije.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Sve od jedne stvari</h3>
+      <p>Slika napravljena samo od jedne vrste materijala: samo listovi, samo sjemenke. Dijete bira raspored, gustinu, smjer. „Gdje će ići ovaj? Tu ili tu?" Vježba kompozicije i izbora.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Tepih od listova</h3>
+      <p>Bez ljepila. Dijete na pod ili stol slaže listove kako želi — kao tepih, kao hrpu, kao stazu. „Šta praviš? Gdje vodi tvoja staza?" Slobodno, bez pripreme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ DAY 7 -->
+<section class="page day day-7">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>Dan 7 / 7</span>
+  </div>
+
+  <div class="day-header">
+    <div class="day-stamp">7</div>
+    <div class="day-title-block">
+      <h2>Mala šetnja sa zadatkom</h2>
+      <p>Lov na blago u prirodi.</p>
+    </div>
+  </div>
+
+  <div class="story">
+    <p>Donesi mi blago iz šetnje.</p>
+  </div>
+
+  <div class="level wow">
+    <span class="level-tag"><span class="ico">⚡</span> WOW Misija</span>
+    <h3>Lov na blago</h3>
+    <div class="needs"><strong>Potrebno:</strong> papirna kesica ili manja vrećica, kratka šetnja (haustor, dvorište, do dućana ili park).</div>
+    <h4>Kako se igra</h4>
+    <p>Daješ djetetu „misiju" — donese ti: nešto okruglo, nešto žuto, nešto što šuška, nešto malo, nešto glatko. Sve stavlja u vrećicu. Kod kuće — vadite jedno po jedno i komentarišete: „Šta si našao okruglo? Kesten! Šta je glatko? Kamen!" <strong>Obična šetnja postaje misija.</strong> Dijete primjećuje 10× više nego inače. Vrećica blaga čuva se i razgleda danima.</p>
+  </div>
+
+  <div class="levels-row">
+    <div class="level medium">
+      <span class="level-tag"><span class="ico">🔧</span> Srednje</span>
+      <h3>Koliko boja?</h3>
+      <p>Šetnja sa pitanjem: „Koliko različitih boja možemo naći?" Imenuj svaku: „Žuta — vidiš tamo cvijet. Zelena — list. Smeđa — kora drveta." Vježba pažnje i imenovanja boja.</p>
+    </div>
+    <div class="level light">
+      <span class="level-tag"><span class="ico">🌿</span> Lagano</span>
+      <h3>Slušaj šta vani priča</h3>
+      <p>Bez sakupljanja. Šetate i slušate: „Šta čuješ? Auto? Pticu? Vjetar?" Dijete usporava, slušajući. Idealno za umorne dane ili kraj sedmice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== SOS -->
+<section class="page">
+  <div class="page-header">
+    <span class="brand">BEZ EKRANA · Sedmični sistem #5 · bezekrana.com</span>
+    <span>SOS ideje</span>
+  </div>
+
+  <p class="h-eyebrow">Spremne za hitne trenutke</p>
+  <h1 class="h-display small">SOS ideje<br/>kada dijete traži ekran</h1>
+
+  <p style="font-size:11.5pt; max-width:155mm; color:var(--muted);">Kada dijete traži ekran iz dosade ili navike, pokušaj brzo skrenuti pažnju na <strong>nešto živo i prirodno</strong>. Pogled kroz prozor, dodir kamena, šuškanje lista — to vraća dijete u trenutak:</p>
+
+  <div class="sos-list">
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Pogledaj kroz prozor — koje boje vidiš?"</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Hajde da napravimo šumu na stolu."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Pluta li ova kockica leda?"</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Koji kamen je najtopliji?"</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Daj sjemenu malo vode."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Slušaj — čuješ pticu?"</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Donesi mi list iz vrećice blaga."</p></div>
+    <div class="sos-item"><span class="sos-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l4 4L19 7"/></svg></span><p>„Hajde bos na minut."</p></div>
+  </div>
+
+  <div class="callout-forest" style="margin-top:8mm; border-radius:18px; padding:7mm 9mm;">
+    <p style="font-size:13pt; font-weight:700; line-height:1.4; margin:0;">
+      Priroda nikad ne mora biti šuma.<br/>
+      <strong>Jedan list u ruci, jedan kamen u džepu</strong> — često je dovoljno da dijete „dođe nazad u tijelo".
+    </p>
+  </div>
+</section>
+
+<!-- =============================================================== CLOSING -->
+<section class="page bleed closing">
+  <div class="closing-inner">
+    <div class="glow cg-1"></div>
+    <div class="glow cg-2"></div>
+
+    <div class="body">
+      <div class="badge">⭐ Završili ste sedmicu</div>
+      <h2>Bravo za još jednu sedmicu bez ekrana</h2>
+      <p>Ako niste stigli uraditi sve aktivnosti — to je potpuno u redu. Ovaj sistem nije tu da vas optereti, nego da vam olakša svakodnevicu i ponudi gotove ideje za igru.</p>
+      <p style="margin-top:4mm;">Sjeme i dalje raste, slika ostaje na zidu, vrećica blaga se vraća. <strong>Priroda koju ste donijeli unutra ne odlazi sa krajem sedmice.</strong></p>
+      <p style="margin-top:4mm;">Možete ponoviti omiljene aktivnosti, sačuvati ovu sedmicu za kasnije, ili preći na <strong>naredni sedmični sistem</strong>.</p>
+
+      <div class="stamp">
+        Malo manje ekrana. Malo više igre. Malo više bliskosti.
+      </div>
+    </div>
+
+    <div class="legal-notice">
+      <p class="legal-safety">
+        <strong>Sigurnost prije svega.</strong> Sav sadržaj je informativnog i edukativnog karaktera. Sve aktivnosti zahtijevaju aktivan nadzor odrasle osobe; roditelj/staratelj je u potpunosti odgovoran za sigurnost djeteta tokom igre. Aktivnosti sa prirodnim materijalima (kamenčići, sjeme, listovi, zemlja) provoditi isključivo uz neprekidan nadzor — paziti na sitne predmete rizične za gušenje, alergije i higijenu (oprati ruke nakon igre).
+      </p>
+
+      <div class="legal-cols">
+        <div>
+          <h4>Pravna napomena</h4>
+          <p>Ovaj materijal je zaštićen autorskim pravima i predstavlja vlasništvo kompanije <strong>Prime Vector Solutions LLC, USA</strong>. Svako neovlašteno kopiranje, dijeljenje, distribuiranje ili prodaja ovog sadržaja — djelimično ili u cijelosti — strogo je zabranjeno bez prethodnog pismenog odobrenja. Kršenje ovih prava može rezultirati pravnim postupkom, uključujući novčane kazne i zahtjeve za naknadu štete, u skladu sa zakonima Sjedinjenih Američkih Država i međunarodnim propisima. Ovaj materijal se aktivno prati u cilju sprječavanja neovlaštene distribucije.</p>
+        </div>
+        <div>
+          <h4>Legal Notice</h4>
+          <p>This material is protected by copyright and is the intellectual property of <strong>Prime Vector Solutions LLC, USA</strong>. Any unauthorized copying, sharing, distribution, or resale of this content — in whole or in part — is strictly prohibited without prior written consent. Violation of these terms may result in legal action, including financial penalties and claims for damages, in accordance with United States and international intellectual property laws. This material is actively monitored for unauthorized distribution.</p>
+        </div>
+      </div>
+
+      <p class="legal-copyright">© 2026 Prime Vector Solutions LLC. Sva prava zadržana. · All rights reserved.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

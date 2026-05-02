@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node scripts/confirm-user.mjs hmustajbasic@gmail.com)",
+      "Bash(node scripts/reset-password.mjs hmustajbasic@gmail.com 'eLma2009@@@')",
+      "Bash(node scripts/make-admin.mjs hmustajbasic@gmail.com)",
+      "Read(//c/Users/hmedi/PRIMEAXIS/PRIMEAXIS/**)",
+      "Bash(npx tsc *)",
+      "Bash(node scripts/fake-active-sub.mjs hmustajbasic@gmail.com 1)",
+      "Bash(node scripts/run-one-migration.mjs 20260430000001_pdf_variants.sql)",
+      "Bash(node scripts/run-one-migration.mjs 20260430000002_banners.sql)",
+      "Bash(git init *)",
+      "Bash(git branch *)",
+      "Bash(git add *)"
+    ]
+  }
+}

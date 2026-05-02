@@ -1,0 +1,544 @@
+{
+  "nav": {
+    "home": "Početna",
+    "about": "O nama",
+    "pricing": "Cijene",
+    "login": "Prijava",
+    "register": "Kreiraj nalog",
+    "dashboard": "Moj panel",
+    "logout": "Odjava",
+    "admin": "Admin"
+  },
+  "landing": {
+    "hero": {
+      "badge": "Bez ekrana. Bez stresa. Bez kupovine.",
+      "title": "Vrati mu djetinjstvo koje se ne dešava iza ekrana",
+      "subtitle": "Znamo onaj osjećaj krivice kada djetetu pružiš tablet jer jednostavno više nemaš snage. Nisi sam/a. Svi smo tamo. Ali dječija mašta je najmoćnija stvar na svijetu — samo joj treba mala iskra. BezEkrana nije samo plan igre, to je tvoj saveznik da ponovo vidiš onaj sjaj u njihovim očima dok otkrivaju svijet običnom kašikom i malo vode.",
+      "ctaPrimary": "Pokreni Sedmični sistem",
+      "ctaSecondary": "Kako radi?",
+      "trust": "Pridružilo se preko 1.200 roditelja iz BiH, Hrvatske i Srbije"
+    },
+    "mission": {
+      "eyebrow": "Naša Misija",
+      "title": "Više od igre — spašavamo trenutke koji se ne vraćaju.",
+      "items": [
+        {
+          "title": "Vrijeme leti",
+          "body": "Djeca uzrasta 2–4 godine najbrže uče kroz dodir, miris i pokret. Svaki minut bez tableta i telefona je pobjeda za njihov fokus i maštu."
+        },
+        {
+          "title": "Roditeljstvo bez pritiska",
+          "body": "Ne treba ti skupa oprema ni sati pripreme. Dovoljno je ono što već imaš u kuhinji."
+        },
+        {
+          "title": "Mirna savjest",
+          "body": "Naš cilj nije da ti prodamo još jednu pretplatu, već da ti poklonimo onaj osjećaj mira dok gledaš svoje dijete kako se samostalno igra, uči i raste — onako kako smo i mi nekada."
+        }
+      ]
+    },
+    "problem": {
+      "title": "Znaš ovaj scenarij?",
+      "differentScenario": "Postoji i drugačiji scenario.",
+      "items": [
+        {
+          "eyebrow": "Jutarnja borba",
+          "title": "07:30 — prvo 'Daj mi tablet', pa onda 'Dobro jutro'",
+          "body": "Tek si otvorio oči, a već si u pregovorima. Prva rečenica djeteta nije zagrljaj, nego zahtjev za ekranom. Ti samo želiš 5 minuta mira uz kafu bez argumentacije zašto 'baš sad ne može YouTube'."
+        },
+        {
+          "eyebrow": "Vikend blokada",
+          "title": "Kišna subota — tvoj kreativni rezervoar je prazan",
+          "body": "Napolju je sivo, a unutra je haos. Potrošio si sve ideje, ponudio sve igračke, a odgovor je uvijek 'dosadno mi je'. Osjećaš kako popuštaš i posežeš za telefonom, iako znaš da to nije rješenje."
+        },
+        {
+          "eyebrow": "Paradoks igračaka",
+          "title": "Soba puna igračaka, a traži se samo jedna stvar",
+          "body": "Potrošeni su sati u radnjama i stotine maraka na šarene kutije koje sada skupljaju prašinu. Ironija je bolna: pored svega što ima, jedino što ga stvarno drži 'budnim' je tablet. Frustracija raste, a osjećaj krivice je sve teži."
+        }
+      ]
+    },
+    "solution": {
+      "title": "Tvoj plan B (i C, i D)",
+      "subtitle": "Tvoj sedmični sistem avantura koji pretvara kućni haos u zonu fokusa. Bez kupovine, bez pripreme i bez grižnje savjesti — samo otvoriš uputstva i zabava počinje.",
+      "features": [
+        {
+          "title": "7 dana aktivnosti",
+          "body": "7 dana bez razmišljanja 'šta ćemo sad?'. Svake sedmice dobijaš gotov plan. Nema traženja po internetu, nema komplikovanih pravila. Otvoriš PDF i igra počinje odmah."
+        },
+        {
+          "title": "Bez kupovine",
+          "body": "Igračke koje već posjeduješ, a da to i ne znaš. Ne troši novac na nove plastične setove. Pokazat ćemo ti kako obična tjestenina, kašike i deke postaju najzanimljiviji alati za istraživanje."
+        },
+        {
+          "title": "Razvija dijete",
+          "body": "Vrijeme koje gradi njihov mozak. Svaka aktivnost je dizajnirana da podstakne finu motoriku, maštu i strpljenje. Dok se oni zabavljaju, ti znaš da zapravo uče važne životne vještine."
+        },
+        {
+          "title": "SOS sekcija",
+          "body": "Tvoj 'as iz rukava' za krizne situacije. Kada ste u restoranu, kod doktora ili ti jednostavno treba 20 minuta tišine da završiš poziv — SOS sekcija nudi trikove koji rade bez tableta i telefona, bilo gdje."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Kako radi?",
+      "steps": [
+        {
+          "title": "Registruješ se",
+          "body": "Brzo i sigurno na našoj stranici. Bez skrivenih troškova i obaveza — otkažeš kad god želiš."
+        },
+        {
+          "title": "Preuzmeš svoj digitalni paket",
+          "body": "Odmah po uplati otključavaš Paket #1. Svakog 7. dana stiže nova sedmica puna svježih ideja za igru direktno na tvoj nalog."
+        },
+        {
+          "title": "Kreneš VEČERAS",
+          "body": "Pogledaš Mapu avantura, izabereš jedan od 7 razvojnih izazova i aktiviraš djetetovu radoznalost običnim kućnim predmetima. Dok tvoj mali istraživač testira granice fizike i mašte, ti uživaš u tišini koja nije kupljena ekranom, već zaslužena zdravom igrom."
+        }
+      ],
+      "neuro": {
+        "title": "Mozak u pokretu: Više od obične igre",
+        "body": "Svaka aktivnost u našem vodiču nije samo zabava — to je pažljivo projektovan razvojni poligon. Fokusiramo se na neuro-motoričku stimulaciju: dok vaše dijete spašava igračke iz leda ili presipa tjesteninu, ono zapravo kalibriše svoju preciznost (pincetni hvat), jača kognitivnu izdržljivost (fokus) i gradi neuronske puteve kroz senzorno istraživanje. Mi ne popunjavamo vrijeme; mi hranimo dječiji potencijal koristeći predmete koje već imate u kuhinji."
+      }
+    },
+    "testimonials": {
+      "title": "Roditelji koji su rekli „NE ekranu“",
+      "items": [
+        {
+          "quote": "Kao učiteljica razredne nastave, odmah sam prepoznala Montessori principe u ovim aktivnostima. Nevjerovatno je kako obična senzorna kutija sa tjesteninom razvija dječiji fokus bolje od bilo koje skupe aplikacije. Preporučujem svim roditeljima u svojoj grupi.",
+          "author": "Jasmina, učiteljica, Banja Luka"
+        },
+        {
+          "quote": "Subota ujutro više nije borba. Hana izabere aktivnost, ja popijem kafu na miru. Vrijedi svakog centa.",
+          "author": "Amina, mama Hane (3 god.), Sarajevo"
+        },
+        {
+          "quote": "Priznajem, bio sam skeptičan. Mislio sam da će se igrati 2 minute i tražiti YouTube. Ali 'Spašavanje autića iz leda' ga je držalo 40 minuta. Nisam mogao vjerovati da je toliko fokusiran bez ekrana.",
+          "author": "Edin, tata Tarika (4 god.), Sarajevo"
+        },
+        {
+          "quote": "Mislio sam 'opet jedna pretplata'. Pa sam isprobao prvu sedmicu. Nismo ugasili tablet — Lana ga sama ne traži.",
+          "author": "Marko, tata Ivone (2.5 god.), Mostar"
+        },
+        {
+          "quote": "Obožavam što ne moram ništa kupovati. Sve što mi treba već imam u kuhinji. Plan avantura mi štedi sate guglanja i grižnje savjesti. Sad vikendi stvarno liče na djetinjstvo, a ne na gledanje u ekran.",
+          "author": "Marija, mama dvoje djece, Zagreb"
+        },
+        {
+          "quote": "SOS sekcija nas je spasila u čekaonici kod doktora. Umjesto telefona, igrali smo se 'Lova na oblike' u ordinaciji. Druge mame su me gledale kao da imam supermoći. Hvala vam na ovome!",
+          "author": "Jelena, mama Luke (3 god.), Beograd"
+        },
+        {
+          "quote": "Primijetila sam da Lana mnogo više priča i objašnjava šta radi dok se igramo po vašem planu. Aktivnosti poput 'Restorana mašte' su joj nevjerovatno otvorile rječnik. Ovo je najboljih 5 maraka koje sam potrošila.",
+          "author": "Amra, mama Lane (2.5 god.), Zenica"
+        },
+        {
+          "quote": "Koristim u vrtićkoj grupi od 12 djece. Najbolja investicija ove godine. Druge odgajateljice me već pitaju.",
+          "author": "Sanela, odgajateljica, Tuzla"
+        },
+        {
+          "quote": "Neuro-motorička stimulacija kroz ove vježbe je vrhunska. Djeca u ovom uzrastu moraju osjetiti teksturu i otpor da bi razvijala mozak. BezEkrana je savršen alat za digitalnu detoksikaciju cijele porodice.",
+          "author": "Ivana, pedagoginja, Split"
+        }
+      ]
+    },
+    "moment": {
+      "body": "Jer na kraju dana, neprocjenjivo je sjesti u miru i gledati kako tvoje dijete samostalno rješava 'velike' izazove običnom drvenom kašikom. To je onaj poseban zvuk fokusa i djetinjstva koji si im ti omogućio."
+    },
+    "faq": {
+      "title": "Sve što te zanima (prije prve kafe u miru)",
+      "items": [
+        {
+          "q": "Hoću li dobiti pakete koje su drugi već imali?",
+          "a": "Naravno. Tvoja avantura počinje od Sedmice 1 bez obzira na to kada se pridružiš. Želimo da prođeš kroz cijeli razvojni put redom, onako kako je planirano, tako da ništa ne propuštaš."
+        },
+        {
+          "q": "Šta ako želim pauzirati?",
+          "a": "Potpuno te razumijemo — roditeljstvo je nepredvidivo. Članstvo možeš prekinuti bilo kada jednim klikom, bez ikakvih skrivenih troškova ili pitanja. Tu smo da ti olakšamo, a ne da ti stvaramo dodatnu obavezu."
+        },
+        {
+          "q": "Mogu li kupiti samo jednu sedmicu?",
+          "a": "Trenutno funkcionišemo kao zajednica koja raste sedmično, jer je kontinuitet u igri bez ekrana ključan za djetetov fokus. Cijena od 2,49 € je prilagođena tako da bude manja od jedne kafe, a donosi ti mirnu cijelu sedmicu."
+        },
+        {
+          "q": "Treba li mi printer?",
+          "a": "Ne moraš ništa printati. Sve aktivnosti su dizajnirane da budu pregledne na tvom telefonu. Dovoljno je da baciš pogled na uputstva, uzmeš kašiku ili deku i kreneš u akciju."
+        },
+        {
+          "q": "Koliko vremena treba za pripremu?",
+          "a": "Manje nego što ti treba da djetetu objasniš zašto ne može tablet. Većina igara se postavlja za manje od 3 minute koristeći stvari koje već imaš u ladici ili kuhinji."
+        },
+        {
+          "q": "Da li je sigurno platiti karticom?",
+          "a": "Apsolutno. Koristimo najsavremenije sisteme za zaštitu podataka, tako da je tvoja uplata potpuno sigurna i kriptovana. Mi vidimo samo tvoj osmijeh olakšanja, ne i tvoje podatke."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Zaslužuje djetinjstvo kojeg će se sjećati... ne ekran, već tvoju ruku i igru.",
+      "subtitle": "Započni prvu sedmicu avanture. Bez ugovora, bez obaveza i sa mogućnošću da pauziraš bilo kada. Tvoj prvi Plan avantura stiže na tvoj nalog odmah nakon prijave.",
+      "button": "Započni našu prvu avanturu",
+      "footer": "Jer najbolje uspomene počinju tamo gdje se ekrani gase."
+    }
+  },
+  "about": {
+    "eyebrow": "Pismo roditeljima",
+    "title": "Dragi roditelji — niste loši.",
+    "intro": "Niko nije savršen. Svi smo nekad pružili tablet jer smo bili iscrpljeni, jer smo trebali 10 minuta tišine, jer dijete nije htjelo da jede dok ne dobije Cocomelon. Razumijemo. Mi smo prošli kroz isto.",
+    "missionTitle": "Šta smo i zašto smo tu",
+    "missionBody": "Mi smo grupa roditelja, edukatora i ljudi koji se profesionalno bave razvojem djece — okupljenih oko jedne ideje: da vrijeme provedeno bez ekrana bude lakše za roditelja, a bogatije za dijete. Ne pravimo aplikacije. Ne pravimo skupe igračke. Pravimo planove koji koriste ono što već imaš u kuhinji.",
+    "scienceTitle": "Zašto baš ovako?",
+    "scienceBody": "Jer mozak djeteta od 2 do 4 godine ne raste pred tabletom ili telefonom. Raste kroz dodir teksture, prelijevanje vode iz tegle u teglu, slaganje kašika po veličini, sortiranje tjestenine po obliku. Najjači razvoj se dešava u trenucima koji izgledaju „nevažno“. Mi te trenutke pakujemo u 7-dnevni plan i isporučujemo ti svake sedmice — gotov, testiran, bez priprema.",
+    "valuesTitle": "Šta nas vodi",
+    "values": [
+      {
+        "title": "Roditelj nije problem — sistem je.",
+        "body": "Nudimo alat, ne predavanja. Bez krivice, bez moralisanja, bez „dobri roditelji rade ovako“."
+      },
+      {
+        "title": "Najbolja aktivnost je ona bez tehnologije.",
+        "body": "Drvena kašika će uvijek nadmašiti aplikaciju koja košta 25 €. Mi to dokazujemo svake sedmice."
+      },
+      {
+        "title": "Vrijeme je vrednije od para.",
+        "body": "Naš plan ti štedi sate guglanja, kupovanja i grižnje savjesti. Cijena nam je manja od kafe."
+      }
+    ],
+    "ctaTitle": "Pridruži nam se",
+    "ctaBody": "Ne trebaš ništa kupovati. Ne trebaš ništa printati. Samo otvoriš PDF i kreneš.",
+    "ctaButton": "Kreni odmah"
+  },
+  "pricing": {
+    "title": "Odaberi kako želiš krenuti",
+    "subtitle": "",
+    "tabs": {
+      "subscribe": "Sedmični sistem",
+      "oneTime": "Jednokratno"
+    },
+    "subscribe": {
+      "label": "Najbolja opcija",
+      "title": "Sedmični sistem (ušteda {percent}%)",
+      "tagline": "Manje ekrana. Više igre. Više druženja. Svake sedmice.",
+      "perWeek": "/ plan",
+      "value": "{price} vrijednost jednog plana",
+      "description": "Svake sedmice dobijaš novi plan gotovih aktivnosti za dijete od 2 do 4 godine.",
+      "features": [
+        "Novi plan aktivnosti svake sedmice",
+        "Aktivnosti za svih 7 dana",
+        "Low-prep igre od stvari koje već imaš kući",
+        "SOS ideje za trenutke kada dijete traži ekran",
+        "Plan odmah dostupan za preuzimanje"
+      ],
+      "cta": "Pokreni sedmični sistem",
+      "fineprint": "Obnavlja se automatski svake sedmice po cijeni od {price}. Otkaži kad god želiš."
+    },
+    "oneTime": {
+      "title": "Jednokratno",
+      "tagline": "Kupi jedan plan i koristi ga kad želiš.",
+      "perPack": "/ plan",
+      "description": "Idealno ako želiš prvo isprobati jedan sedmični sistem bez automatske obnove.",
+      "features": [
+        "Jedan plan aktivnosti",
+        "Aktivnosti za 7 dana",
+        "PDF odmah dostupan",
+        "Bez automatske obnove"
+      ],
+      "cta": "Kupi jedan plan",
+      "fineprint": "Jednokratno plaćanje. Bez obnove."
+    },
+    "trust": {
+      "secure": "Sigurno plaćanje",
+      "instant": "Plan odmah dostupan",
+      "age": "Za uzrast 2–4 godine",
+      "home": "Aktivnosti od stvari koje već imaš kući"
+    },
+    "note": "BezEkrana nije samo spisak ideja; to je tvoj saveznik u spašavanju djetinjstva od digitalnog šuma, koji običnu kuhinjsku kašiku pretvara u alat za razvoj fokusa, motorike i mašte vašeg djeteta.",
+    "currencyNote": "Cijena u {currency}"
+  },
+  "auth": {
+    "login": {
+      "title": "Dobrodošao nazad",
+      "subtitle": "Prijavi se da nastaviš",
+      "email": "Email",
+      "password": "Lozinka",
+      "submit": "Prijavi se",
+      "google": "Prijava preko Google",
+      "noAccount": "Nemaš nalog?",
+      "signUp": "Kreiraj nalog",
+      "forgot": "Zaboravljena lozinka?"
+    },
+    "register": {
+      "title": "Kreiraj nalog",
+      "subtitle": "30 sekundi i si unutra",
+      "name": "Ime i prezime",
+      "namePlaceholder": "Npr. Amina Hasić",
+      "email": "Email",
+      "password": "Lozinka (min 8 znakova)",
+      "submit": "Kreiraj nalog",
+      "google": "Registruj se preko Google",
+      "haveAccount": "Već imaš nalog?",
+      "signIn": "Prijavi se",
+      "agreement": "Slažem se sa <terms>Uslovima korištenja</terms>, <privacy>Politikom privatnosti</privacy> i <refund>Politikom povrata</refund>. Razumijem da je sadržaj digitalan i da je dostupan odmah.",
+      "agreementRequired": "Moraš prihvatiti uslove da bi nastavio."
+    },
+    "errors": {
+      "invalidCredentials": "Pogrešan email ili lozinka",
+      "emailInUse": "Ovaj email je već u upotrebi",
+      "weakPassword": "Lozinka mora imati barem 8 znakova",
+      "generic": "Nešto je pošlo po zlu, pokušaj ponovo"
+    },
+    "forgot": {
+      "title": "Zaboravljena lozinka?",
+      "subtitle": "Pošaljemo ti link za resetovanje na email.",
+      "email": "Email",
+      "submit": "Pošalji link",
+      "submitting": "Šaljem…",
+      "successTitle": "Provjeri email",
+      "successBody": "Ako postoji nalog sa tom adresom, link za resetovanje je upravo poslan. Pogledaj i spam folder.",
+      "back": "Nazad na prijavu"
+    },
+    "reset": {
+      "title": "Postavi novu lozinku",
+      "subtitle": "Unesi novu lozinku za svoj nalog.",
+      "newPassword": "Nova lozinka",
+      "confirmPassword": "Potvrdi lozinku",
+      "submit": "Postavi lozinku",
+      "submitting": "Postavljam…",
+      "success": "Lozinka postavljena. Preusmjeravamo te…",
+      "errorMismatch": "Lozinke se ne podudaraju",
+      "errorTooShort": "Lozinka mora imati barem 8 znakova",
+      "errorInvalidLink": "Link je neispravan ili je istekao. Zatraži novi.",
+      "errorGeneric": "Greška, pokušaj ponovo"
+    }
+  },
+  "checkout": {
+    "title": "Plaćanje",
+    "subscribe": "Pretplati se",
+    "oneTime": "Kupi paket",
+    "selectMethod": "Odaberi način plaćanja",
+    "stripe": "Kartica (Stripe)",
+    "dodo": "Kartica (Dodo)",
+    "summary": "Sažetak narudžbe",
+    "subscriptionItem": "Sedmični sistem",
+    "oneTimeItem": "{title}",
+    "total": "Ukupno",
+    "submit": "Plati sigurno",
+    "submitting": "Procesiranje…",
+    "success": "Uspjelo!",
+    "successSubtitle": "Hvala. Tvoj prvi Sedmični sistem te čeka u panelu.",
+    "goToDashboard": "Nastavi na Moj panel",
+    "errors": {
+      "generic": "Plaćanje nije uspjelo. Pokušaj ponovo ili koristi drugu karticu."
+    }
+  },
+  "dashboard": {
+    "welcome": "Zdravo, {name}!",
+    "currentWeek": "Tvoja trenutna sedmica",
+    "weekN": "Sedmica {n}",
+    "noPackYet": "Tvoj prvi Sedmični sistem stiže za par minuta…",
+    "download": "Preuzmi PDF",
+    "view": "Pogledaj",
+    "archive": "Arhiva",
+    "archiveSubtitle": "Sve sedmice koje si otključao",
+    "archiveLockedNote": "Otključavanje prema planu — pretplati se da nastaviš redom",
+    "collection": "Tvoja zbirka",
+    "collectionSubtitle": "Sedmice koje su tvoje",
+    "upgradeTitle": "Želiš nastaviti dalje?",
+    "upgradeBody": "Pokreni Sedmični sistem i nastavi sa aktivnostima — redovne aktivnosti stižu svake sedmice.",
+    "upgradeCta": "Pokreni Sedmični sistem",
+    "sos": "SOS — brze ideje",
+    "sosSubtitle": "Za one momente kad treba sad odmah",
+    "settings": "Postavke",
+    "profile": {
+      "title": "Profil",
+      "fullName": "Ime i prezime",
+      "fullNamePlaceholder": "Npr. Amina Hasić",
+      "email": "Email",
+      "emailNote": "Email se ne može promijeniti iz panela. Za izmjenu kontaktiraj support.",
+      "save": "Spasi izmjene",
+      "saving": "Spremam…",
+      "saved": "Spremljeno",
+      "errorTooShort": "Ime mora imati barem 2 znaka",
+      "errorGeneric": "Greška pri spremanju, pokušaj ponovo"
+    },
+    "password": {
+      "title": "Promijeni lozinku",
+      "newPassword": "Nova lozinka",
+      "confirmPassword": "Potvrdi novu lozinku",
+      "submit": "Promijeni lozinku",
+      "submitting": "Mijenjam…",
+      "success": "Lozinka promijenjena",
+      "errorMismatch": "Lozinke se ne podudaraju",
+      "errorTooShort": "Lozinka mora imati barem 8 znakova",
+      "errorGeneric": "Greška, pokušaj ponovo"
+    },
+    "subscriptionStatus": "Status pretplate",
+    "active": "Aktivna",
+    "canceled": "Otkazana",
+    "paused": "Pauzirana",
+    "manageSubscription": "Upravljaj pretplatom",
+    "nextBilling": "Sljedeća naplata: {date}",
+    "noSubscription": "Nemaš aktivnu pretplatu",
+    "subscribeCta": "Pretplati se"
+  },
+  "admin": {
+    "title": "Admin panel",
+    "tabs": {
+      "packs": "Paketi",
+      "users": "Korisnici",
+      "settings": "Postavke"
+    },
+    "packs": {
+      "title": "Paketi sadržaja",
+      "newPack": "Novi paket",
+      "sequence": "Redni broj",
+      "locale": "Jezik",
+      "packTitle": "Naslov",
+      "description": "Opis",
+      "pdfFile": "PDF fajl",
+      "thumbnail": "Naslovna slika",
+      "oneTimeAvailable": "Dostupan kao jednokratna kupovina",
+      "oneTimePriceOverride": "Cijena (override, ostavi prazno za default)",
+      "save": "Spasi",
+      "edit": "Uredi",
+      "delete": "Obriši",
+      "noPacks": "Još nema paketa. Kreiraj prvi."
+    },
+    "users": {
+      "title": "Korisnici",
+      "email": "Email",
+      "status": "Status",
+      "weeksConsumed": "Sedmica iskorišteno",
+      "subscribed": "Pretplaćen od",
+      "actions": "Akcije"
+    }
+  },
+  "common": {
+    "loading": "Učitavanje…",
+    "error": "Greška",
+    "back": "Nazad",
+    "save": "Spasi",
+    "cancel": "Otkaži",
+    "delete": "Obriši",
+    "edit": "Uredi",
+    "yes": "Da",
+    "no": "Ne"
+  },
+  "footer": {
+    "tagline": "Sedmični sistem — manje ekrana, više smijeha.",
+    "rights": "© {year} BezEkrana. Sva prava zadržana.",
+    "links": {
+      "terms": "Uslovi korištenja",
+      "privacy": "Politika privatnosti",
+      "refund": "Politika povrata"
+    }
+  },
+  "legal": {
+    "lastUpdated": "Posljednja izmjena: {date}",
+    "terms": {
+      "title": "Uslovi korištenja",
+      "intro": "Dobrodošao na BezEkrana. Korištenjem ove platforme prihvataš sljedeće uslove. Pažljivo ih pročitaj prije pretplate.",
+      "sections": [
+        {
+          "heading": "1. O usluzi",
+          "body": "BezEkrana je digitalna pretplatnička platforma koja korisnicima dostavlja sedmične PDF planove aktivnosti za djecu uzrasta 2–4 godine. Sav sadržaj je digitalni i isporučuje se elektronski."
+        },
+        {
+          "heading": "2. Pretplata i naplata",
+          "body": "Pretplata se obnavlja automatski svake sedmice po cijeni navedenoj na stranici za naplatu (2,49 € / 2,79 USD u zavisnosti od regije). Naplata se vrši karticom putem Stripe ili Dodo Payments servisa. Otkazivanje je moguće u svakom trenutku iz tvog korisničkog panela — naplata staje istog časa, a već uplaćeni paketi ostaju trajno dostupni u tvojoj arhivi."
+        },
+        {
+          "heading": "3. Pristup sadržaju",
+          "body": "Svaki novi pretplatnik počinje od Paketa #1 i progresivno otključava jedan paket sedmično. Ako pretplata bude otkazana ili pauzirana, brojač zadržava trenutno stanje — pri reaktivaciji nastavlja se od posljednje uplaćene sedmice."
+        },
+        {
+          "heading": "4. Korištenje sadržaja",
+          "body": "PDF-ovi su namijenjeni isključivo ličnoj/porodičnoj upotrebi. Komercijalna distribucija, preprodaja ili dijeljenje sadržaja sa trećim licima bez izričite pisane saglasnosti nije dozvoljeno."
+        },
+        {
+          "heading": "5. Korisnički nalog",
+          "body": "Odgovoran si za čuvanje pristupnih podataka. Sve aktivnosti pod tvojim nalogom smatraju se tvojim. Ako primijetiš neovlašteni pristup, odmah promijeni lozinku ili nas kontaktiraj."
+        },
+        {
+          "heading": "6. Suspenzija i blokiranje",
+          "body": "BezEkrana zadržava pravo da suspenduje ili trajno blokira nalog u slučaju zloupotrebe (preprodaja sadržaja, povratne uplate bez razloga, narušavanje sigurnosti platforme)."
+        },
+        {
+          "heading": "7. Odgovornost",
+          "body": "Aktivnosti u paketima su edukativne prirode. Roditelj/staratelj je u svakom trenutku odgovoran za sigurnost djeteta tokom igre. BezEkrana ne snosi odgovornost za bilo kakve nezgode tokom realizacije aktivnosti."
+        },
+        {
+          "heading": "8. Izmjene uslova",
+          "body": "Možemo periodično ažurirati ove uslove. Aktivnim korisnicima ćemo obavezno komunicirati materijalne izmjene email-om barem 14 dana unaprijed."
+        },
+        {
+          "heading": "9. Kontakt",
+          "body": "Za sva pitanja ili pritužbe: kontakt@bezekrana.com"
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Politika privatnosti",
+      "intro": "Tvoja privatnost nam je važna. U nastavku objašnjavamo koje podatke prikupljamo i kako ih koristimo.",
+      "sections": [
+        {
+          "heading": "1. Podaci koje prikupljamo",
+          "body": "Prilikom registracije: email i lozinka (lozinka se čuva enkriptovana, mi je ne vidimo). Prilikom plaćanja: podatke o kartici NE čuvamo — oni idu direktno Stripe-u/Dodo-u koji su PCI-DSS certifikovani. Mi samo dobijamo customer ID i status pretplate."
+        },
+        {
+          "heading": "2. Marketinški podaci",
+          "body": "Prilikom posjete sajtu, ako si došao putem reklame, čuvamo UTM parametre (izvor, kampanja) u httpOnly cookie-ju 30 dana radi mjerenja efikasnosti reklama. Cookie ne sadrži lične podatke."
+        },
+        {
+          "heading": "3. Kako koristimo podatke",
+          "body": "• Da ti pružimo pretplatu i dostavimo sadržaj.\n• Da te kontaktiramo o tvom nalogu (npr. neuspjela naplata, novi paket).\n• Da analiziramo agregirane podatke o tome kako platforma funkcioniše (bez ličnog identifikovanja).\n• Da zadovoljimo zakonske obaveze (npr. čuvanje računa za poreznu)."
+        },
+        {
+          "heading": "4. Dijeljenje sa trećim stranama",
+          "body": "Ne prodajemo tvoje podatke. Dijelimo samo sa procesorima koji su nužni za rad platforme: Supabase (hosting baze), Stripe i Dodo Payments (naplata), Railway (hosting aplikacije). Svi su pod ugovorom o zaštiti podataka."
+        },
+        {
+          "heading": "5. Tvoja prava (GDPR)",
+          "body": "Imaš pravo da: vidiš sve podatke koje imamo o tebi, zatražiš njihovu izmjenu, zatražiš brisanje (osim onih koje moramo čuvati zakonski — npr. fakture). Pošalji zahtjev na kontakt@bezekrana.com."
+        },
+        {
+          "heading": "6. Sigurnost",
+          "body": "Komunikacija je TLS-enkriptovana. Pristup bazama je ograničen i logovan. Lozinke se hashiraju preko bcrypt-a. Periodično provodimo sigurnosne provjere."
+        },
+        {
+          "heading": "7. Cookies",
+          "body": "Koristimo samo nužne cookies za rad sajta (sesija, jezik, UTM). Ne koristimo treći reklamne cookies bez tvog pristanka."
+        },
+        {
+          "heading": "8. Kontakt",
+          "body": "Za sva pitanja o privatnosti: kontakt@bezekrana.com"
+        }
+      ]
+    },
+    "refund": {
+      "title": "Politika povrata",
+      "intro": "BezEkrana isporučuje digitalni sadržaj koji postaje dostupan ODMAH po uplati. Iz tog razloga povrat sredstava nije moguć — vidi detalje ispod.",
+      "sections": [
+        {
+          "heading": "Zašto bez povrata?",
+          "body": "Sav sadržaj na BezEkrana platformi je digitalni: PDF-ovi i pristup arhivi. Čim platiš, sadržaj ti je trenutno otključan i preuzimljiv. Po pravilima EU i BiH potrošačkog prava, za digitalne sadržaje koji se isporučuju odmah, korisnik se pri kupovini izričito odriče prava na 14-dnevni odustanak — što ti potvrđuješ klikom na „Plati“ pri checkout-u."
+        },
+        {
+          "heading": "Šta to konkretno znači?",
+          "body": "• Pretplata: nakon što sedmica bude naplaćena i paket otključan, ta naplata se NE vraća. Ali možeš otkazati u svakom trenutku — sljedeće naplate neće biti, a već dobijeni paketi ostaju u arhivi.\n• Jednokratna kupovina: nakon što je paket otključan i dostupan za preuzimanje, povrat nije moguć."
+        },
+        {
+          "heading": "Izuzeci kada vraćamo novac",
+          "body": "Iako je politika striktno non-refund, vraćamo u sljedećim slučajevima:\n• Tehnički kvar koji je trajno spriječio pristup paketu (i naš support nije uspio riješiti u 7 dana).\n• Dvostruka naplata (pogrešno naplaćen isti paket dva puta).\n• Neovlaštena transakcija (pošalji nam dokaz prijavi banci/Stripe-u, vraćamo bez pitanja).\n• Greška na našoj strani (pogrešna cijena, pogrešan paket isporučen)."
+        },
+        {
+          "heading": "Kako tražiti povrat (ako spadaš u izuzetke)",
+          "body": "Pošalji email na kontakt@bezekrana.com sa: tvoj email naloga, datum uplate, iznos, razlog. Odgovaramo unutar 3 radna dana. Odobreni povrati se procesiraju za 5-10 radnih dana nazad na karticu kojom je plaćeno."
+        },
+        {
+          "heading": "Otkazivanje pretplate ≠ povrat",
+          "body": "Otkazivanje (cancel) zaustavlja BUDUĆE naplate, ali ne vraća već uplaćeno. Možeš otkazati u svakom trenutku iz Postavki — bez objašnjenja, bez emaila, bez follow-up poziva."
+        }
+      ]
+    }
+  }
+}

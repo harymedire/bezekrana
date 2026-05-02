@@ -1,0 +1,114 @@
+{
+  "nav": { "home": "Početna", "pricing": "Cene", "login": "Prijava", "register": "Registracija", "dashboard": "Moj panel", "logout": "Odjava", "admin": "Admin" },
+  "landing": {
+    "hero": {
+      "badge": "Bez ekrana, bez stresa",
+      "title": "Tvoje dete opet traži tablet?",
+      "subtitle": "Svake nedelje dobiješ 7 aktivnosti za decu 2–4 godine. Bez pripreme. Bez kupovine. Bez posebnog materijala.",
+      "ctaPrimary": "Probaj odmah", "ctaSecondary": "Vidi kako radi",
+      "trust": "Pridružilo se preko 1.200 roditelja"
+    },
+    "problem": {
+      "title": "Poznato ti je?",
+      "items": [
+        { "title": "Tablet u 7:30 ujutru", "body": "Probudilo se i prvo što traži je ekran. Ti samo želiš još 10 minuta mira." },
+        { "title": "“Šta ćemo danas raditi?”", "body": "Dolazi vikend, napolju kiša. Ideje su potrošene još do podne." },
+        { "title": "Kupili smo gomilu igračaka", "body": "I sad sede u kutiji. Ono najbolje je obično ono što već imaš kod kuće." }
+      ]
+    },
+    "solution": {
+      "title": "Mi to rešavamo umesto tebe",
+      "subtitle": "BezEkrana je jednostavan: pretplatiš se, svake nedelje dobiješ novi paket aktivnosti spreman za korišćenje VEČERAS.",
+      "features": [
+        { "title": "7 aktivnosti nedeljno", "body": "Svaki dan jedna ideja. PDF koji odštampaš ili pratiš s telefona." },
+        { "title": "Bez pripreme", "body": "Sve se radi sa stvarima koje već imaš kod kuće. Maksimalno 5 minuta postavke." },
+        { "title": "Stručno odabrano", "body": "Aktivnosti razvijaju motoriku, govor i kreativnost — testirano s pravom decom." },
+        { "title": "SOS situacije", "body": "Brze ideje za čekaonicu, restoran ili dugu vožnju." }
+      ]
+    },
+    "howItWorks": {
+      "title": "Kako radi",
+      "steps": [
+        { "title": "Pretplati se", "body": "Odaberi nedeljnu pretplatu ili kupi jedan paket. Plaćanje karticom direktno na našoj stranici." },
+        { "title": "Dobij paket", "body": "Odmah po uplati dobijaš pristup prvom paketu. Sledeća nedelja — novi paket." },
+        { "title": "Igraj se", "body": "Otvoriš PDF, pratiš uputstvo, dete se igra. Bez ekrana. Bez stresa." }
+      ]
+    },
+    "testimonials": {
+      "title": "Šta kažu roditelji",
+      "items": [
+        { "quote": "Konačno znam šta da radim s detetom subotom ujutru. Vredi svake pare.", "author": "Ana, mama Hane (3 god.)" },
+        { "quote": "Aktivnosti su jednostavne ali deca ih obožavaju. Stvarno bez kupovine ičega.", "author": "Marko, tata Lane (2.5 god.)" },
+        { "quote": "Koristim s grupom u vrtiću. Najbolja investicija ove godine.", "author": "Sanela, vaspitačica" }
+      ]
+    },
+    "faq": {
+      "title": "Često postavljana pitanja",
+      "items": [
+        { "q": "Kako tačno funkcioniše pretplata?", "a": "Plaćaš nedeljno. Svake nedelje ti se otključa novi paket. Ako otkažeš, zadržavaš sve do tog trenutka." },
+        { "q": "Mogu li kupiti samo jedan paket?", "a": "Da. Imamo opciju 'jednokratno' za kupovinu pojedinačnog paketa po višoj ceni." },
+        { "q": "Šta ako sam već propustio nekoliko nedelja?", "a": "Ne brini — krećeš od paketa #1 bez obzira kada se pretplatiš. Svaki novi pretplatnik počinje od početka." },
+        { "q": "Da li je sigurno platiti karticom?", "a": "Da. Koristimo Stripe (najveći svetski payment processor). Tvoji podaci o kartici nikad ne dolaze do nas." }
+      ]
+    },
+    "cta": { "title": "Spreman za prvu nedelju bez ekrana?", "subtitle": "Pridruži se hiljadama roditelja koji su rekli ne tabletu.", "button": "Krenimo" }
+  },
+  "pricing": {
+    "title": "Odaberi svoj plan", "subtitle": "Pretplata je najpovoljnija. Ako želiš samo da probaš, kupi jedan paket.",
+    "subscribe": {
+      "label": "Najpopularnije", "title": "Nedeljna pretplata", "subtitle": "Novi paket svake nedelje dok si pretplaćen", "perWeek": "/nedelja",
+      "features": ["Novi paket aktivnosti svake nedelje","Pristup arhivi svih tvojih nedelja","SOS sekcija — brze ideje","Otkaži kad god želiš"],
+      "cta": "Pretplati se"
+    },
+    "oneTime": {
+      "title": "Jedan paket", "subtitle": "Plati jednom, dobij jedan paket", "perPack": "/paket",
+      "features": ["Jedan paket aktivnosti po izboru","Trajno tvoj — bez pretplate","PDF za preuzimanje","Bez automatske naplate"],
+      "cta": "Kupi paket"
+    },
+    "currencyNote": "Cena u {currency}"
+  },
+  "auth": {
+    "login": { "title": "Dobrodošao nazad", "subtitle": "Prijavi se da nastaviš", "email": "Email", "password": "Lozinka", "submit": "Prijavi se", "google": "Prijava preko Google-a", "noAccount": "Nemaš nalog?", "signUp": "Registruj se", "forgot": "Zaboravljena lozinka?" },
+    "register": { "title": "Kreiraj nalog", "subtitle": "Brzo i besplatno", "email": "Email", "password": "Lozinka (min 8 znakova)", "submit": "Registruj se", "google": "Registracija preko Google-a", "haveAccount": "Već imaš nalog?", "signIn": "Prijavi se", "terms": "Registracijom prihvataš naše uslove korišćenja." },
+    "errors": { "invalidCredentials": "Pogrešan email ili lozinka", "emailInUse": "Ovaj email je već u upotrebi", "weakPassword": "Lozinka mora imati bar 8 znakova", "generic": "Nešto je pošlo naopako, pokušaj ponovo" }
+  },
+  "checkout": {
+    "title": "Plaćanje", "subscribe": "Pretplati se", "oneTime": "Kupi paket",
+    "selectMethod": "Odaberi način plaćanja", "stripe": "Kartica (Stripe)", "dodo": "Kartica (Dodo)",
+    "summary": "Sažetak porudžbine", "subscriptionItem": "Nedeljna pretplata BezEkrana", "oneTimeItem": "Paket: {title}",
+    "total": "Ukupno", "submit": "Plati sada", "submitting": "Obrada…",
+    "success": "Uspelo!", "successSubtitle": "Hvala. Tvoj prvi paket te čeka u panelu.",
+    "goToDashboard": "Idi u panel",
+    "errors": { "generic": "Plaćanje nije uspelo. Pokušaj ponovo ili koristi drugu karticu." }
+  },
+  "dashboard": {
+    "welcome": "Zdravo, {name}!", "currentWeek": "Tvoja trenutna nedelja", "weekN": "Nedelja {n}",
+    "noPackYet": "Tvoj prvi paket stiže za par minuta…", "download": "Preuzmi PDF", "view": "Pogledaj",
+    "archive": "Arhiva", "archiveSubtitle": "Sve nedelje koje si otključao",
+    "collection": "Tvoja zbirka", "collectionSubtitle": "Nedelje koje su tvoje",
+    "sos": "SOS — brze ideje", "sosSubtitle": "Za trenutke kad treba odmah",
+    "settings": "Podešavanja", "subscriptionStatus": "Status pretplate",
+    "active": "Aktivna", "canceled": "Otkazana", "paused": "Pauzirana",
+    "manageSubscription": "Upravljaj pretplatom", "nextBilling": "Sledeća naplata: {date}",
+    "noSubscription": "Nemaš aktivnu pretplatu", "subscribeCta": "Pretplati se"
+  },
+  "admin": {
+    "title": "Admin panel",
+    "tabs": { "packs": "Paketi", "users": "Korisnici", "settings": "Podešavanja" },
+    "packs": {
+      "title": "Paketi sadržaja", "newPack": "Novi paket",
+      "sequence": "Redni broj", "locale": "Jezik", "packTitle": "Naslov", "description": "Opis",
+      "pdfFile": "PDF fajl", "thumbnail": "Naslovna slika",
+      "oneTimeAvailable": "Dostupan kao jednokratna kupovina",
+      "oneTimePriceOverride": "Cena (override, ostavi prazno za default)",
+      "save": "Sačuvaj", "edit": "Izmeni", "delete": "Obriši",
+      "noPacks": "Još nema paketa. Kreiraj prvi."
+    },
+    "users": {
+      "title": "Korisnici", "email": "Email", "status": "Status",
+      "weeksConsumed": "Nedelja iskorišćeno", "subscribed": "Pretplaćen od", "actions": "Akcije"
+    }
+  },
+  "common": { "loading": "Učitavanje…", "error": "Greška", "back": "Nazad", "save": "Sačuvaj", "cancel": "Otkaži", "delete": "Obriši", "edit": "Izmeni", "yes": "Da", "no": "Ne" },
+  "footer": { "tagline": "Manje ekrana, više igre.", "rights": "© {year} BezEkrana. Sva prava zadržana." }
+}
