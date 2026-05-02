@@ -11,7 +11,7 @@ const tints = [
 
 export function Solution() {
   const t = useTranslations("landing.solution");
-  const features = t.raw("features") as { title: string; body: string }[];
+  const features = t.raw("features") as { eyebrow?: string; title: string; body: string }[];
 
   return (
     <section className="bg-gradient-to-b from-cream via-coral-50 to-cream py-16 md:py-24">
@@ -34,6 +34,11 @@ export function Solution() {
                   <Icon className="h-6 w-6" />
                 </div>
                 <div>
+                  {f.eyebrow && (
+                    <div className="text-xs font-bold tracking-[0.18em] text-coral-600 mb-1.5">
+                      {f.eyebrow}
+                    </div>
+                  )}
                   <h3 className="font-display text-xl mb-2">{f.title}</h3>
                   <p className="text-plum-700 leading-relaxed">{f.body}</p>
                 </div>

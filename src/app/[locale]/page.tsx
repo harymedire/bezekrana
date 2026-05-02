@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/landing/Hero";
 import { Mission } from "@/components/landing/Mission";
 import { NeuroBlock } from "@/components/landing/NeuroBlock";
-import { Problem } from "@/components/landing/Problem";
+// import { Problem } from "@/components/landing/Problem";  // privremeno uklonjena „Znaš ovaj scenarij?" sekcija
 import { Solution } from "@/components/landing/Solution";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Testimonials } from "@/components/landing/Testimonials";
@@ -26,7 +26,6 @@ export default async function LandingPage({
         <Hero />
         <Mission />
         <NeuroBlock />
-        <Problem />
         <Solution />
         <HowItWorks />
         <Testimonials />

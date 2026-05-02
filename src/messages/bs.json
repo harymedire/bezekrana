@@ -12,7 +12,7 @@
   "landing": {
     "hero": {
       "badge": "Bez ekrana. Bez stresa. Bez kupovine.",
-      "title": "Vrati mu djetinjstvo koje se ne dešava iza ekrana",
+      "title": "Vratimo im djetinjstvo koje se ne dešava iza ekrana",
       "subtitle": "Znamo onaj osjećaj krivice kada djetetu pružiš tablet jer jednostavno više nemaš snage. Nisi sam/a. Svi smo tamo. Ali dječija mašta je najmoćnija stvar na svijetu — samo joj treba mala iskra. BezEkrana nije samo plan igre, to je tvoj saveznik da ponovo vidiš onaj sjaj u njihovim očima dok otkrivaju svijet običnom kašikom i malo vode.",
       "ctaPrimary": "Pokreni Sedmični sistem",
       "ctaSecondary": "Kako radi?",
@@ -28,7 +28,7 @@
         },
         {
           "title": "Roditeljstvo bez pritiska",
-          "body": "Ne treba ti skupa oprema ni sati pripreme. Dovoljno je ono što već imaš u kuhinji."
+          "body": "Ne treba ti skupa oprema ni sati pripreme. Dovoljno je ono što već imaš u kući."
         },
         {
           "title": "Mirna savjest",
@@ -62,20 +62,24 @@
       "subtitle": "Tvoj sedmični sistem avantura koji pretvara kućni haos u zonu fokusa. Bez kupovine, bez pripreme i bez grižnje savjesti — samo otvoriš uputstva i zabava počinje.",
       "features": [
         {
-          "title": "7 dana aktivnosti",
-          "body": "7 dana bez razmišljanja 'šta ćemo sad?'. Svake sedmice dobijaš gotov plan. Nema traženja po internetu, nema komplikovanih pravila. Otvoriš PDF i igra počinje odmah."
+          "eyebrow": "7 DANA AKTIVNOSTI",
+          "title": "Gotov plan, bez razmišljanja",
+          "body": "Svake sedmice dobijaš sedam dana gotovih ideja sa jasnim uputstvima. Nema više traženja po internetu, nema komplikovanih pravila. Otvoriš vodič i igra počinje za pet minuta."
         },
         {
-          "title": "Bez kupovine",
-          "body": "Igračke koje već posjeduješ, a da to i ne znaš. Ne troši novac na nove plastične setove. Pokazat ćemo ti kako obična tjestenina, kašike i deke postaju najzanimljiviji alati za istraživanje."
+          "eyebrow": "BEZ KUPOVINE",
+          "title": "Sve što ti treba, već imaš",
+          "body": "Ne troši novac na nove plastične setove i \"edukativne\" igračke. Pokazat ćemo ti kako predmeti koje već imaš u kući postaju najzanimljiviji alati za istraživanje — samo ih treba pogledati drugim očima."
         },
         {
-          "title": "Razvija dijete",
-          "body": "Vrijeme koje gradi njihov mozak. Svaka aktivnost je dizajnirana da podstakne finu motoriku, maštu i strpljenje. Dok se oni zabavljaju, ti znaš da zapravo uče važne životne vještine."
+          "eyebrow": "RAZVIJA DIJETE",
+          "title": "Vrijeme koje gradi mozak",
+          "body": "Svaka aktivnost je dizajnirana da podstakne finu motoriku, koncentraciju i maštu. Dok se oni zabavljaju, ti znaš da zapravo grade vještine koje će im trebati u školi i u životu."
         },
         {
-          "title": "SOS sekcija",
-          "body": "Tvoj 'as iz rukava' za krizne situacije. Kada ste u restoranu, kod doktora ili ti jednostavno treba 20 minuta tišine da završiš poziv — SOS sekcija nudi trikove koji rade bez tableta i telefona, bilo gdje."
+          "eyebrow": "SOS SEKCIJA",
+          "title": "As iz rukava za krizne situacije",
+          "body": "Kada ste u restoranu, kod doktora, ili ti jednostavno treba 20 minuta tišine da završiš poziv — SOS sekcija nudi trikove koji rade bilo gdje, bez ekrana i bez pripreme."
         }
       ]
     },
@@ -83,61 +87,49 @@
       "title": "Kako radi?",
       "steps": [
         {
-          "title": "Registruješ se",
-          "body": "Brzo i sigurno na našoj stranici. Bez skrivenih troškova i obaveza — otkažeš kad god želiš."
+          "title": "Registruješ se i biraš plan",
+          "body": "Kreiraš nalog za par minuta. Otkažeš kad god želiš — bez ugovora i skrivenih troškova."
         },
         {
-          "title": "Preuzmeš svoj digitalni paket",
-          "body": "Odmah po uplati otključavaš Paket #1. Svakog 7. dana stiže nova sedmica puna svježih ideja za igru direktno na tvoj nalog."
+          "title": "Otključavaš prvi paket",
+          "body": "Odmah stiže Paket #1 na tvoj nalog. Svakih 7 dana automatski dobijaš novu sedmicu sa svježim idejama."
         },
         {
           "title": "Kreneš VEČERAS",
-          "body": "Pogledaš Mapu avantura, izabereš jedan od 7 razvojnih izazova i aktiviraš djetetovu radoznalost običnim kućnim predmetima. Dok tvoj mali istraživač testira granice fizike i mašte, ti uživaš u tišini koja nije kupljena ekranom, već zaslužena zdravom igrom."
+          "body": "Otvoriš Mapu avantura, biraš jedan od izazova, i pokrećeš fenomenalnu aktivnost običnim kućnim predmetima. Tišina koju čuješ nije kupljena ekranom — zaslužena je."
         }
       ],
       "neuro": {
         "title": "Mozak u pokretu: Više od obične igre",
-        "body": "Svaka aktivnost u našem vodiču nije samo zabava — to je pažljivo projektovan razvojni poligon. Fokusiramo se na neuro-motoričku stimulaciju: dok vaše dijete spašava igračke iz leda ili presipa tjesteninu, ono zapravo kalibriše svoju preciznost (pincetni hvat), jača kognitivnu izdržljivost (fokus) i gradi neuronske puteve kroz senzorno istraživanje. Mi ne popunjavamo vrijeme; mi hranimo dječiji potencijal koristeći predmete koje već imate u kuhinji."
+        "body": "Iza svake aktivnosti u našem vodiču stoji razvojna logika. Dok vaše dijete realizuje izazove iz našeg plana, ne ubija vrijeme — kalibriše finu motoriku koja će jednog dana držati olovku, gradi kognitivnu izdržljivost koja je preduslov za čitanje, i utabava neuronske puteve koje pasivno gledanje ekrana ne može aktivirati. Mi ne popunjavamo dan. Mi pretvaramo običnu kuhinju u razvojni poligon — i hranimo potencijal koji se ne može kupiti."
       }
     },
     "testimonials": {
       "title": "Roditelji koji su rekli „NE ekranu“",
       "items": [
         {
-          "quote": "Kao učiteljica razredne nastave, odmah sam prepoznala Montessori principe u ovim aktivnostima. Nevjerovatno je kako obična senzorna kutija sa tjesteninom razvija dječiji fokus bolje od bilo koje skupe aplikacije. Preporučujem svim roditeljima u svojoj grupi.",
-          "author": "Jasmina, učiteljica, Banja Luka"
-        },
-        {
-          "quote": "Subota ujutro više nije borba. Hana izabere aktivnost, ja popijem kafu na miru. Vrijedi svakog centa.",
-          "author": "Amina, mama Hane (3 god.), Sarajevo"
-        },
-        {
-          "quote": "Priznajem, bio sam skeptičan. Mislio sam da će se igrati 2 minute i tražiti YouTube. Ali 'Spašavanje autića iz leda' ga je držalo 40 minuta. Nisam mogao vjerovati da je toliko fokusiran bez ekrana.",
+          "quote": "Priznajem, bio sam skeptičan. Mislio sam da će se igrati dvije minute i tražiti YouTube. Ali jedna aktivnost zvana 'Spašavanje autića' ga je držala 40 minuta — bez ijednog pitanja za ekran. Nisam mogao vjerovati.",
           "author": "Edin, tata Tarika (4 god.), Sarajevo"
         },
         {
-          "quote": "Mislio sam 'opet jedna pretplata'. Pa sam isprobao prvu sedmicu. Nismo ugasili tablet — Lana ga sama ne traži.",
-          "author": "Marko, tata Ivone (2.5 god.), Mostar"
-        },
-        {
-          "quote": "Obožavam što ne moram ništa kupovati. Sve što mi treba već imam u kuhinji. Plan avantura mi štedi sate guglanja i grižnje savjesti. Sad vikendi stvarno liče na djetinjstvo, a ne na gledanje u ekran.",
+          "quote": "Najviše volim što ne moram ništa kupovati. Sve što treba — već imam u kuhinji. Štedim sate guglanja po Pinterestu i, što je važnije, ne osjećam onu grižnju savjesti kada im pružim tablet. Vikendi sad stvarno liče na djetinjstvo.",
           "author": "Marija, mama dvoje djece, Zagreb"
         },
         {
-          "quote": "SOS sekcija nas je spasila u čekaonici kod doktora. Umjesto telefona, igrali smo se 'Lova na oblike' u ordinaciji. Druge mame su me gledale kao da imam supermoći. Hvala vam na ovome!",
+          "quote": "SOS sekcija nas je spasila u čekaonici kod doktora. Umjesto telefona, izvukla sam jedan mali trik iz vodiča koji ne traži ništa osim malo mašte. Druge mame su me gledale kao da imam supermoći. Hvala vam na ovome!",
           "author": "Jelena, mama Luke (3 god.), Beograd"
         },
         {
-          "quote": "Primijetila sam da Lana mnogo više priča i objašnjava šta radi dok se igramo po vašem planu. Aktivnosti poput 'Restorana mašte' su joj nevjerovatno otvorile rječnik. Ovo je najboljih 5 maraka koje sam potrošila.",
-          "author": "Amra, mama Lane (2.5 god.), Zenica"
+          "quote": "Mislio sam 'opet jedna pretplata, šta će mi'. Probao sam prvu sedmicu samo da vidim. Nismo ugasili tablet preko noći — ali Ivona ga sama ne traži kao prije. To je sve što sam htio.",
+          "author": "Marko, tata Ivone (2.5 god.), Mostar"
         },
         {
-          "quote": "Koristim u vrtićkoj grupi od 12 djece. Najbolja investicija ove godine. Druge odgajateljice me već pitaju.",
-          "author": "Sanela, odgajateljica, Tuzla"
-        },
-        {
-          "quote": "Neuro-motorička stimulacija kroz ove vježbe je vrhunska. Djeca u ovom uzrastu moraju osjetiti teksturu i otpor da bi razvijala mozak. BezEkrana je savršen alat za digitalnu detoksikaciju cijele porodice.",
+          "quote": "Kao pedagoginja, vidim da su aktivnosti pažljivo osmišljene. Djeca u ovim godinama treba da osjete teksturu, otpor i težinu pravih predmeta — ekran to ne može pružiti. BezEkrana je odličan alat za porodice koje žele povratak na osnove.",
           "author": "Ivana, pedagoginja, Split"
+        },
+        {
+          "quote": "Primijetila sam da Lana mnogo više priča i objašnjava šta radi dok se igramo po vašem planu. Neke aktivnosti su joj nevjerovatno otvorile rječnik — riječi koje nisam ni očekivala u ovim godinama. Ovo je najboljih 5 maraka koje sam potrošila.",
+          "author": "Amra, mama Lane (2.5 god.), Zenica"
         }
       ]
     },
