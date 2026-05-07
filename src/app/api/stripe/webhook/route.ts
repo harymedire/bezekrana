@@ -83,9 +83,26 @@ async function handleInvoicePaid(
   invoice: Stripe.Invoice,
   service: ReturnType<typeof createSupabaseServiceClient>,
 ) {
-  if (!invoice.subscription || !invoice.customer) return;
-  const subscriptionId = String(invoice.subscription);
+  if (!invoice.customer) return;
   const customerId = String(invoice.customer);
+
+  // Subscription ID — u 2026-04-22.dahlia Stripe je premjestio polje sa
+  // top-level invoice.subscription na invoice.parent.subscription_details ili
+  // invoice.lines.data[].subscription. Pokušamo redom.
+  const invoiceWithParent = invoice as Stripe.Invoice & {
+    parent?: { subscription_details?: { subscription?: string | Stripe.Subscription } };
+  };
+  const subscriptionField =
+    invoice.subscription ??
+    invoiceWithParent.parent?.subscription_details?.subscription ??
+    invoice.lines?.data?.[0]?.subscription ??
+    null;
+  const subscriptionId = subscriptionField ? String(subscriptionField) : null;
+
+  // Subscription invoices imaju subscriptionId; one-time payment invoices ga
+  // nemaju. Pošto handlujemo samo subscription kroz invoice.payment_succeeded,
+  // izlazimo ako ga nema.
+  if (!subscriptionId) return;
 
   const { data: profile } = await service
     .from("profiles")
