@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "@/lib/i18n/navigation";
 import { Button } from "@/components/ui/Button";
-import { User, Mail, ShieldOff, ShieldCheck, Pause, Play, PlusCircle, MinusCircle, Save, BadgeCheck, BadgeX } from "lucide-react";
+import { User, Mail, ShieldOff, ShieldCheck, Pause, Play, PlusCircle, MinusCircle, Save, BadgeCheck, BadgeX, Trash2 } from "lucide-react";
 import type { Profile } from "@/types/db";
 
 type Tracking = {
@@ -51,6 +51,21 @@ export function UserDetailForm({ profile, isBlocked, lastSignInAt, tracking }: P
     } catch (err) {
       setMsg({ kind: "err", text: (err as Error).message });
     } finally {
+      setBusy(null);
+    }
+  }
+
+  async function deleteUser() {
+    setBusy("delete");
+    setMsg(null);
+    try {
+      const res = await fetch(`/api/admin/users/${profile.id}`, { method: "DELETE" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "request-failed");
+      router.replace("/admin/users");
+      router.refresh();
+    } catch (err) {
+      setMsg({ kind: "err", text: (err as Error).message });
       setBusy(null);
     }
   }
@@ -170,7 +185,7 @@ export function UserDetailForm({ profile, isBlocked, lastSignInAt, tracking }: P
           </div>
         </div>
 
-        {/* Block / unblock */}
+        {/* Block / unblock + delete */}
         <div className="card space-y-3">
           <h2 className="font-display text-xl text-plum-900">Pristup nalogu</h2>
           {isBlocked ? (
@@ -200,6 +215,30 @@ export function UserDetailForm({ profile, isBlocked, lastSignInAt, tracking }: P
               <ShieldOff className="h-4 w-4" /> Blokiraj nalog
             </Button>
           )}
+
+          <div className="pt-3 mt-3 border-t border-plum-100">
+            <p className="text-xs text-plum-500 mb-2">
+              Brisanje uklanja korisnika trajno (auth, profil, Brevo liste). Pretplate u Stripe-u
+              treba ručno otkazati.
+            </p>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="!text-coral-700"
+              disabled={busy === "delete"}
+              onClick={() => {
+                if (
+                  confirm(
+                    `Trajno obrisati ${profile.email}? Ova radnja se ne može poništiti.`,
+                  )
+                ) {
+                  deleteUser();
+                }
+              }}
+            >
+              <Trash2 className="h-4 w-4" /> {busy === "delete" ? "Brišem…" : "Obriši nalog"}
+            </Button>
+          </div>
         </div>
 
         {msg && (

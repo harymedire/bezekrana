@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseServiceClient } from "@/lib/supabase/server";
-import { promoteToPaid, demoteToFree } from "@/lib/brevo";
+import { promoteToPaid, demoteToFree, removeContactFromList, BREVO_LISTS } from "@/lib/brevo";
 import type { SubscriptionStatus } from "@/types/db";
 
 // PATCH /api/admin/users/[id] — admin-only user actions.
@@ -27,7 +27,7 @@ async function ensureAdmin() {
     .eq("id", user.id)
     .single();
   if (profile?.role !== "admin") return { ok: false as const, status: 403, msg: "forbidden" };
-  return { ok: true as const };
+  return { ok: true as const, adminId: user.id };
 }
 
 export async function PATCH(
@@ -194,6 +194,53 @@ export async function PATCH(
     }
   } catch (err) {
     console.error("[admin/users/PATCH]", body.action, err);
+    return NextResponse.json(
+      { error: (err as Error).message || "server-error" },
+      { status: 500 },
+    );
+  }
+}
+
+// DELETE /api/admin/users/[id] — fully remove a user. Drops the auth row
+// (profiles cascades), and best-effort removes them from Brevo lists. Admin
+// cannot delete themselves to prevent locking out the only admin account.
+export async function DELETE(
+  _request: Request,
+  ctx: { params: Promise<{ id: string }> },
+) {
+  const auth = await ensureAdmin();
+  if (!auth.ok) return NextResponse.json({ error: auth.msg }, { status: auth.status });
+
+  const { id: userId } = await ctx.params;
+  if (userId === auth.adminId) {
+    return NextResponse.json({ error: "cannot-delete-self" }, { status: 400 });
+  }
+
+  const service = createSupabaseServiceClient();
+
+  try {
+    // Pull email first so we can clean up Brevo. Profile row is dropped by
+    // the auth.users → profiles ON DELETE CASCADE.
+    const { data: profile } = await service
+      .from("profiles")
+      .select("email")
+      .eq("id", userId)
+      .single();
+
+    const { error: delErr } = await service.auth.admin.deleteUser(userId);
+    if (delErr) throw delErr;
+
+    if (profile?.email) {
+      // Best-effort cleanup from both lists.
+      await Promise.allSettled([
+        removeContactFromList({ email: profile.email, listId: BREVO_LISTS.freeSignup }),
+        removeContactFromList({ email: profile.email, listId: BREVO_LISTS.paid }),
+      ]);
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("[admin/users/DELETE]", err);
     return NextResponse.json(
       { error: (err as Error).message || "server-error" },
       { status: 500 },
