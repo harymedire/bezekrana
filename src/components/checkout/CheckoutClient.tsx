@@ -16,13 +16,16 @@ type Props = {
   // Order summary card (price + product) — držimo ga jer Stripe Payment
   // Element ne pokazuje šta se plaća, pa je transparentnost na našoj strani.
   summary?: { title: string; amountCents: number; currency: Currency };
+  // Iz session-a (registracija). Stripe traži billing_details kad smo
+  // isključili polja sa fields.billingDetails="never".
+  billing: { name: string; email: string };
 };
 
 
 // Inline Stripe checkout — minimalan dizajn, samo kartica. Ime i email se
 // prikupljaju u registraciji; Stripe sam pokrije ono što mu mora po pravilima
 // (postal code za US/UK kartice, 3D Secure, itd.).
-export function CheckoutClient({ mode, packId, locale, summary }: Props) {
+export function CheckoutClient({ mode, packId, locale, summary, billing }: Props) {
   return (
     <div className="max-w-md mx-auto space-y-4">
       {/* Order summary — naslov + cijena, kratko. Subscription: brand naziv;
@@ -48,7 +51,7 @@ export function CheckoutClient({ mode, packId, locale, summary }: Props) {
           Sigurno plaćanje preko Stripe-a
         </div>
 
-        <StripeInline mode={mode} packId={packId} locale={locale} />
+        <StripeInline mode={mode} packId={packId} locale={locale} billing={billing} />
         {/* <StripeMock mode={mode} /> */}
 
         <div className="mt-4 pt-4 border-t border-plum-100 flex items-center gap-2 text-xs text-plum-500">

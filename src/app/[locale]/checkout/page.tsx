@@ -58,6 +58,10 @@ export default async function CheckoutPage({
           packId={sp.packId ?? null}
           locale={locale}
           summary={{ title, amountCents, currency }}
+          billing={{
+            name: (user!.user_metadata?.full_name as string | undefined) ?? user!.email ?? "",
+            email: user!.email ?? "",
+          }}
         />
       </main>
     </>

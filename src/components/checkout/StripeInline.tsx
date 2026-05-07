@@ -8,14 +8,15 @@ import { Button } from "@/components/ui/Button";
 import { CheckCircle2 } from "lucide-react";
 
 type Mode = "subscription" | "onetime";
-type Props = { mode: Mode; packId: string | null; locale: string };
+type Billing = { name: string; email: string };
+type Props = { mode: Mode; packId: string | null; locale: string; billing: Billing };
 
 // Minimal Stripe checkout — card only, no billing address fields. We collect
 // the user's name/email at registration; Stripe stores billing data on the
 // customer object internally. Address suppression is allowed for card
 // payments since Stripe asks for postal code automatically inside the card
 // element where the issuing country requires it (e.g. US cards).
-export function StripeInline({ mode, packId, locale }: Props) {
+export function StripeInline({ mode, packId, locale, billing }: Props) {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [alreadyActive, setAlreadyActive] = useState(false);
@@ -86,12 +87,12 @@ export function StripeInline({ mode, packId, locale }: Props) {
         },
       }}
     >
-      <CheckoutForm mode={mode} />
+      <CheckoutForm mode={mode} billing={billing} />
     </Elements>
   );
 }
 
-function CheckoutForm({ mode }: { mode: Mode }) {
+function CheckoutForm({ mode, billing }: { mode: Mode; billing: Billing }) {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
@@ -104,23 +105,38 @@ function CheckoutForm({ mode }: { mode: Mode }) {
     setSubmitting(true);
     setErrMsg(null);
 
-    const result = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/checkout/success?mode=${mode}`,
-      },
-      redirect: "if_required",
-    });
+    // Stripe rule: kad smo ugasili billing polja sa fields.billingDetails="never",
+    // moramo proslijediti vrijednosti ovdje. Ime i email već imamo iz registracije.
+    // Wrap u try/catch — IntegrationError se ne vraća kroz result.error nego je
+    // throwan, što bi inače ostavilo dugme zaglavljeno na "Procesiram…".
+    try {
+      const result = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/checkout/success?mode=${mode}`,
+          payment_method_data: {
+            billing_details: {
+              name: billing.name,
+              email: billing.email,
+            },
+          },
+        },
+        redirect: "if_required",
+      });
 
-    if (result.error) {
-      setErrMsg(result.error.message ?? "Plaćanje nije uspjelo.");
+      if (result.error) {
+        setErrMsg(result.error.message ?? "Plaćanje nije uspjelo.");
+        setSubmitting(false);
+        return;
+      }
+
+      // No redirect needed (3DS not required) — payment succeeded inline.
+      router.replace(`/checkout/success?mode=${mode}`);
+      router.refresh();
+    } catch (err) {
+      setErrMsg(err instanceof Error ? err.message : "Plaćanje nije uspjelo.");
       setSubmitting(false);
-      return;
     }
-
-    // No redirect needed (3DS not required) — payment succeeded inline.
-    router.replace(`/checkout/success?mode=${mode}`);
-    router.refresh();
   }
 
   return (
@@ -130,10 +146,12 @@ function CheckoutForm({ mode }: { mode: Mode }) {
           layout: "tabs",
           fields: {
             billingDetails: {
+              // Skidamo name+email iz UI-ja jer ih već imamo iz registracije i
+              // prosljeđujemo ih ručno u confirmPayment. phone i address ostaju
+              // na "auto" — Stripe ih pokazuje samo kad ih banka kartice traži
+              // (npr. postal code za US/UK kartice).
               name: "never",
               email: "never",
-              phone: "never",
-              address: "never",
             },
           },
           wallets: {
