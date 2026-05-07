@@ -276,7 +276,7 @@
       "invalidCredentials": "Pogrešan email ili lozinka",
       "emailInUse": "Ovaj email je već u upotrebi",
       "weakPassword": "Lozinka mora imati barem 8 znakova",
-      "generic": "Nešto je pošlo po zlu, pokušaj ponovo"
+      "generic": "Dogodila se greška, pokušajte ponovo"
     },
     "forgot": {
       "title": "Zaboravljena lozinka?",
