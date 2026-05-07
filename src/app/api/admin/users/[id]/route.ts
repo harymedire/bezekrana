@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseServiceClient } from "@/lib/supabase/server";
 import { promoteToPaid, demoteToFree, removeContactFromList, BREVO_LISTS } from "@/lib/brevo";
+import { stripe } from "@/lib/stripe/server";
 import type { SubscriptionStatus } from "@/types/db";
 
 // PATCH /api/admin/users/[id] — admin-only user actions.
@@ -219,13 +220,31 @@ export async function DELETE(
   const service = createSupabaseServiceClient();
 
   try {
-    // Pull email first so we can clean up Brevo. Profile row is dropped by
-    // the auth.users → profiles ON DELETE CASCADE.
+    // Pull email + provider sub IDs first so we can cancel billing & clean up
+    // Brevo. Profile row is dropped by auth.users → profiles ON DELETE CASCADE.
     const { data: profile } = await service
       .from("profiles")
-      .select("email")
+      .select("email, subscription_provider, subscription_id, stripe_customer_id")
       .eq("id", userId)
       .single();
+
+    // Cancel Stripe subscription before deleting the auth row, so the user
+    // doesn't continue getting charged. Manual sentinels (subscription_id
+    // starting with "manual:") aren't real Stripe subs — skip those. Customer
+    // object is left in Stripe for invoice history; Stripe doesn't allow
+    // deleting customers with prior charges anyway.
+    const subId = profile?.subscription_id ?? "";
+    const isRealStripeSub =
+      profile?.subscription_provider === "stripe" &&
+      subId.startsWith("sub_");
+    if (isRealStripeSub) {
+      try {
+        await stripe.subscriptions.cancel(subId);
+      } catch (err) {
+        // Already canceled / not found is fine — log and proceed with deletion.
+        console.warn("[admin/users/DELETE] stripe cancel failed (continuing)", err);
+      }
+    }
 
     const { error: delErr } = await service.auth.admin.deleteUser(userId);
     if (delErr) throw delErr;

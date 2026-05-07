@@ -218,8 +218,8 @@ export function UserDetailForm({ profile, isBlocked, lastSignInAt, tracking }: P
 
           <div className="pt-3 mt-3 border-t border-plum-100">
             <p className="text-xs text-plum-500 mb-2">
-              Brisanje uklanja korisnika trajno (auth, profil, Brevo liste). Pretplate u Stripe-u
-              treba ručno otkazati.
+              Brisanje uklanja korisnika trajno (auth, profil, Brevo liste) i automatski otkazuje
+              aktivnu Stripe pretplatu.
             </p>
             <Button
               variant="ghost"
