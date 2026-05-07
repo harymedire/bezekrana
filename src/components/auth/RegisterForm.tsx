@@ -36,7 +36,10 @@ export function RegisterForm() {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/api/auth/callback?next=/onboarding`,
+        // Email confirmation je isključen u Supabase Auth pa se signUp() vraća
+        // sa već aktivnom sesijom. emailRedirectTo držimo za slučaj da neko
+        // u budućnosti ponovo uključi confirm — vodi nazad u dashboard.
+        emailRedirectTo: `${window.location.origin}/api/auth/callback?next=/dashboard`,
         // full_name is picked up by the handle_new_user() trigger and copied
         // into public.profiles. Consent timestamp is kept here for legal trace.
         data: {
@@ -83,7 +86,10 @@ export function RegisterForm() {
         locale,
       }),
     }).catch(() => {});
-    router.replace("/onboarding");
+    // Bez email confirma signUp odmah daje sesiju, pa idemo direktno u
+    // dashboard. Ako korisnik nema aktivnu pretplatu, dashboard sam pokaže
+    // veliku CTA "Pretplati se".
+    router.replace("/dashboard");
     router.refresh();
   }
 
