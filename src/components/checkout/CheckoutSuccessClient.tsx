@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/Button";
 type Props = { mode: "subscription" | "onetime"; locale: string };
 
 // Pricing context for the GA4 / Ads conversion event. Subscription is the
-// recurring weekly fee; one-time uses the platform default. Server-side will
-// pass actual values once we wire up the real Stripe success path — this
-// constant is fine for the conversion-tracking starting point.
-const SUBSCRIPTION_VALUE_EUR = 2.49;
-const ONETIME_VALUE_EUR = 2.99;
+// recurring weekly fee; one-time uses the platform default. Values match
+// money.ts BAM defaults — server-side will pass actual amounts when we wire
+// up the real Stripe success path.
+const SUBSCRIPTION_VALUE_BAM = 4.99;
+const ONETIME_VALUE_BAM = 11.99;
 
 declare global {
   interface Window {
@@ -26,7 +26,7 @@ export function CheckoutSuccessClient({ mode, locale }: Props) {
   void locale;
 
   useEffect(() => {
-    const value = mode === "subscription" ? SUBSCRIPTION_VALUE_EUR : ONETIME_VALUE_EUR;
+    const value = mode === "subscription" ? SUBSCRIPTION_VALUE_BAM : ONETIME_VALUE_BAM;
     const transactionId = `bz_${Date.now()}`;
 
     // Google Analytics 4 / Google Ads — `purchase` event is the standard
@@ -37,7 +37,7 @@ export function CheckoutSuccessClient({ mode, locale }: Props) {
       window.gtag("event", "purchase", {
         transaction_id: transactionId,
         value,
-        currency: "EUR",
+        currency: "BAM",
         items: [
           {
             item_id: mode === "subscription" ? "weekly-sub" : "onetime-pack",
@@ -51,7 +51,7 @@ export function CheckoutSuccessClient({ mode, locale }: Props) {
 
     // Meta Pixel (if installed later) — same event, different vendor.
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
-      window.fbq("track", "Purchase", { value, currency: "EUR" });
+      window.fbq("track", "Purchase", { value, currency: "BAM" });
     }
 
     // Auto-forward to dashboard after 6 seconds so the user doesn't camp

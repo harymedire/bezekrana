@@ -13,14 +13,14 @@
     "hero": {
       "badge": "Bez ekrana. Bez stresa. Bez kupovine.",
       "title": "Vratimo im djetinjstvo koje se ne dešava iza ekrana",
-      "subtitle": "Znamo onaj osjećaj krivice kada djetetu pružiš tablet jer jednostavno više nemaš snage. Nisi sam/a. Svi smo tamo. Ali dječija mašta je najmoćnija stvar na svijetu — samo joj treba mala iskra. BezEkrana nije samo plan igre, to je tvoj saveznik da ponovo vidiš onaj sjaj u njihovim očima dok otkrivaju svijet običnom kašikom i malo vode.",
+      "subtitle": "Znamo onaj osjećaj krivice kada djetetu pružiš tablet jer jednostavno više nemaš snage. Nisi sam/a. Svi smo tamo. Ali dječija mašta je najmoćnija stvar na svijetu i treba joj samo mala iskra. BezEkrana nije samo plan igre, to je tvoj saveznik da ponovo vidiš onaj sjaj u njihovim očima dok otkrivaju svijet običnom kašikom i malo vode.",
       "ctaPrimary": "Pokreni Sedmični sistem",
       "ctaSecondary": "Kako radi?",
       "trust": "Pridružilo se preko 1.200 roditelja iz BiH, Hrvatske i Srbije"
     },
     "mission": {
       "eyebrow": "Naša Misija",
-      "title": "Više od igre — spašavamo trenutke koji se ne vraćaju.",
+      "title": "Više od igre. Spašavamo trenutke koji se ne vraćaju.",
       "items": [
         {
           "title": "Vrijeme leti",
@@ -32,7 +32,7 @@
         },
         {
           "title": "Mirna savjest",
-          "body": "Naš cilj nije da ti prodamo još jednu pretplatu, već da ti poklonimo onaj osjećaj mira dok gledaš svoje dijete kako se samostalno igra, uči i raste — onako kako smo i mi nekada."
+          "body": "Naš cilj nije da ti prodamo još jednu pretplatu, već da ti poklonimo onaj osjećaj mira dok gledaš svoje dijete kako se samostalno igra, uči i raste, onako kako smo i mi nekada."
         }
       ]
     },
@@ -59,7 +59,7 @@
     },
     "solution": {
       "title": "Tvoj plan B (i C, i D)",
-      "subtitle": "Tvoj sedmični sistem avantura koji pretvara kućni haos u zonu fokusa. Bez kupovine, bez pripreme i bez grižnje savjesti — samo otvoriš uputstva i zabava počinje.",
+      "subtitle": "Tvoj sedmični sistem avantura koji pretvara kućni haos u zonu fokusa. Bez kupovine, bez pripreme i bez grižnje savjesti. Samo otvoriš uputstva i zabava počinje.",
       "features": [
         {
           "eyebrow": "7 DANA AKTIVNOSTI",
@@ -69,7 +69,7 @@
         {
           "eyebrow": "BEZ KUPOVINE",
           "title": "Sve što ti treba, već imaš",
-          "body": "Ne troši novac na nove plastične setove i \"edukativne\" igračke. Pokazat ćemo ti kako predmeti koje već imaš u kući postaju najzanimljiviji alati za istraživanje — samo ih treba pogledati drugim očima."
+          "body": "Ne troši novac na nove plastične setove i \"edukativne\" igračke. Pokazat ćemo ti kako predmeti koje već imaš u kući postaju najzanimljiviji alati za istraživanje. Samo ih treba pogledati drugim očima."
         },
         {
           "eyebrow": "RAZVIJA DIJETE",
@@ -79,7 +79,7 @@
         {
           "eyebrow": "SOS SEKCIJA",
           "title": "As iz rukava za krizne situacije",
-          "body": "Kada ste u restoranu, kod doktora, ili ti jednostavno treba 20 minuta tišine da završiš poziv — SOS sekcija nudi trikove koji rade bilo gdje, bez ekrana i bez pripreme."
+          "body": "Kada ste u restoranu, kod doktora, ili ti jednostavno treba 20 minuta tišine da završiš poziv. SOS sekcija nudi trikove koji rade bilo gdje, bez ekrana i bez pripreme."
         }
       ]
     },
@@ -88,7 +88,7 @@
       "steps": [
         {
           "title": "Registruješ se i biraš plan",
-          "body": "Kreiraš nalog za par minuta. Otkažeš kad god želiš — bez ugovora i skrivenih troškova."
+          "body": "Kreiraš nalog za par minuta. Otkažeš kad god želiš, bez ugovora i skrivenih troškova."
         },
         {
           "title": "Otključavaš prvi paket",
@@ -96,23 +96,23 @@
         },
         {
           "title": "Kreneš VEČERAS",
-          "body": "Otvoriš Mapu avantura, biraš jedan od izazova, i pokrećeš fenomenalnu aktivnost običnim kućnim predmetima. Tišina koju čuješ nije kupljena ekranom — zaslužena je."
+          "body": "Otvoriš Mapu avantura, biraš jedan od izazova, i pokrećeš fenomenalnu aktivnost običnim kućnim predmetima. Tišina koju čuješ nije kupljena ekranom. Zaslužena je."
         }
       ],
       "neuro": {
         "title": "Mozak u pokretu: Više od obične igre",
-        "body": "Iza svake aktivnosti u našem vodiču stoji razvojna logika. Dok vaše dijete realizuje izazove iz našeg plana, ne ubija vrijeme — kalibriše finu motoriku koja će jednog dana držati olovku, gradi kognitivnu izdržljivost koja je preduslov za čitanje, i utabava neuronske puteve koje pasivno gledanje ekrana ne može aktivirati. Mi ne popunjavamo dan. Mi pretvaramo običnu kuhinju u razvojni poligon — i hranimo potencijal koji se ne može kupiti."
+        "body": "Iza svake aktivnosti u našem vodiču stoji razvojna logika. Dok vaše dijete realizuje izazove iz našeg plana, ne ubija vrijeme, već kalibriše finu motoriku koja će jednog dana držati olovku, gradi kognitivnu izdržljivost koja je preduslov za čitanje, i utabava neuronske puteve koje pasivno gledanje ekrana ne može aktivirati. Mi ne popunjavamo dan. Mi pretvaramo običnu kuhinju u razvojni poligon i hranimo potencijal koji se ne može kupiti."
       }
     },
     "testimonials": {
       "title": "Roditelji koji su rekli „NE ekranu“",
       "items": [
         {
-          "quote": "Priznajem, bio sam skeptičan. Mislio sam da će se igrati dvije minute i tražiti YouTube. Ali jedna aktivnost zvana 'Spašavanje autića' ga je držala 40 minuta — bez ijednog pitanja za ekran. Nisam mogao vjerovati.",
+          "quote": "Priznajem, bio sam skeptičan. Mislio sam da će se igrati dvije minute i tražiti YouTube. Ali jedna aktivnost zvana 'Spašavanje autića' ga je držala 40 minuta. Bez ijednog pitanja za ekran. Nisam mogao vjerovati.",
           "author": "Edin, tata Tarika (4 god.), Sarajevo"
         },
         {
-          "quote": "Najviše volim što ne moram ništa kupovati. Sve što treba — već imam u kuhinji. Štedim sate guglanja po Pinterestu i, što je važnije, ne osjećam onu grižnju savjesti kada im pružim tablet. Vikendi sad stvarno liče na djetinjstvo.",
+          "quote": "Najviše volim što ne moram ništa kupovati. Sve što treba već imam u kuhinji. Štedim sate guglanja po Pinterestu i, što je važnije, ne osjećam onu grižnju savjesti kada im pružim tablet. Vikendi sad stvarno liče na djetinjstvo.",
           "author": "Marija, mama dvoje djece, Zagreb"
         },
         {
@@ -120,15 +120,15 @@
           "author": "Jelena, mama Luke (3 god.), Beograd"
         },
         {
-          "quote": "Mislio sam 'opet jedna pretplata, šta će mi'. Probao sam prvu sedmicu samo da vidim. Nismo ugasili tablet preko noći — ali Ivona ga sama ne traži kao prije. To je sve što sam htio.",
+          "quote": "Mislio sam 'opet jedna pretplata, šta će mi'. Probao sam prvu sedmicu samo da vidim. Nismo ugasili tablet preko noći, ali Ivona ga sama ne traži kao prije. To je sve što sam htio.",
           "author": "Marko, tata Ivone (2.5 god.), Mostar"
         },
         {
-          "quote": "Kao pedagoginja, vidim da su aktivnosti pažljivo osmišljene. Djeca u ovim godinama treba da osjete teksturu, otpor i težinu pravih predmeta — ekran to ne može pružiti. BezEkrana je odličan alat za porodice koje žele povratak na osnove.",
+          "quote": "Kao pedagoginja, vidim da su aktivnosti pažljivo osmišljene. Djeca u ovim godinama treba da osjete teksturu, otpor i težinu pravih predmeta. Ekran to ne može pružiti. BezEkrana je odličan alat za porodice koje žele povratak na osnove.",
           "author": "Ivana, pedagoginja, Split"
         },
         {
-          "quote": "Primijetila sam da Lana mnogo više priča i objašnjava šta radi dok se igramo po vašem planu. Neke aktivnosti su joj nevjerovatno otvorile rječnik — riječi koje nisam ni očekivala u ovim godinama. Ovo je najboljih 5 maraka koje sam potrošila.",
+          "quote": "Primijetila sam da Lana mnogo više priča i objašnjava šta radi dok se igramo po vašem planu. Neke aktivnosti su joj nevjerovatno otvorile rječnik, riječi koje nisam ni očekivala u ovim godinama. Ovo je najboljih 5 maraka koje sam potrošila.",
           "author": "Amra, mama Lane (2.5 god.), Zenica"
         }
       ]
@@ -145,11 +145,11 @@
         },
         {
           "q": "Šta ako želim pauzirati?",
-          "a": "Potpuno te razumijemo — roditeljstvo je nepredvidivo. Članstvo možeš prekinuti bilo kada jednim klikom, bez ikakvih skrivenih troškova ili pitanja. Tu smo da ti olakšamo, a ne da ti stvaramo dodatnu obavezu."
+          "a": "Potpuno te razumijemo, roditeljstvo je nepredvidivo. Članstvo možeš prekinuti bilo kada jednim klikom, bez ikakvih skrivenih troškova ili pitanja. Tu smo da ti olakšamo, a ne da ti stvaramo dodatnu obavezu."
         },
         {
           "q": "Mogu li kupiti samo jednu sedmicu?",
-          "a": "Trenutno funkcionišemo kao zajednica koja raste sedmično, jer je kontinuitet u igri bez ekrana ključan za djetetov fokus. Cijena od 2,49 € je prilagođena tako da bude manja od jedne kafe, a donosi ti mirnu cijelu sedmicu."
+          "a": "Trenutno funkcionišemo kao zajednica koja raste sedmično, jer je kontinuitet u igri bez ekrana ključan za djetetov fokus. Cijena od 4,99 KM je prilagođena tako da bude manja od jedne kafe, a donosi ti mirnu cijelu sedmicu."
         },
         {
           "q": "Treba li mi printer?",
@@ -188,7 +188,7 @@
       },
       {
         "title": "Najbolja aktivnost je ona bez tehnologije.",
-        "body": "Drvena kašika će uvijek nadmašiti aplikaciju koja košta 25 €. Mi to dokazujemo svake sedmice."
+        "body": "Drvena kašika će uvijek nadmašiti aplikaciju koja košta 50 KM. Mi to dokazujemo svake sedmice."
       },
       {
         "title": "Vrijeme je vrednije od para.",
@@ -436,7 +436,7 @@
         },
         {
           "heading": "2. Pretplata i naplata",
-          "body": "Pretplata se obnavlja automatski svake sedmice po cijeni navedenoj na stranici za naplatu (2,49 € / 2,79 USD u zavisnosti od regije). Naplata se vrši karticom putem Stripe ili Dodo Payments servisa. Otkazivanje je moguće u svakom trenutku iz tvog korisničkog panela — naplata staje istog časa, a već uplaćeni paketi ostaju trajno dostupni u tvojoj arhivi."
+          "body": "Pretplata se obnavlja automatski svake sedmice po cijeni navedenoj na stranici za naplatu (4,99 KM). Naplata se vrši karticom putem Stripe servisa. Otkazivanje je moguće u svakom trenutku iz tvog korisničkog panela — naplata staje istog časa, a već uplaćeni paketi ostaju trajno dostupni u tvojoj arhivi."
         },
         {
           "heading": "3. Pristup sadržaju",

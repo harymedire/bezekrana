@@ -50,7 +50,7 @@ export const TERMS: LegalContent = {
       },
       {
         heading: "2. Subscription, Pricing, and Billing",
-        body: "• Subscriptions renew automatically on a weekly cycle at the price displayed at checkout (currently EUR 2.49 / USD 2.79; we may adjust pricing with 30 days' notice).\n• Payments are processed by Stripe, Inc. We do not store card details on our servers.\n• Each successful weekly invoice unlocks one new pack, in sequence.\n• All amounts are inclusive of any applicable VAT/sales tax where required.\n• You may cancel at any time from your account dashboard. Cancellation stops future billing immediately; previously paid packs remain in your library.",
+        body: "• Subscriptions renew automatically on a weekly cycle at the price displayed at checkout (currently BAM 4.99; we may adjust pricing with 30 days' notice).\n• Payments are processed by Stripe, Inc. We do not store card details on our servers.\n• Each successful weekly invoice unlocks one new pack, in sequence.\n• All amounts are inclusive of any applicable VAT/sales tax where required.\n• You may cancel at any time from your account dashboard. Cancellation stops future billing immediately; previously paid packs remain in your library.",
       },
       {
         heading: "3. Instant Access and Waiver of Withdrawal Right",
@@ -100,7 +100,7 @@ export const TERMS: LegalContent = {
       },
       {
         heading: "2. Pretplata, cijena i naplata",
-        body: "• Pretplata se obnavlja automatski svake sedmice po cijeni navedenoj na stranici za naplatu (trenutno 2,49 € / 2,79 USD; cijenu možemo promijeniti uz najavu 30 dana unaprijed).\n• Plaćanja procesira Stripe, Inc. Mi NE čuvamo podatke o kartici na našim serverima.\n• Svaka uspješna sedmična naplata otključava jedan novi paket, redoslijedom.\n• Svi iznosi uključuju primjenjive poreze tamo gdje su obavezni.\n• Otkazivanje je moguće u svakom trenutku iz korisničkog panela. Otkazivanjem prestaju buduće naplate odmah; već uplaćeni paketi ostaju trajno u tvojoj biblioteci.",
+        body: "• Pretplata se obnavlja automatski svake sedmice po cijeni navedenoj na stranici za naplatu (trenutno 4,99 KM; cijenu možemo promijeniti uz najavu 30 dana unaprijed).\n• Plaćanja procesira Stripe, Inc. Mi NE čuvamo podatke o kartici na našim serverima.\n• Svaka uspješna sedmična naplata otključava jedan novi paket, redoslijedom.\n• Svi iznosi uključuju primjenjive poreze tamo gdje su obavezni.\n• Otkazivanje je moguće u svakom trenutku iz korisničkog panela. Otkazivanjem prestaju buduće naplate odmah; već uplaćeni paketi ostaju trajno u tvojoj biblioteci.",
       },
       {
         heading: "3. Trenutni pristup i odricanje od prava odustanka",

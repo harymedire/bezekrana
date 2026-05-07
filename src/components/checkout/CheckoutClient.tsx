@@ -2,10 +2,9 @@
 
 import type { Currency } from "@/types/db";
 import { ShieldCheck, Lock } from "lucide-react";
-// Design preview — koristi mock dok ne postavimo Stripe API ključeve.
-// Kad budu spremni, swap-uj `StripeMock` za `StripeInline` u JSX-u dolje.
-import { StripeMock } from "./StripeMock";
-// import { StripeInline } from "./StripeInline";
+import { formatMoney } from "@/lib/utils/money";
+import { StripeInline } from "./StripeInline";
+// import { StripeMock } from "./StripeMock";  // Mock sa lažnom karticom; aktivirao sam StripeInline kad je Stripe podešen.
 // import { DodoInline } from "./DodoInline";  // Dodo Payments — privremeno isključen.
 
 type Mode = "subscription" | "onetime";
@@ -19,10 +18,6 @@ type Props = {
   summary?: { title: string; amountCents: number; currency: Currency };
 };
 
-function formatAmount(cents: number, currency: Currency): string {
-  const major = (cents / 100).toFixed(2);
-  return `${major} ${currency === "EUR" ? "€" : currency}`;
-}
 
 // Inline Stripe checkout — minimalan dizajn, samo kartica. Ime i email se
 // prikupljaju u registraciji; Stripe sam pokrije ono što mu mora po pravilima
@@ -40,7 +35,7 @@ export function CheckoutClient({ mode, packId, locale, summary }: Props) {
               {mode === "subscription" ? "Sedmični sistem" : summary.title}
             </div>
             <div className="font-display text-xl text-plum-900 shrink-0">
-              {formatAmount(summary.amountCents, summary.currency)}
+              {formatMoney(summary.amountCents, summary.currency)}
             </div>
           </div>
         </div>
@@ -53,8 +48,8 @@ export function CheckoutClient({ mode, packId, locale, summary }: Props) {
           Sigurno plaćanje preko Stripe-a
         </div>
 
-        <StripeMock mode={mode} />
-        {/* <StripeInline mode={mode} packId={packId} locale={locale} /> */}
+        <StripeInline mode={mode} packId={packId} locale={locale} />
+        {/* <StripeMock mode={mode} /> */}
 
         <div className="mt-4 pt-4 border-t border-plum-100 flex items-center gap-2 text-xs text-plum-500">
           <ShieldCheck className="h-3.5 w-3.5 shrink-0" />

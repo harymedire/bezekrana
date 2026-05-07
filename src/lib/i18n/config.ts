@@ -15,11 +15,10 @@ export const fullyTranslatedLocales: Locale[] = ["bs"];
 // Locales surfaced to end users in the UI locale switcher.
 export const publicLocales: Locale[] = ["bs"];
 
-// All BCS markets price in EUR. BAM/USD literals are kept in the type union
-// because the DB CHECK constraint allows them, but no current locale maps
-// to them — useful only if/when a "ba" locale gets enabled later.
+// BAM (KM) je primarna valuta za BiH tržište; Stripe podržava direktno.
+// Money helpers već formatiraju BAM kao "KM" (Intl daje nekonzistentno).
 export const currencyByLocale: Record<Locale, "BAM" | "EUR" | "USD"> = {
-  bs: "EUR",
+  bs: "BAM",
 };
 
 export const localeLabels: Record<Locale, string> = {

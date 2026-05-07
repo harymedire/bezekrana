@@ -19,6 +19,15 @@ function needsPostalCode(cardNumber: string): boolean {
   return US_BIN_PREFIXES.some((p) => digits.startsWith(p));
 }
 
+// Format expiry as MM / YY: auto-insert " / " after 2 month digits, then
+// accept up to 2 year digits. Keeps backspace usable — users can delete
+// the slash by hitting backspace on the leading year digit.
+function formatExpiry(input: string): string {
+  const digits = input.replace(/\D/g, "").slice(0, 4);
+  if (digits.length < 3) return digits;
+  return `${digits.slice(0, 2)} / ${digits.slice(2)}`;
+}
+
 // Visual-only mock of the Stripe Payment Element. Used during design review
 // so the checkout layout can be inspected without configuring real Stripe
 // API keys. Replace with <StripeInline /> once Stripe env vars are set.
@@ -68,7 +77,8 @@ export function StripeMock({ mode }: { mode: Mode }) {
             inputMode="numeric"
             placeholder="MM / GG"
             value={exp}
-            onChange={(e) => setExp(e.target.value)}
+            onChange={(e) => setExp(formatExpiry(e.target.value))}
+            maxLength={7}
             className="w-full rounded-xl border border-plum-200 bg-white px-3 py-3 text-base text-plum-900 placeholder:text-plum-300 focus:border-coral-500 focus:outline-none focus:ring-2 focus:ring-coral-100 transition"
           />
         </label>

@@ -19,7 +19,8 @@
       "Bash(git rm *)",
       "Bash(git commit -m ' *)",
       "Bash(npx next *)",
-      "Read(//c/Users/hmedi/Desktop/bezekrana-en/**)"
+      "Read(//c/Users/hmedi/Desktop/bezekrana-en/**)",
+      "Bash(awk 'NR<=176' /c/Users/hmedi/Desktop/bezekrana/src/messages/bs.json)"
     ],
     "additionalDirectories": [
       "c:\\Users\\hmedi\\Desktop\\bezekrana-en"
