@@ -47,7 +47,26 @@ export function RegisterForm() {
       },
     });
     if (error) {
-      setError(error.message.toLowerCase().includes("registered") ? tErr("emailInUse") : tErr("generic"));
+      // Log the raw Supabase error so we can diagnose from the browser console
+      // when users report a failure. The message map below covers the cases
+      // we've seen on Supabase Auth; everything else falls through to generic.
+      console.error("[register] supabase signUp error", error);
+      const m = (error.message ?? "").toLowerCase();
+      let friendly = tErr("generic");
+      if (m.includes("registered") || m.includes("already") || m.includes("exists")) {
+        friendly = tErr("emailInUse");
+      } else if (m.includes("rate limit")) {
+        friendly = "Previše pokušaja u kratkom vremenu. Sačekaj par minuta pa ponovo.";
+      } else if (m.includes("password")) {
+        friendly = tErr("weakPassword");
+      } else if (m.includes("invalid") && m.includes("email")) {
+        friendly = "Neispravna email adresa.";
+      } else if (m.includes("captcha")) {
+        friendly = "Verifikacija nije prošla. Osvježi stranicu i pokušaj ponovo.";
+      } else if (error.message) {
+        friendly = `${tErr("generic")} (${error.message})`;
+      }
+      setError(friendly);
       setLoading(false);
       return;
     }
