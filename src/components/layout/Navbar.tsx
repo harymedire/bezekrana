@@ -28,8 +28,8 @@ export async function Navbar() {
             />
           ) : (
             <>
-              <Link href="/login" className="hidden sm:block">
-                <Button variant="ghost" size="sm">
+              <Link href="/login">
+                <Button variant="plum" size="sm">
                   {t("login")}
                 </Button>
               </Link>

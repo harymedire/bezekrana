@@ -106,7 +106,17 @@
     },
     "users": {
       "title": "Korisnici", "email": "Email", "status": "Status",
-      "weeksConsumed": "Nedelja iskorišćeno", "subscribed": "Pretplaćen od", "actions": "Akcije"
+      "weeksConsumed": "Nedelja iskorišćeno", "subscribed": "Pretplaćen od", "actions": "Akcije",
+      "empty": "Nema korisnika za prikaz.",
+      "filters": {
+        "all": "Svi", "active": "Aktivni", "canceled": "Otkazani",
+        "paused": "Pauzirani", "past_due": "Kašnjenje", "none": "Bez pretplate"
+      },
+      "sort": { "label": "Sortiraj", "newest": "Najnoviji", "oldest": "Najstariji" },
+      "pagination": {
+        "prev": "Prethodna", "next": "Sledeća",
+        "page": "Strana {page} / {total}", "count": "Ukupno: {count}"
+      }
     }
   },
   "common": { "loading": "Učitavanje…", "error": "Greška", "back": "Nazad", "save": "Sačuvaj", "cancel": "Otkaži", "delete": "Obriši", "edit": "Izmeni", "yes": "Da", "no": "Ne" },

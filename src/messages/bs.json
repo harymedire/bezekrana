@@ -401,7 +401,27 @@
       "status": "Status",
       "weeksConsumed": "Sedmica iskorišteno",
       "subscribed": "Pretplaćen od",
-      "actions": "Akcije"
+      "actions": "Akcije",
+      "empty": "Nema korisnika za prikaz.",
+      "filters": {
+        "all": "Svi",
+        "active": "Aktivni",
+        "canceled": "Otkazani",
+        "paused": "Pauzirani",
+        "past_due": "Kašnjenje",
+        "none": "Bez pretplate"
+      },
+      "sort": {
+        "label": "Sortiraj",
+        "newest": "Najnoviji",
+        "oldest": "Najstariji"
+      },
+      "pagination": {
+        "prev": "Prethodna",
+        "next": "Sljedeća",
+        "page": "Stranica {page} / {total}",
+        "count": "Ukupno: {count}"
+      }
     }
   },
   "common": {
